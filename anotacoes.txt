@@ -1,0 +1,76 @@
+1-clonado o projeto (template próprio no github) e já renomeado
+    git clone https://github.com/walterrodriguesjr/template-laravel-9-docker.git renan-escritorio 
+
+2-criado o .env
+
+3-rodado comando que 
+    docker-compose up -d && sh ..docker/app/config.sh
+
+            Este comando, após executado:
+            1 - Sobe os container docker de: PHP 8.0, nginx:alpine, mysql:5.7.22, redis:latest
+
+            1 - Instala o composer
+
+            1 - Ativa o key generate, após configuração do .env
+
+            1 - Roda as migration default do laravel
+
+            1 - Cria o Storage local para posteriores uploads de imagens
+
+4-subido os containers 
+    docker-compose up -d 
+
+5-criar um git próprio 
+	Remova a pasta .git do projeto existente. Isso garantirá que você esteja criando uma nova inicialização do Git para o 	novo repositório.
+		rm -rf .git
+	Inicialize um novo repositório Git no diretório do seu projeto:
+		git init 
+	Adicione todos os arquivos do seu projeto para serem monitorados pelo Git:
+		sudo git add .
+	Faça o primeiro commit para o novo repositório:
+		git commit -m "Inicializar novo repositório"
+	Adicione o novo repositório remoto apontando para o URL do seu repositório no GitHub:
+		git remote add origin https://github.com/walterrodriguesjr/renan-escritorio.git
+	Agora você está pronto para empurrar seus arquivos para o novo repositório no GitHub:
+		git push -u origin master
+
+COMITADO E PRONTO O TEMPLATE, USANDO A MASTER 
+--------------------------------------------------------------------------------------------------------------------------
+
+6-criado a branch desenv 
+	git branch desenv
+
+7-conectado o laravel com o banco renan_escritorio criado no mysqlworckbench 
+    solucionado bug de ssl, na criação do banco, na parte de SSL, deixa com no 
+    https://www.changwoo.org/x1wins@changwoo.net/2022-03-01/SSL-connection-error-error-1425F102-SSL-0651d0d8f3
+
+8-rodado as migration padrão 
+
+9-instalação do laravel sanctum para futura criação do sistem de autenticação por token por API 
+    no laravel 
+        composer require laravel/sanctum
+    Após a instalação, você deve publicar as configurações e migrações do Sanctum. Novamente, no 
+    terminal, execute os seguintes comandos:
+        php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+        php artisan migrate
+
+10-instalando o laravel breeze 
+    composer require laravel/breeze --dev
+    php artisan breeze:install
+    npm install && npm run dev
+
+11-retirar arquivos de docker desnecessários do git add 
+    sudo git checkout -- .
+
+12-resolver problema da pasta .docker 
+    sudo chmod -R 777 .docker/mysql/dbdata
+
+13-criando a view clientes
+    -configurado o modal de clientes (de adicionar e editar)
+
+14-usando o Ag Grid (similar ao jsGrid)
+    npm install ag-grid-community
+
+15-incluido a biblioteca do selectize, para os select do form de clientes 
+
+
