@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cidades;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\Estados;
 use Illuminate\Support\Facades\Route;
 
@@ -27,8 +28,8 @@ Route::get('/clientes', function () {
     return view('clientes');
 })->middleware(['auth', 'verified'])->name('clientes');
 
-Route::get('/estados', [Estados::class, 'estados'])->name('estados');
-/* Route::get('/cidades', [Cidades::class, 'cidades'])->name('cidades'); */
+Route::get('/listarClientes', [ClienteController::class, 'listarClientes'])->name('listarClientes');
+
 
 
 

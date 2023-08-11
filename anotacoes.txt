@@ -68,9 +68,15 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 13-criando a view clientes
     -configurado o modal de clientes (de adicionar e editar)
 
-14-usando o Ag Grid (similar ao jsGrid)
-    npm install ag-grid-community
+14-usando o jsgrid
+    inserido os arquivos css e js em public, adicionados em app.blade.php
 
 15-incluido a biblioteca do selectize, para os select do form de clientes 
+
+16-configurado migration de Clientes 
+
+16-configurado model de Cliente 
+
+17-
 
 
