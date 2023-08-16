@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dados Completo do Cliente</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-address-card"></i> Dados Completos do Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -134,11 +134,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                           
+                            <div class="col-md-4">
+                                <div class="mt-2">
+                                    <x-input-label for="visualizarUltimaAtualizacaoCliente" :value="__('Última Atualização')" />
+                                    <x-text-input id="visualizarUltimaAtualizacaoCliente" class="block mt-1 w-full"
+                                        type="text" name="visualizarUltimaAtualizacaoCliente" :value="old('visualizarUltimaAtualizacaoCliente')"
+                                        placeholder="Digite" autofocus disabled />
+                                    <x-input-error :messages="$errors->get('visualizarUltimaAtualizacaoCliente')" class="mt-2" />
+                                </div>
+                                <div class="mt-2">
+                                    <x-input-label for="visualizarDataCadastroCliente" :value="__('Data de Cadastro')" />
+                                    <x-text-input id="visualizarDataCadastroCliente" class="block mt-1 w-full"
+                                        type="text" name="visualizarDataCadastroCliente" :value="old('visualizarDataCadastroCliente')"
+                                        placeholder="Digite" autofocus disabled />
+                                    <x-input-error :messages="$errors->get('visualizarDataCadastroCliente')" class="mt-2" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Fechar</button>
 
             </div>
         </div>

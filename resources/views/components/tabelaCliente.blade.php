@@ -108,6 +108,22 @@
                                             data: "data",
                                             dataType: "json",
                                             success: function(response) {
+
+                                                function formatarData(dataString) {
+                                                    // Converte a string para um objeto Date
+                                                    var data = new Date(dataString);
+
+                                                    // Formata a data e a hora
+                                                    var formatado = pad(data.getHours()) + ":" + pad(data.getMinutes()) + ":" + pad(data.getSeconds()) + " - " + pad(data.getDate()) + "/" + pad(data.getMonth() + 1) + "/" + data.getFullYear();
+
+                                                    return formatado;
+                                                }
+
+                                                // Função para adicionar zeros à esquerda (para valores menores que 10)
+                                                function pad(value) {
+                                                    return (value < 10 ? '0' : '') + value;
+                                                }
+
                                                 $("#visualizarNomeCliente").val(response.nomeCliente);
                                                 $("#visualizarEstadoRgCliente").val(response.estadoRgCliente);
                                                 $("#visualizarRgCliente").val(response.rgCliente);
@@ -120,6 +136,8 @@
                                                 $("#visualizarComplementoCliente").val(response.complementoCliente);
                                                 $("#visualizarEstadoCliente").val(response.estadoCliente);
                                                 $("#visualizarCidadeCliente").val(response.cidadeCliente);
+                                                $("#visualizarUltimaAtualizacaoCliente").val(formatarData(response.updated_at));
+                                                $("#visualizarDataCadastroCliente").val(formatarData(response.created_at));
                                             }
                                         });
 
