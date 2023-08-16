@@ -17,11 +17,11 @@
         <!-- Incluir o custom css -->
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         
-        <!-- Incluir o ag-grid css -->
-        <link rel="stylesheet" href="{{ asset('css/ag-grid.min.css') }}">
-
-        <!-- Incluir o ag-theme-alpine css -->
-        <link rel="stylesheet" href="{{ asset('css/ag-theme-alpine.min.css') }}">
+        <!-- Incluir o jsgrid css -->
+        <link rel="stylesheet" href="{{ asset('css/jsgrid.min.css') }}">
+        
+        <!-- Incluir o js grid theme css -->
+        <link rel="stylesheet" href="{{ asset('css/jsgrid-theme.min.css') }}">
 
         <!-- Incluir o selectize css -->
         <link rel="stylesheet" href="{{ asset('css/selectize.bootstrap5.css') }}">
@@ -32,8 +32,11 @@
          <!-- Incluir o selectize js -->
         <script src="{{ asset('js/selectize.min.js') }}"></script>
 
-         <!-- Incluir o bootstrap js -->
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+         <!-- Incluir o jsgrid js -->
+
+         <!-- Incluir o bootstrap js -->
+        <script src="{{ asset('js/jsgrid.min.js') }}"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -50,7 +53,7 @@
                     </div>
                 </header>
             @endif
-
+                
             <!-- Page Content -->
             <main>
                 {{ $slot }}
@@ -58,3 +61,5 @@
         </div>
     </body>
 </html>
+
+
