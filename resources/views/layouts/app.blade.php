@@ -53,7 +53,7 @@
                     </div>
                 </header>
             @endif
-
+                
             <!-- Page Content -->
             <main>
                 {{ $slot }}
@@ -61,3 +61,5 @@
         </div>
     </body>
 </html>
+
+

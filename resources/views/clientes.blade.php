@@ -13,22 +13,18 @@
                         data-bs-target="#modalAdicionarEditarCliente">Adicionar</button>
                 </div>
             </div>
+            {{-- trazendo o conteudo da referida view --}}
             @include('components.tabelaCliente')
         </div>
     </div>
-
-
-
 </x-app-layout>
 
 <!-- Incluir o modal -->
 @include('components.modalAdicionarEditarCliente')
 
-
-
 <script>
-    
-    $(document).ready(function () {
+    $(document).ready(function() {
+        /* função que lista os clientes, está em tabelaCLiente.blade.php */
         listarClientes();
     });
 
@@ -38,3 +34,6 @@
 
     });
 </script>
+
+{{-- incluindo a biblioteca jsGrid após toda página ser carregada, evita o erro --}}
+<script src="{{ asset('js/jsgrid.min.js') }}"></script>
