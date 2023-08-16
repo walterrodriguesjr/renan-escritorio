@@ -21,6 +21,7 @@
 
 <!-- Incluir o modal -->
 @include('components.modalAdicionarEditarCliente')
+@include('components.modalVisualizarCliente')
 
 <script>
     $(document).ready(function() {

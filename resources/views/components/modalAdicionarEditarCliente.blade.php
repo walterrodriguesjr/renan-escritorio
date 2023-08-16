@@ -7,8 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="" id="formAdicionarEditarCliente">
                     @csrf
+
+                    <!-- Input Hidden -->
+                    {{-- <input type="text" id="idCliente" name="id" value="id"> --}}
 
                     <!-- Nome -->
                     <div>
@@ -21,12 +24,12 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="rgEstado" :value="__('Estado do RG')" />
-                                <select id="rgEstado" name="rgEstado"
+                                <x-input-label for="estadoRgCliente" :value="__('Estado do RG')" />
+                                <select id="estadoRgCliente" name="estadoRgCliente"
                                     class="block mt-1 w-full shadow-sm border-gray-300 rounded-md" required autofocus>
 
                                 </select>
-                                <x-input-error :messages="$errors->get('rgEstado')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('estadoRgCliente')" class="mt-2" />
                             </div>
                         </div>
 
@@ -100,11 +103,10 @@
 
                         <div class="col-md-2">
                             <div class="mt-2">
-                                <x-input-label for="complementoEnderecoCliente" :value="__('Complento')" />
-                                <x-text-input id="complementoEnderecoCliente" class="block mt-1 w-full"
-                                    type="text" name="complementoEnderecoCliente" :value="old('complementoEnderecoCliente')"
-                                    placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('complementoEnderecoCliente')" class="mt-2" />
+                                <x-input-label for="complementoCliente" :value="__('Complento')" />
+                                <x-text-input id="complementoCliente" class="block mt-1 w-full" type="text"
+                                    name="complementoCliente" :value="old('complementoCliente')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('complementoCliente')" class="mt-2" />
                             </div>
                         </div>
                     </div>
@@ -137,7 +139,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Cadastrar</button>
+                <button type="button" class="btn btn-primary" id="cadastrarCliente">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -199,7 +201,43 @@
         });
     }
 
-    // Aguarde o documento estar pronto
+    /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
+    $("#cadastrarCliente").click(function(e) {
+        e.preventDefault();
+
+        /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
+        let $dadosCliente = {};
+
+        // todos os dados do form são adicionados em um array um a um, em $dadosCliente
+        $("#formAdicionarEditarCliente").serializeArray().forEach(function(field) {
+            $dadosCliente[field.name] = field.value;
+        });
+
+        // Pegue o token CSRF da meta tag
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        /* $data recebe o conteudo de $dadosCliente no formato json string */
+        let $data = JSON.stringify($dadosCliente);
+
+        $.ajax({
+            type: "POST",
+            url: "/adicionarCliente",
+            data: $data,
+            headers: {
+                // Adicione o token CSRF ao cabeçalho da solicitação
+                'X-CSRF-TOKEN': csrfToken
+            },
+            ontentType: "application/json",
+            dataType: "json",
+            success: function(response) {
+                $("#modalAdicionarEditarCliente").modal('hide');
+                /* método que recarrega o grid de clientes, já atualizado */
+                listarClientes();
+            }
+        });
+
+    });
+
     $(document).ready(function() {
         // Busque os dados da API do IBGE e preencha o select "estadoCliente"
         $.ajax({
@@ -207,7 +245,7 @@
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var rgEstadoSelect = $('#rgEstado');
+                var rgEstadoSelect = $('#estadoRgCliente');
                 var estadoSelect = $('#estadoCliente');
 
                 // Ordenar os estados em ordem alfabética
@@ -248,5 +286,6 @@
 
         // Chamar a função para buscar e preencher o select "cidadeCliente"
         obterMunicipios();
+
     });
 </script>
