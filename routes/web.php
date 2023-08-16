@@ -29,6 +29,8 @@ Route::get('/clientes', function () {
 })->middleware(['auth', 'verified'])->name('clientes');
 
 Route::get('/listarClientes', [ClienteController::class, 'listarClientes'])->name('listarClientes');
+Route::post('adicionarCliente', [ClienteController::class, 'adicionarCliente'])->name('adicionarCliente');
+Route::get('visualizarCliente/{id}', [ClienteController::class, 'visualizarCliente'])->name('visualizarCliente');
 
 
 
