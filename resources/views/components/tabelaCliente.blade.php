@@ -23,6 +23,7 @@
 <div id="jsGridClientes"></div>
 
 <script>
+    
     /* função GET na tabela CLIENTES, carregada de fato em DocReady abaixo e importada em clientes.blade.php */
     function listarClientes() {
         $.ajax({
@@ -100,15 +101,29 @@
                                         "data-bs-toggle": "modal",
                                         "data-bs-target": "#modalVisualizarCliente"
                                     })
-                                    .click(function(e) {
                                       
+                                    .click(function(e) {
+
+                                        /* esta variável recebe as propriedades de um spinner */
+                                        var spinnerHtml = `
+                                     <div id="loadingSpinnerModal" class="text-center">
+                                         <button class="btn btn-primary" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Carregando...
+                                         </button>
+                                     </div>
+                                 `;
+
+                                 // insere o spinner dinamicamente dentro do body do modal visualizar
+                                 $("#modalVisualizarCliente .modal-body").prepend(spinnerHtml);
                                         $.ajax({
                                             type: "GET",
                                             url: "/visualizarCliente/" + item.id,
                                             data: "data",
                                             dataType: "json",
                                             success: function(response) {
-
+                                                /* finalizando o GET o spinner é destruído */
+                                                $("#loadingSpinnerModal").remove();
                                                 function formatarData(dataString) {
                                                     // Converte a string para um objeto Date
                                                     var data = new Date(dataString);
@@ -124,6 +139,7 @@
                                                     return (value < 10 ? '0' : '') + value;
                                                 }
 
+                                                /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
                                                 $("#visualizarNomeCliente").val(response.nomeCliente);
                                                 $("#visualizarEstadoRgCliente").val(response.estadoRgCliente);
                                                 $("#visualizarRgCliente").val(response.rgCliente);
@@ -172,6 +188,8 @@
         });
     }
 
+    /* ao finalizar o carregamento da página, o spinner é mostrado e o jsGrid ocultado, até que o GET dos 
+    Clientes seja finalizado */
     $(document).ready(function() {
         $("#loadingSpinner").show();
         $("#jsGridClientes").hide();

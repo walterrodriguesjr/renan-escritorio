@@ -219,6 +219,7 @@
         /* $data recebe o conteudo de $dadosCliente no formato json string */
         let $data = JSON.stringify($dadosCliente);
 
+        /* ajax POST adicionar novo cliente */
         $.ajax({
             type: "POST",
             url: "/adicionarCliente",
