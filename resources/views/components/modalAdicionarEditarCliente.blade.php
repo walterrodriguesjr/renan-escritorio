@@ -117,7 +117,7 @@
                             <div class="mt-2">
                                 <x-input-label for="estadoCliente" :value="__('Estado')" />
                                 <select id="estadoCliente" class="form-select" name="estadoCliente" autofocus>
-
+                                    
                                 </select>
                                 {{-- <x-input-error :messages="$errors->get('estadoCliente')" class="mt-2" /> --}}
                             </div>
@@ -155,6 +155,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
 <script>
+
+function limparInputsModalAdicionarEditarCliente() {
+        $("#nomeCliente").val('');
+        $("#estadoRgCliente").val('');
+        $("#rgCliente").val('');
+        $("#cpfCliente").val('');
+        $("#emailCliente").val('');
+        $("#celularCliente").val('');
+        $("#telefoneCliente").val('');
+        $("#enderecoCliente").val('');
+        $("#numeroCliente").val('');
+        $("#complementoCliente").val('');
+        $("#estadoCliente").val('');
+        $("#cidadeCliente").val('');
+    };
+
+    $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
+        limparInputsModalAdicionarEditarCliente(); 
+            });
+
     // Função para preencher o select "cidadeCliente" com os municípios
     function popularCidades(data) {
         var select = $('#cidadeCliente');
@@ -163,7 +183,7 @@
         select.empty();
 
         // Adicionar opção padrão
-        select.append('<option value="">Selecione a cidade</option>');
+        select.append('<option value="">Selecione a Cidade</option>');
 
         // Ordenar os municípios em ordem alfabética
         data.sort(function(a, b) {
@@ -172,8 +192,7 @@
 
         // Adicionar as opções dos municípios em ordem alfabética
         $.each(data, function(index, cidade) {
-            var option = $('<option></option>').attr('value', cidade.sigla).text(
-                cidade.nome);
+            var option = $('<option></option>').attr('value', cidade.sigla).text(cidade.nome);
             select.append(option);
         });
 
@@ -253,6 +272,10 @@
                 data.sort(function(a, b) {
                     return a.nome.localeCompare(b.nome);
                 });
+
+                // Adicionar o option default 'Selecione o Estado'
+                rgEstadoSelect.append('<option value="" selected disabled>Selecione o Estado do RG</option>');
+                estadoSelect.append('<option value="" selected disabled>Selecione o Estado</option>');
 
                 // Adicionar as opções dos estados em ordem alfabética
                 $.each(data, function(index, estado) {

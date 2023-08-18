@@ -160,12 +160,68 @@
                                     }).append($iconVisualizar);
 
                                 var $editarButton = $("<button>").attr({
-                                        class: "btn btn-sm btn-success ml-2"
+                                        class: "btn btn-sm btn-success ml-2",
+                                        "data-bs-toggle": "modal",
+                                        "data-bs-target": "#modalAdicionarEditarCliente"
                                     })
                                     .click(function(e) {
                                         e.stopPropagation();
                                         console.log("Edit clicked for item:", item);
-                                        // Aqui você pode chamar a função para editar o cliente
+                                        
+
+                                         /* esta variável recebe as propriedades de um spinner */
+                                         var spinnerHtml = `
+                                     <div id="loadingSpinnerModal" class="text-center">
+                                         <button class="btn btn-primary" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Carregando...
+                                         </button>
+                                     </div>
+                                 `;
+
+                                 // insere o spinner dinamicamente dentro do body do modal visualizar
+                                 $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "/visualizarCliente/" + item.id,
+                                            data: "data",
+                                            dataType: "json",
+                                            success: function(response) {
+                                                /* finalizando o GET o spinner é destruído */
+                                                $("#loadingSpinnerModal").remove();
+                                                function formatarData(dataString) {
+                                                    // Converte a string para um objeto Date
+                                                    var data = new Date(dataString);
+
+                                                    // Formata a data e a hora
+                                                    var formatado = pad(data.getHours()) + ":" + pad(data.getMinutes()) + ":" + pad(data.getSeconds()) + " - " + pad(data.getDate()) + "/" + pad(data.getMonth() + 1) + "/" + data.getFullYear();
+
+                                                    return formatado;
+                                                }
+
+                                                // Função para adicionar zeros à esquerda (para valores menores que 10)
+                                                function pad(value) {
+                                                    return (value < 10 ? '0' : '') + value;
+                                                }
+
+                                                /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
+                                                $("#nomeCliente").val(response.nomeCliente);
+                                                $("#estadoRgCliente").val(response.estadoRgCliente);
+                                                $("#rgCliente").val(response.rgCliente);
+                                                $("#cpfCliente").val(response.cpfCliente);
+                                                $("#emailCliente").val(response.emailCliente);
+                                                $("#celularCliente").val(response.celularCliente);
+                                                $("#telefoneCliente").val(response.telefoneCliente);
+                                                $("#enderecoCliente").val(response.enderecoCliente);
+                                                $("#numeroCliente").val(response.numeroCliente);
+                                                $("#complementoCliente").val(response.complementoCliente);
+                                                $("#estadoCliente").val(response.estadoCliente);
+                                                $("#cidadeCliente").val(response.cidadeCliente);
+                                                $("#ultimaAtualizacaoCliente").val(formatarData(response.updated_at));
+                                                $("#dataCadastroCliente").val(formatarData(response.created_at));
+                                            }
+                                        });
+
                                     }).append($iconEditar);
 
                                 // botão de exclusão

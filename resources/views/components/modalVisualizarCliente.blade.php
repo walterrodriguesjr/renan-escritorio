@@ -167,7 +167,7 @@
 
 <script>
     /* função que limpa os inputs do modal visualizar */
-    function limparInputsModalCliente() {
+    function limparInputsModalVisualizarCliente() {
         $("#visualizarNomeCliente").val('');
         $("#visualizarEstadoRgCliente").val('');
         $("#visualizarRgCliente").val('');
@@ -185,7 +185,7 @@
     };
 
     $("#modalVisualizarCliente").on("hidden.bs.modal", function () {
-        limparInputsModalCliente(); 
+        limparInputsModalVisualizarCliente(); 
             });
 </script>
 
