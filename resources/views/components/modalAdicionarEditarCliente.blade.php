@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Cadastrar Cliente</h5>
+                <h5 class="modal-title" id="cabecalhoModalAdicionarEditarCliente"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -158,7 +158,8 @@
 
 function limparInputsModalAdicionarEditarCliente() {
         $("#nomeCliente").val('');
-        $("#estadoRgCliente").val('');
+        var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
+            estadoRgClienteSelectize.clear();
         $("#rgCliente").val('');
         $("#cpfCliente").val('');
         $("#emailCliente").val('');
@@ -167,8 +168,10 @@ function limparInputsModalAdicionarEditarCliente() {
         $("#enderecoCliente").val('');
         $("#numeroCliente").val('');
         $("#complementoCliente").val('');
-        $("#estadoCliente").val('');
-        $("#cidadeCliente").val('');
+        var estadoClienteSelectize = $('#estadoCliente')[0].selectize;
+            estadoClienteSelectize.clear();
+        var cidadeClienteSelectize = $('#cidadeCliente')[0].selectize;
+            cidadeClienteSelectize.clear();
     };
 
     $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
@@ -223,6 +226,7 @@ function limparInputsModalAdicionarEditarCliente() {
     /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
     $("#cadastrarCliente").click(function(e) {
         e.preventDefault();
+        
 
         /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
         let $dadosCliente = {};
