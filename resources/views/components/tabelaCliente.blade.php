@@ -167,7 +167,10 @@
                                     .click(function(e) {
                                         e.stopPropagation();
                                         console.log("Edit clicked for item:", item);
-                                        
+
+                                        var icon = '<i class="fas fa-user"></i>';
+                                        var texto = "Editar dados do Cliente";
+                                        $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
 
                                          /* esta variável recebe as propriedades de um spinner */
                                          var spinnerHtml = `
@@ -179,7 +182,7 @@
                                      </div>
                                  `;
 
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
+                                 // insere o spinner dinamicamente dentro do body do modal AdicionarVisualizarCliente
                                  $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
                                         $.ajax({
                                             type: "GET",
@@ -204,9 +207,10 @@
                                                     return (value < 10 ? '0' : '') + value;
                                                 }
 
-                                                /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
+                                                /* os dados trazidos na requisição GET colocandos nos inputs do modal Adicionar / Editar */
                                                 $("#nomeCliente").val(response.nomeCliente);
-                                                $("#estadoRgCliente").val(response.estadoRgCliente);
+                                                var estadoRgCliente = $('#estadoRgCliente')[0].selectize;
+                                                    estadoRgCliente.setValue(response.estadoRgCliente);
                                                 $("#rgCliente").val(response.rgCliente);
                                                 $("#cpfCliente").val(response.cpfCliente);
                                                 $("#emailCliente").val(response.emailCliente);
@@ -215,8 +219,10 @@
                                                 $("#enderecoCliente").val(response.enderecoCliente);
                                                 $("#numeroCliente").val(response.numeroCliente);
                                                 $("#complementoCliente").val(response.complementoCliente);
-                                                $("#estadoCliente").val(response.estadoCliente);
-                                                $("#cidadeCliente").val(response.cidadeCliente);
+                                                var estadoCliente = $('#estadoCliente')[0].selectize;
+                                                    estadoCliente.setValue(response.estadoCliente);
+                                                var cidadeCliente = $('#cidadeCliente')[0].selectize;
+                                                    cidadeCliente.setValue(response.cidadeCliente);
                                                 $("#ultimaAtualizacaoCliente").val(formatarData(response.updated_at));
                                                 $("#dataCadastroCliente").val(formatarData(response.created_at));
                                             }

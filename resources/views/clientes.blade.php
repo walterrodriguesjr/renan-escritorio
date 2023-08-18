@@ -29,10 +29,14 @@
         listarClientes();
     });
 
+    /* ação click do button Adicionar Cliente */
     $('#adicionarCliente').click(function(e) {
         e.preventDefault();
-        /* alert("teste") */
 
+        /* insere dinamicamente icon e text no header do modal AdicionarEditarCliente */
+        var icon = '<i class="fas fa-user"></i>';
+        var texto = "Cadastrar novo Cliente";
+        $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
     });
 </script>
 
