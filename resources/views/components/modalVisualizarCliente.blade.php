@@ -135,21 +135,24 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                           
-                            <div class="col-md-4">
-                                <div class="mt-2">
-                                    <x-input-label for="visualizarUltimaAtualizacaoCliente" :value="__('Última Atualização')" />
-                                    <x-text-input id="visualizarUltimaAtualizacaoCliente" class="block mt-1 w-full"
-                                        type="text" name="visualizarUltimaAtualizacaoCliente" :value="old('visualizarUltimaAtualizacaoCliente')"
-                                     autofocus disabled />
-                                    <x-input-error :messages="$errors->get('visualizarUltimaAtualizacaoCliente')" class="mt-2" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mt-2">
+                                        <x-input-label for="visualizarUltimaAtualizacaoCliente" :value="__('Última Atualização')" />
+                                        <x-text-input id="visualizarUltimaAtualizacaoCliente" class="block mt-1 w-full"
+                                            type="text" name="visualizarUltimaAtualizacaoCliente" :value="old('visualizarUltimaAtualizacaoCliente')"
+                                            autofocus disabled />
+                                        <x-input-error :messages="$errors->get('visualizarUltimaAtualizacaoCliente')" class="mt-2" />
+                                    </div>
                                 </div>
-                                <div class="mt-2">
-                                    <x-input-label for="visualizarDataCadastroCliente" :value="__('Data de Cadastro')" />
-                                    <x-text-input id="visualizarDataCadastroCliente" class="block mt-1 w-full"
-                                        type="text" name="visualizarDataCadastroCliente" :value="old('visualizarDataCadastroCliente')"
-                                     autofocus disabled />
-                                    <x-input-error :messages="$errors->get('visualizarDataCadastroCliente')" class="mt-2" />
+                                <div class="col-md-6">
+                                    <div class="mt-2">
+                                        <x-input-label for="visualizarDataCadastroCliente" :value="__('Data de Cadastro')" />
+                                        <x-text-input id="visualizarDataCadastroCliente" class="block mt-1 w-full"
+                                            type="text" name="visualizarDataCadastroCliente" :value="old('visualizarDataCadastroCliente')"
+                                            autofocus disabled />
+                                        <x-input-error :messages="$errors->get('visualizarDataCadastroCliente')" class="mt-2" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

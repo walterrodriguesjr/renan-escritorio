@@ -7,6 +7,18 @@
     background-color: #e9ecef;
     cursor: not-allowed;
 }
+
+.btn-atualizar {
+        color: #fff; /* Define a cor do texto para branco */
+        background-color: #198754; /* Define a cor de fundo como a cor de sucesso do Bootstrap */
+        border-color: #198754; /* Define a cor da borda como a cor de sucesso do Bootstrap */
+    }
+
+    .btn-atualizar:hover {
+        color: #fff; /* Mantém o texto branco em hover */
+        background-color: #218838; /* Define a cor de fundo um pouco mais escura em hover */
+        border-color: #1e7e34; /* Define a cor da borda um pouco mais escura em hover */
+    }
 </style>
 
 
@@ -172,6 +184,10 @@
                                         var texto = "Editar dados do Cliente";
                                         $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
 
+                                        // Substituir o botão
+                                        var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente"><i class="fas fa-sync"></i> Atualizar</button>';
+                                        $("#cadastrarCliente").replaceWith(botaoAtualizar);
+
                                          /* esta variável recebe as propriedades de um spinner */
                                          var spinnerHtml = `
                                      <div id="loadingSpinnerModal" class="text-center">
@@ -226,6 +242,28 @@
                                                 $("#ultimaAtualizacaoCliente").val(formatarData(response.updated_at));
                                                 $("#dataCadastroCliente").val(formatarData(response.created_at));
                                             }
+                                        });
+
+                                        $('#atualizarCliente').click(function (e) { 
+                                            e.preventDefault();
+                                            // Coleta dos valores dos campos e selects usando serializeArray
+    var data = {};
+    $.each($("#seu-form-id").serializeArray(), function (index, field) {
+        data[field.name] = field.value;
+    });
+
+    console.log(data);
+
+                                            
+                                            $.ajax({
+                                                type: "PUT",
+                                                url: "/editarCliente/" + item.id,
+                                                data: data,
+                                                dataType: "json",
+                                                success: function (response) {
+                                                    
+                                                }
+                                            });
                                         });
 
                                     }).append($iconEditar);
