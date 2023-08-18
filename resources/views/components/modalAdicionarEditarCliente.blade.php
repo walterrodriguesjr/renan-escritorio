@@ -172,7 +172,11 @@ function limparInputsModalAdicionarEditarCliente() {
             estadoClienteSelectize.clear();
         var cidadeClienteSelectize = $('#cidadeCliente')[0].selectize;
             cidadeClienteSelectize.clear();
-    };
+
+        // Restaurar o botão Cadastrar
+        var botaoCadastrar = '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
+        $("#atualizarCliente").replaceWith(botaoCadastrar);
+        };
 
     $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
         limparInputsModalAdicionarEditarCliente(); 
@@ -242,6 +246,7 @@ function limparInputsModalAdicionarEditarCliente() {
         /* $data recebe o conteudo de $dadosCliente no formato json string */
         let $data = JSON.stringify($dadosCliente);
 
+        
         /* ajax POST adicionar novo cliente */
         $.ajax({
             type: "POST",
@@ -251,7 +256,7 @@ function limparInputsModalAdicionarEditarCliente() {
                 // Adicione o token CSRF ao cabeçalho da solicitação
                 'X-CSRF-TOKEN': csrfToken
             },
-            ontentType: "application/json",
+            contentType: "application/json",
             dataType: "json",
             success: function(response) {
                 $("#modalAdicionarEditarCliente").modal('hide');
