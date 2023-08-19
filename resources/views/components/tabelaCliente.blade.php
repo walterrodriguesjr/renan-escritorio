@@ -247,18 +247,47 @@
                                         $('#atualizarCliente').click(function (e) { 
                                             e.preventDefault();
                                             // Coleta dos valores dos campos e selects usando serializeArray
-    var data = {};
-    $.each($("#seu-form-id").serializeArray(), function (index, field) {
-        data[field.name] = field.value;
-    });
+                                            var nomeCliente = $("#nomeCliente").val();
+                                            var estadoRgCliente = $("#estadoRgCliente").val();
+                                            var rgCliente = $("#rgCliente").val();
+                                            var cpfCliente = $("#cpfCliente").val();
+                                            var emailCliente = $("#emailCliente").val();
+                                            var celularCliente = $("#celularCliente").val();
+                                            var telefoneCliente = $("#telefoneCliente").val();
+                                            var enderecoCliente = $("#enderecoCliente").val();
+                                            var numeroCliente = $("#numeroCliente").val();
+                                            var complementoCliente = $("#complementoCliente").val();
+                                            var estadoCliente = $("#estadoCliente").val();
+                                            var cidadeCliente = $("#cidadeCliente").val();
 
-    console.log(data);
+                                            var data = {
+                                                nomeCliente: nomeCliente,
+                                                estadoRgCliente: estadoRgCliente,
+                                                rgCliente: rgCliente,
+                                                cpfCliente: cpfCliente,
+                                                emailCliente: emailCliente,
+                                                celularCliente: celularCliente,
+                                                telefoneCliente: telefoneCliente,
+                                                enderecoCliente: enderecoCliente,
+                                                numeroCliente: numeroCliente,
+                                                complementoCliente: complementoCliente,
+                                                estadoCliente: estadoCliente,
+                                                cidadeCliente: cidadeCliente,
+                                            };
 
-                                            
+                                            console.log(data);
+
+                                            // Pegue o token CSRF da meta tag
+                                            let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
                                             $.ajax({
                                                 type: "PUT",
                                                 url: "/editarCliente/" + item.id,
                                                 data: data,
+                                                headers: {
+                                                // Adicione o token CSRF ao cabeçalho da solicitação
+                                                'X-CSRF-TOKEN': csrfToken
+                                            },
                                                 dataType: "json",
                                                 success: function (response) {
                                                     
