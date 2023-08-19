@@ -19,6 +19,17 @@
         background-color: #218838; /* Define a cor de fundo um pouco mais escura em hover */
         border-color: #1e7e34; /* Define a cor da borda um pouco mais escura em hover */
     }
+.deletar {
+        color: #fff; /* Define a cor do texto para branco */
+        background-color: #dc3545; /* Define a cor de fundo como a cor de sucesso do Bootstrap */
+        border-color: ##dc3545; /* Define a cor da borda como a cor de sucesso do Bootstrap */
+    }
+
+    .deletar:hover {
+        color: #fff; /* Mantém o texto branco em hover */
+        background-color: #dc3545; /* Define a cor de fundo um pouco mais escura em hover */
+        border-color: #b33d49; /* Define a cor da borda um pouco mais escura em hover */
+    }
 </style>
 
 
@@ -51,7 +62,7 @@
 
                 $("#jsGridClientes").jsGrid({
                     width: "100%",
-                    height: "400px",
+                    height: "350px",
                     inserting: false,
                     editing: false,
                     sorting: true,
@@ -287,10 +298,12 @@
                                                 headers: {
                                                 // Adicione o token CSRF ao cabeçalho da solicitação
                                                 'X-CSRF-TOKEN': csrfToken
-                                            },
+                                                },
                                                 dataType: "json",
                                                 success: function (response) {
-                                                    
+                                                $("#modalAdicionarEditarCliente").modal('hide');
+                                                    /* método que recarrega o grid de clientes, já atualizado */
+                                                listarClientes();
                                                 }
                                             });
                                         });
@@ -299,12 +312,34 @@
 
                                 // botão de exclusão
                                 var $deletarButton = $("<button>").attr({
-                                        class: "btn btn-sm btn-danger ml-2"
+                                        class: "btn btn-sm btn-danger ml-2",
+                                        "data-bs-toggle": "modal",
+                                        "data-bs-target": "#modalConfirmacaoDeletarCliente"
                                     })
                                     .click(function(e) {
                                         e.stopPropagation();
-                                        console.log("Delete clicked for item:", item);
-                                        // Aqui você pode chamar a função para deletar o cliente
+
+                                    $("#buttonDeletarCliente").click(function (e) { 
+                                        e.preventDefault();
+                                        // Pegue o token CSRF da meta tag
+                                        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+                                        $.ajax({
+                                            type: "DELETE",
+                                            url: "/deletarCliente/" + item.id,
+                                            data: "data",
+                                            headers: {
+                                                // Adicione o token CSRF ao cabeçalho da solicitação
+                                                'X-CSRF-TOKEN': csrfToken
+                                                },
+                                            dataType: "json",
+                                            success: function (response) {
+                                                $("#modalConfirmacaoDeletarCliente").modal("hide");
+                                                listarClientes();
+                                            }
+                                        });
+                                        
+                                    });
+                                        
                                     }).append($iconDeletar);
 
                                 return $("<div>").append($visualizarButton).append(

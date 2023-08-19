@@ -32,6 +32,7 @@ Route::get('/listarClientes', [ClienteController::class, 'listarClientes'])->nam
 Route::post('adicionarCliente', [ClienteController::class, 'adicionarCliente'])->name('adicionarCliente');
 Route::get('visualizarCliente/{id}', [ClienteController::class, 'visualizarCliente'])->name('visualizarCliente');
 Route::put('editarCliente/{id}', [ClienteController::class, 'editarCliente'])->name('editarCliente');
+Route::delete('deletarCliente/{id}', [ClienteController::class, 'deletarCliente'])->name('deletarCliente');
 
 
 
