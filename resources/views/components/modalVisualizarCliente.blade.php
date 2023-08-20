@@ -52,7 +52,7 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="visualizarEmailCliente" :value="__('E-mail')" />
+                                <x-input-label for="visualizarEmailCliente" id="visualizarEmailCliente" :value="__('E-mail')" />
                                 <x-text-input id="visualizarEmailCliente" class="block mt-1 w-full" type="email"
                                     name="visualizarEmailCliente" :value="old('visualizarEmailCliente')" required
                                     autofocus disabled />
@@ -62,7 +62,7 @@
 
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="visualizarCelularCliente" :value="__('Celular')" />
+                                <x-input-label for="visualizarCelularCliente" id="visualizarCelularWhatsappCliente" :value="__('Celular') " />
                                 <x-text-input id="visualizarCelularCliente" class="block mt-1 w-full" type="text"
                                     name="visualizarCelularCliente" :value="old('visualizarCelularCliente')" autofocus disabled />
                                 <x-input-error :messages="$errors->get('visualizarCelularCliente')" class="mt-2" />
