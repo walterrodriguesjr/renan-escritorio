@@ -152,10 +152,14 @@
     </button>
 </div> --}}
 
-<!-- Certifique-se de incluir o jQuery antes do código do Selectize -->
+{{-- incluindo o jquery nesta view --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Certifique-se de incluir a biblioteca Selectize -->
+{{-- inclui o sweet alert nesta view --}}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+{{-- inclui o selectize nesta view --}}
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
@@ -279,9 +283,23 @@ function limparInputsModalAdicionarEditarCliente() {
             success: function(response) {
                 $("#adicionarSpinnerModal").remove();
                 $("#modalAdicionarEditarCliente").modal('hide');
+                 // Exibir o SweetAlert de sucesso
+        swal("Cliente Adicionado com Sucesso!", "", "success");
                 /* método que recarrega o grid de clientes, já atualizado */
                 listarClientes();
-            }
+            },
+            error: function(xhr, status, error) {
+        $("#adicionarSpinnerModal").remove();
+        
+        // Se a resposta da API incluir mensagens de erro
+        if (xhr.responseJSON && xhr.responseJSON.errors) {
+            var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+            swal("Erro ao Adicionar Cliente", errorMessages, "error");
+        } else {
+            // Caso contrário, exiba uma mensagem genérica
+            swal("Erro ao Adicionar Cliente", "Verifique sua conexão com a internet.", "error");
+        }
+    }
         });
 
     });

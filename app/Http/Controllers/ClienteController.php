@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
     public function listarClientes()
     {
-        $clientes = Cliente::all();
-        return $clientes;
+        try {
+            $clientes = Cliente::all();
+            return response()->json($clientes, 200); // 200 OK
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao listar clientes'], 500); // 500 Internal Server Error
+        }
     }
 
     public function adicionarCliente(Request $request)
@@ -21,7 +26,30 @@ class ClienteController extends Controller
         // Remova o campo _token dos dados
         unset($dados['_token']);
 
-        /* $cliente recebe os atributos da class Cliente */
+        // Validação dos campos obrigatórios e únicos
+        $regras = [
+            'nomeCliente' => 'required',
+            'celularCliente' => 'required',
+            'cpfCliente' => 'required|unique:clientes',
+            'emailCliente' => 'required|unique:clientes',
+        ];
+
+        $mensagens = [
+            'nomeCliente.required' => '* O campo nome é obrigatório.',
+            'celularCliente.required' => '* O campo celular é obrigatório.',
+            'cpfCliente.required' => '* O campo CPF é obrigatório.',
+            'cpfCliente.unique' => '* Este CPF já está cadastrado.',
+            'emailCliente.required' => '* O campo e-mail é obrigatório.',
+            'emailCliente.unique' => '* Este e-mail já está cadastrado.',
+        ];
+
+        $validador = Validator::make($dados, $regras, $mensagens);
+
+        if ($validador->fails()) {
+            return response()->json(['errors' => $validador->errors()], 400); // Bad Request
+        }
+
+        // Criar novo cliente
         $cliente = new Cliente;
 
         // Atribuir os valores dos dados ao modelo
@@ -30,7 +58,8 @@ class ClienteController extends Controller
         }
 
         $cliente->save();
-        return $cliente;
+
+        return response()->json($cliente, 201); // Created
     }
 
     public function visualizarCliente($id)
@@ -41,48 +70,39 @@ class ClienteController extends Controller
 
     public function editarCliente(Request $request, $id)
     {
-        // Validação dos dados recebidos do formulário (se necessário)
-        $request->validate([
-            'nomeCliente' => 'required|max:255',
-            'estadoRgCliente' => 'required|max:255',
-            'rgCliente' => 'required|max:255',
-            'cpfCliente' => 'required|max:255',
-            'emailCliente' => 'required|email|max:255',
-            'celularCliente' => 'max:255',
-            'telefoneCliente' => 'max:255',
-            'enderecoCliente' => 'max:255',
-            'numeroCliente' => 'max:255',
-            'complementoCliente' => 'max:255',
-            'estadoCliente' => 'max:255',
-            'cidadeCliente' => 'max:255',
-            // Adicione outras regras de validação conforme necessário
-        ]);
+        $dados = $request->all();
 
-        // Encontra o cliente pelo ID
+        $regras = [
+            'nomeCliente' => 'required',
+            'celularCliente' => 'required',
+            'cpfCliente' => 'required|unique:clientes,cpfCliente,' . $id,
+            'emailCliente' => 'required|unique:clientes,emailCliente,' . $id,
+        ];
+
+        $mensagens = [
+            'nomeCliente.required' => '* O campo nome é obrigatório.',
+            'celularCliente.required' => '* O campo celular é obrigatório.',
+            'cpfCliente.required' => '* O campo CPF é obrigatório.',
+            'cpfCliente.unique' => '* Este CPF já está cadastrado.',
+            'emailCliente.required' => '* O campo e-mail é obrigatório.',
+            'emailCliente.unique' => '* Este e-mail já está cadastrado.',
+        ];
+
+        $validador = Validator::make($dados, $regras, $mensagens);
+
+        if ($validador->fails()) {
+            return response()->json(['errors' => $validador->errors()], 400); // Bad Request
+        }
+
         $cliente = Cliente::findOrFail($id);
 
-        // Atualiza os atributos do cliente com os dados do formulário
-        $cliente->update([
-            'nomeCliente' => $request->input('nomeCliente'),
-            'estadoRgCliente' => $request->input('estadoRgCliente'),
-            'rgCliente' => $request->input('rgCliente'),
-            'cpfCliente' => $request->input('cpfCliente'),
-            'emailCliente' => $request->input('emailCliente'),
-            'celularCliente' => $request->input('celularCliente'),
-            'telefoneCliente' => $request->input('telefoneCliente'),
-            'enderecoCliente' => $request->input('enderecoCliente'),
-            'numeroCliente' => $request->input('numeroCliente'),
-            'complementoCliente' => $request->input('complementoCliente'),
-            'estadoCliente' => $request->input('estadoCliente'),
-            'cidadeCliente' => $request->input('cidadeCliente'),
-            // Adicione outros atributos conforme necessário
-        ]);
+        $cliente->update($dados);
 
-        // Retorna a resposta da atualização (por exemplo, um JSON de sucesso)
         return response()->json(['message' => 'Cliente atualizado com sucesso']);
     }
 
-    public function deletarCliente($id) {
+    public function deletarCliente($id)
+    {
         $cliente = Cliente::find($id);
         $cliente->delete();
         return $cliente;

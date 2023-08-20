@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('nomeCliente');
-            $table->string('estadoRgCliente');
-            $table->string('rgCliente');
-            $table->string('cpfCliente')->unique();
-            $table->string('emailCliente')->unique();
-            $table->string('celularCliente');
-            $table->string('telefoneCliente');
-            $table->string('enderecoCliente');
-            $table->string('numeroCliente');
-            $table->string('complementoCliente');
-            $table->string('estadoCliente');
-            $table->string('cidadeCliente');
+            $table->string('nomeCliente')->required();
+            $table->string('estadoRgCliente')->nullable();
+            $table->string('rgCliente')->nullable();
+            $table->string('cpfCliente')->required()->unique();
+            $table->string('emailCliente')->required()->unique();
+            $table->string('celularCliente')->required();
+            $table->string('telefoneCliente')->nullable();
+            $table->string('enderecoCliente')->nullable();
+            $table->string('numeroCliente')->nullable();
+            $table->string('complementoCliente')->nullable();
+            $table->string('estadoCliente')->nullable();
+            $table->string('cidadeCliente')->nullable();
 
             $table->timestamps();
         });

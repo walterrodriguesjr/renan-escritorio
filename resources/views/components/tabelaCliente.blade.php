@@ -168,7 +168,19 @@
                                                 $("#visualizarCidadeCliente").val(response.cidadeCliente);
                                                 $("#visualizarUltimaAtualizacaoCliente").val(formatarData(response.updated_at));
                                                 $("#visualizarDataCadastroCliente").val(formatarData(response.created_at));
+                                            },
+                                            error: function(xhr, status, error) {
+                                            $("#loadingSpinner").hide();
+
+                                            // Se a resposta da API incluir mensagens de erro
+                                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                                var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+                                                swal("Erro ao Exibir Cliente", errorMessages, "error");
+                                            } else {
+                                                // Caso contrário, exiba uma mensagem genérica
+                                                swal("Erro ao Exibir Cliente", "Verifique sua conexão com a internet.", "error");
                                             }
+                                        }
                                         });
 
                                     }).append($iconVisualizar);
@@ -234,7 +246,19 @@
 
                                                 $("#modalAdicionarEditarCliente").modal("show");
                                             $("#loadingSpinner").hide();
+                                            },
+                                            error: function(xhr, status, error) {
+                                            $("#loadingSpinner").remove();
+
+                                            // Se a resposta da API incluir mensagens de erro
+                                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                                var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+                                                swal("Erro ao Exibir Cliente", errorMessages, "error");
+                                            } else {
+                                                // Caso contrário, exiba uma mensagem genérica
+                                                swal("Erro ao Exibir Cliente", "Verifique sua conexão com a internet.", "error");
                                             }
+                                        }
                                         
                                         });
 
@@ -300,9 +324,22 @@
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarCliente").modal('hide');
                                                 $("#loadingSpinnerModal").remove();
+                                                swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientes();
-                                                }
+                                                },
+                                                error: function(xhr, status, error) {
+                                            $("#loadingSpinnerModal").remove();
+
+                                            // Se a resposta da API incluir mensagens de erro
+                                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                                var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+                                                swal("Erro ao Editar Cliente", errorMessages, "error");
+                                            } else {
+                                                // Caso contrário, exiba uma mensagem genérica
+                                                swal("Erro ao Editar Cliente", "Verifique sua conexão com a internet.", "error");
+                                            }
+                                        }
                                             });
                                         });
 
@@ -347,8 +384,15 @@
                                             success: function (response) {
                                                 $("#deletarSpinnerModal").remove();
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
+                                                swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientes();
-                                            }
+                                            },
+                                            error: function(xhr, status, error) {
+                                                $("#deletarSpinnerModal").remove();
+                                                $("#modalConfirmacaoDeletarCliente").modal("hide");
+                                            // Exibir o SweetAlert de erro
+                                            swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
+                                        }
                                         });
                                         
                                     });
@@ -361,6 +405,11 @@
                         }
                     ]
                 });
+            },
+            error: function(xhr, status, error) {
+                $("#loadingSpinner").hide();
+                // Exibir o SweetAlert de erro
+                swal("Erro ao Carregar Clientes", "Verifique sua conexão com a internet.", "error");
             }
         });
     }

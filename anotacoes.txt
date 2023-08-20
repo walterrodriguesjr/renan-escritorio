@@ -77,6 +77,14 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 16-configurado model de Cliente 
 
-17-
+17-configurado toda view de Cliente 
+    parte de listar, visualizar, cadastrar, editar e deletar 
+    incluido spinners personalizados em todo escopo
+    incluido sweet alert de retorno ao usuario 
+
+18-seeder de admin 
+    php artisan db:seed --class=UserSeeder
+
+19-
 
 
