@@ -121,24 +121,13 @@
 
                                 var $visualizarButton = $("<button>").attr({
                                         class: "btn btn-sm btn-secondary ml-3",
-                                        "data-bs-toggle": "modal",
-                                        "data-bs-target": "#modalVisualizarCliente"
+                                        
                                     })
                                       
                                     .click(function(e) {
 
-                                        /* esta variável recebe as propriedades de um spinner */
-                                        var spinnerHtml = `
-                                     <div id="loadingSpinnerModal" class="text-center">
-                                         <button class="btn btn-primary" type="button" disabled>
-                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                             Carregando...
-                                         </button>
-                                     </div>
-                                 `;
-
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
-                                 $("#modalVisualizarCliente .modal-body").prepend(spinnerHtml);
+                                       $("#loadingSpinner").show();
+                                 
                                         $.ajax({
                                             type: "GET",
                                             url: "/visualizarCliente/" + item.id,
@@ -161,6 +150,8 @@
                                                 function pad(value) {
                                                     return (value < 10 ? '0' : '') + value;
                                                 }
+                                                $("#modalVisualizarCliente").modal("show");
+                                                $("#loadingSpinner").hide();
 
                                                 /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
                                                 $("#visualizarNomeCliente").val(response.nomeCliente);
@@ -184,8 +175,7 @@
 
                                 var $editarButton = $("<button>").attr({
                                         class: "btn btn-sm btn-success ml-2",
-                                        "data-bs-toggle": "modal",
-                                        "data-bs-target": "#modalAdicionarEditarCliente"
+                                        
                                     })
                                     .click(function(e) {
                                         e.stopPropagation();
@@ -199,26 +189,15 @@
                                         var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente"><i class="fas fa-sync"></i> Atualizar</button>';
                                         $("#cadastrarCliente").replaceWith(botaoAtualizar);
 
-                                         /* esta variável recebe as propriedades de um spinner */
-                                         var spinnerHtml = `
-                                     <div id="loadingSpinnerModal" class="text-center">
-                                         <button class="btn btn-primary" type="button" disabled>
-                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                             Carregando...
-                                         </button>
-                                     </div>
-                                 `;
+                                        $("#loadingSpinner").show();
 
-                                 // insere o spinner dinamicamente dentro do body do modal AdicionarVisualizarCliente
-                                 $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+                                 
                                         $.ajax({
                                             type: "GET",
                                             url: "/visualizarCliente/" + item.id,
                                             data: "data",
                                             dataType: "json",
-                                            success: function(response) {
-                                                /* finalizando o GET o spinner é destruído */
-                                                $("#loadingSpinnerModal").remove();
+                                            success: function(response) {                                            
                                                 function formatarData(dataString) {
                                                     // Converte a string para um objeto Date
                                                     var data = new Date(dataString);
@@ -252,11 +231,29 @@
                                                     cidadeCliente.setValue(response.cidadeCliente);
                                                 $("#ultimaAtualizacaoCliente").val(formatarData(response.updated_at));
                                                 $("#dataCadastroCliente").val(formatarData(response.created_at));
+
+                                                $("#modalAdicionarEditarCliente").modal("show");
+                                            $("#loadingSpinner").hide();
                                             }
+                                        
                                         });
 
                                         $('#atualizarCliente').click(function (e) { 
                                             e.preventDefault();
+
+                                            /* esta variável recebe as propriedades de um spinner de atualizando */
+                                        var spinnerHtml = `
+                                     <div id="loadingSpinnerModal" class="text-center">
+                                         <button class="btn btn-success" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Atualizando...
+                                         </button>
+                                     </div>
+                                 `;
+
+                                 // insere o spinner dinamicamente dentro do body do modal visualizar
+                                 $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+
                                             // Coleta dos valores dos campos e selects usando serializeArray
                                             var nomeCliente = $("#nomeCliente").val();
                                             var estadoRgCliente = $("#estadoRgCliente").val();
@@ -286,7 +283,7 @@
                                                 cidadeCliente: cidadeCliente,
                                             };
 
-                                            console.log(data);
+                                            
 
                                             // Pegue o token CSRF da meta tag
                                             let csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -302,6 +299,7 @@
                                                 dataType: "json",
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarCliente").modal('hide');
+                                                $("#loadingSpinnerModal").remove();
                                                     /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientes();
                                                 }
@@ -321,6 +319,20 @@
 
                                     $("#buttonDeletarCliente").click(function (e) { 
                                         e.preventDefault();
+
+                                        /* esta variável recebe as propriedades de um spinner de atualizando */
+                                        var spinnerHtml = `
+                                     <div id="deletarSpinnerModal" class="text-center">
+                                         <button class="btn btn-danger" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Deletando...
+                                         </button>
+                                     </div>
+                                 `;
+
+                                 // insere o spinner dinamicamente dentro do body do modal visualizar
+                                 $("#modalConfirmacaoDeletarCliente .modal-body").prepend(spinnerHtml);
+
                                         // Pegue o token CSRF da meta tag
                                         let csrfToken = $('meta[name="csrf-token"]').attr('content');
                                         $.ajax({
@@ -333,6 +345,7 @@
                                                 },
                                             dataType: "json",
                                             success: function (response) {
+                                                $("#deletarSpinnerModal").remove();
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
                                                 listarClientes();
                                             }
