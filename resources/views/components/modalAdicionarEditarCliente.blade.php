@@ -145,6 +145,12 @@
     </div>
 </div>
 
+{{-- <div id="loadingSpinner" class="text-center">
+    <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Carregando...
+    </button>
+</div> --}}
 
 <!-- Certifique-se de incluir o jQuery antes do código do Selectize -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -231,6 +237,18 @@ function limparInputsModalAdicionarEditarCliente() {
     $("#cadastrarCliente").click(function(e) {
         e.preventDefault();
         
+        /* esta variável recebe as propriedades de um spinner de atualizando */
+        var spinnerHtml = `
+             <div id="adicionarSpinnerModal" class="text-center">
+                 <button class="btn btn-primary" type="button" disabled>
+                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                     Adicionando...
+                 </button>
+             </div>
+         `;
+
+         // insere o spinner dinamicamente dentro do body do modal visualizar
+         $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
 
         /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
         let $dadosCliente = {};
@@ -259,6 +277,7 @@ function limparInputsModalAdicionarEditarCliente() {
             contentType: "application/json",
             dataType: "json",
             success: function(response) {
+                $("#adicionarSpinnerModal").remove();
                 $("#modalAdicionarEditarCliente").modal('hide');
                 /* método que recarrega o grid de clientes, já atualizado */
                 listarClientes();
