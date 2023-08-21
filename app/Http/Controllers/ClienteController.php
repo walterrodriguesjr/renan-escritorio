@@ -9,15 +9,31 @@ use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
-    public function listarClientes()
-    {
-        try {
-            $clientes = Cliente::all();
-            return response()->json($clientes, 200); // 200 OK
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Erro ao listar clientes'], 500); // 500 Internal Server Error
+    public function listarClientes(Request $request)
+{
+    try {
+        $searchTerm = $request->input('search');
+
+        $query = Cliente::query();
+
+        if ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('nomeCliente', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('rgCliente', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('cpfCliente', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('emailCliente', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('celularCliente', 'like', '%' . $searchTerm . '%');
+            });
         }
+
+        $clientes = $query->get();
+
+        return response()->json($clientes, 200); // 200 OK
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Erro ao listar clientes'], 500); // 500 Internal Server Error
     }
+}
+
 
     public function adicionarCliente(Request $request)
     {

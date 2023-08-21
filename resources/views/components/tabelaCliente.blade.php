@@ -61,6 +61,7 @@
 
 <script>
     
+    
     /* função GET na tabela CLIENTES, carregada de fato em DocReady abaixo e importada em clientes.blade.php */
     function listarClientes() {
         $.ajax({
@@ -446,10 +447,12 @@ $("#visualizarCelularWhatsappCliente").html(linkHtml);
     /* ao finalizar o carregamento da página, o spinner é mostrado e o jsGrid ocultado, até que o GET dos 
     Clientes seja finalizado */
     $(document).ready(function() {
-        $("#loadingSpinner").show();
-        $("#jsGridClientes").hide();
+       /*  $("#loadingSpinner").show();
+        $("#jsGridClientes").hide(); */
 
         /* carrega de fato a função acima de GET */
-        listarClientes();
+        /* listarClientes(); */
     });
+    
+
 </script>
