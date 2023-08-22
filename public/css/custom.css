@@ -4,11 +4,18 @@
 .btn.btn-secondary {
     background-color: #6c757d;
 }
+.btn.btn-success {
+    background-color: #198754;
+}
 
 /* Desabilitar o hover do botão */
 .btn.btn-primary:hover {
     background-color: #009bff;
 }
+.btn.btn-success:hover {
+    background-color: #198754;
+}
+
 .btn.btn-secondary:hover {
     background-color: #788380;
 }

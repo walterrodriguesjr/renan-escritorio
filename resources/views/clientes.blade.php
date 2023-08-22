@@ -1,4 +1,10 @@
-
+<style>
+   .btn-success {
+    background-color: #28a745; /* Substitua pela cor desejada */
+    color: #fff; /* Defina a cor do texto para garantir a legibilidade */
+    border-color: #28a745; /* Defina a cor da borda para combinar */
+}
+</style>
 
 <x-app-layout>
     <x-slot name="header">
@@ -10,19 +16,32 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200 button-container">
-                    <button type="button" id="adicionarCliente" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalAdicionarEditarCliente"><i class="fas fa-plus"></i> Adicionar Cliente</button>
-                    <button type="button" id="buttonListarClientes" class="btn btn-success"><i class="fas fa-plus"></i> Listar todos os Clientes</button>
-                        <div class="col-md-6 mt-3">
-                            <x-input-label for="pesquisarCliente" id="pesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
-                            <x-text-input id="pesquisarCliente" class="block mt-1 w-full" type="text"
-                                name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required
-                                autofocus />
-                            <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
-                        </div>
+                <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
+                    <div class="col-md mb-2">
+                        <button type="button" id="adicionarCliente" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
+                            <i class="fas fa-plus"></i> Adicionar Cliente
+                        </button>
+                    </div>
+                    <div class="col-md mb-2">
+                        <button type="button" id="buttonListarClientes" class="btn btn-success w-100">
+                            <i class="fas fa-list-ul"></i> Listar todos os Clientes
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-4" style="margin-bottom: 30px !important">
+                        <x-input-label for="pesquisarCliente" id="pesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
+                        <x-text-input id="pesquisarCliente" class="block mt-1 w-full" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
+                        <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
+                    </div>
+                </div>
+                <div id="loadingSpinner" class="text-center" style="display: none;">
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Carregando...
+                    </button>
                 </div>
             </div>
+            
+            
             {{-- trazendo o conteúdo da referida view --}}
             @include('components.tabelaCliente')
         </div>
@@ -38,6 +57,7 @@
 
 <script>
     $(document).ready(function() {
+        $("#spinnerListarTodosClientes").hide();
         var minCharsToSearch = 3; // Mínimo de caracteres para iniciar a pesquisa
 
         /* var dadoPesquisado recebe o conteudo digitado no input search */
@@ -53,12 +73,23 @@
     });
 
     function listarClientesAjax(dadoPesquisado) {
+        /* esta variável recebe as propriedades de um spinner de atualizando */
+        var spinnerPesquisarCliente = `
+                                     <div id="spinnerPesquisarCliente" class="text-center">
+                                         <button class="btn btn-primary" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Pesquisando...
+                                         </button>
+                                     </div>
+                                 `;
+                                 $("#jsGridClientes").prepend(spinnerPesquisarCliente);
         $.ajax({
             type: "GET",
             url: "/listarClientes",
             data: { search: dadoPesquisado },
             dataType: "json",
             success: function (response) {
+                $("#spinnerPesquisarCliente").remove();
                 renderJsGrid(response);
             },
             error: function (error) {
@@ -85,36 +116,36 @@
                             name: "nomeCliente",
                             title: "Nome",
                             type: "text",
-                            width: 50,
+                            width: 100,
 
                         },
                         {
                             name: "rgCliente",
                             title: "RG",
                             type: "text",
-                            width: 25,
+                            width: 100,
                         },
                         {
                             name: "cpfCliente",
                             title: "CPF",
                             type: "text",
-                            width: 25,
+                            width: 100,
                         },
                         {
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 50,
+                            width: 100,
                         },
                         {
                             name: "celularCliente",
                             title: "Celular",
                             type: "text",
-                            width: 25,
+                            width: 100,
                         },
                         {
                             title: "Ações",
-                            width: 30,
+                            width: 100,
                             sorting: false,
                             filtering: false,
                             itemTemplate: function(value, item) {
@@ -448,7 +479,9 @@ $("#visualizarCelularWhatsappCliente").html(linkHtml);
 
     $("#buttonListarClientes").click(function (e) { 
         e.preventDefault();
+        $("#loadingSpinner").show();
         listarClientes();
+   
     });
 
     
