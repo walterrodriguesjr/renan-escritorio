@@ -50,7 +50,10 @@
                     </div>
                     <div class="col-md-4 mb-4" style="margin-bottom: 30px !important">
                         <x-input-label for="pesquisarCliente" id="pesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
-                        <x-text-input id="pesquisarCliente" class="block mt-1 w-full" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            <x-text-input id="pesquisarCliente" class="form-control" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
+                        </div>
                         <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
                     </div>
                 </div>
@@ -148,7 +151,7 @@
                             name: "nomeCliente",
                             title: "Nome",
                             type: "text",
-                            width: 100,
+                            width: 150,
 
                         },
                         {
@@ -167,7 +170,7 @@
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 100,
+                            width: 150,
                         },
                         {
                             name: "celularCliente",
@@ -177,7 +180,7 @@
                         },
                         {
                             title: "Ações",
-                            width: 100,
+                            width: 150,
                             sorting: false,
                             filtering: false,
                             itemTemplate: function(value, item) {

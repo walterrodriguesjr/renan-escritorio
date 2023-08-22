@@ -111,7 +111,7 @@
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 150,
+                            width: 200,
                         },
                         {
                             name: "celularCliente",
