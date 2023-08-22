@@ -92,36 +92,36 @@
                             name: "nomeCliente",
                             title: "Nome",
                             type: "text",
-                            width: 50,
+                            width: 200,
 
                         },
                         {
                             name: "rgCliente",
                             title: "RG",
                             type: "text",
-                            width: 25,
+                            width: 150,
                         },
                         {
                             name: "cpfCliente",
                             title: "CPF",
                             type: "text",
-                            width: 25,
+                            width: 150,
                         },
                         {
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 50,
+                            width: 150,
                         },
                         {
                             name: "celularCliente",
                             title: "Celular",
                             type: "text",
-                            width: 25,
+                            width: 150,
                         },
                         {
                             title: "Ações",
-                            width: 30,
+                            width: 150,
                             sorting: false,
                             filtering: false,
                             itemTemplate: function(value, item) {
