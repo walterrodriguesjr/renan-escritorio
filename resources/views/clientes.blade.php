@@ -4,6 +4,19 @@
     color: #fff; /* Defina a cor do texto para garantir a legibilidade */
     border-color: #28a745; /* Defina a cor da borda para combinar */
 }
+   /* Estilo personalizado */
+.custom-btn-warning {
+    background-color: #ffc107 !important;
+    color: #fff !important;
+    border-color: #ffc107 !important;
+}
+
+/* Sobrescrevendo a classe .btn-warning */
+.btn-warning {
+    background-color: #ffc107 !important; /* Substitua pela cor desejada */
+    color: #fff !important; /* Defina a cor do texto para garantir a legibilidade */
+    border-color: #ffc107 !important; /* Defina a cor da borda para combinar */
+}
 </style>
 
 <!-- Incluir o custom css -->
@@ -30,7 +43,12 @@
                             <i class="fas fa-list-ul"></i> Listar todos os Clientes
                         </button>
                     </div>
-                    <div class="col-md-6 mb-4" style="margin-bottom: 30px !important">
+                    <div class="col-md mb-2">
+                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-warning w-100">
+                            <i class="fas fa-eraser"></i> Limpar Pesquisa
+                        </button>
+                    </div>
+                    <div class="col-md-4 mb-4" style="margin-bottom: 30px !important">
                         <x-input-label for="pesquisarCliente" id="pesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
                         <x-text-input id="pesquisarCliente" class="block mt-1 w-full" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
                         <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
@@ -61,16 +79,27 @@
 <script>
     $(document).ready(function() {
         $("#spinnerListarTodosClientes").hide();
-        var minCharsToSearch = 3; // Mínimo de caracteres para iniciar a pesquisa
+    var minimoDigitosPesquisar = 3;
+    var adicionarSpinner = false;
 
-        /* var dadoPesquisado recebe o conteudo digitado no input search */
+    // button que aciona limpeza do grid de clientes
+    $("#buttonLimparTabelaClientes").on("click", function () {
+        // Limpa o conteúdo do jsGrid chamando a função de renderização com um array vazio
+        renderJsGrid([]);
+        $("#pesquisarCliente").val('');
+    });
+
     $("#pesquisarCliente").on("input", function () {
         var dadoPesquisado = $(this).val();
 
-        if (dadoPesquisado.length >= minCharsToSearch) {
-            listarClientesAjax(dadoPesquisado);
-        } else if (dadoPesquisado.length === 0) {
-            // Limpar o jsGrid se o input estiver vazio
+        if (dadoPesquisado.length >= minimoDigitosPesquisar) {
+            if (!adicionarSpinner) {
+                listarClientesAjax(dadoPesquisado);
+                adicionarSpinner = true;
+            }
+        } else {
+            $("#spinnerPesquisarCliente").remove();
+            adicionarSpinner = false;
             renderJsGrid([]);
         }
     });
@@ -484,8 +513,9 @@ $("#visualizarCelularWhatsappCliente").html(linkHtml);
         e.preventDefault();
         $("#loadingSpinner").show();
         listarClientes();
-   
     });
+
+    
 
     
 

@@ -85,6 +85,10 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 18-seeder de admin 
     php artisan db:seed --class=UserSeeder
 
-19-
+19-inserido buttons de listar Clientes e limpar o grid de clientes
+
+20-inserido input de search para pesquisa manual de cliente 
+
+21-
 
 
