@@ -89,6 +89,8 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 20-inserido input de search para pesquisa manual de cliente 
 
-21-
+21-inserido label que exibe quantidade de clientes cadastrados, dinamicamente
+
+22-
 
 

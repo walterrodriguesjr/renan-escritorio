@@ -27,6 +27,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight"><i class="fas fa-users"></i>
             {{ __('Clientes') }}
         </h2>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-users"></i></span>
+                <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled />
+                <span class="input-group-text" id="quantidadeClientes" ></span>
+            </div>
+            <x-input-error :messages="$errors->get('quantidadeClientes')" class="mt-2" />
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -49,7 +57,7 @@
                         </button>
                     </div>
                     <div class="col-md-4 mb-4" style="margin-bottom: 30px !important">
-                        <x-input-label for="pesquisarCliente" id="pesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
+                        <x-input-label for="pesquisquantidade" id="psesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
                             <x-text-input id="pesquisarCliente" class="form-control" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
@@ -81,6 +89,7 @@
 
 <script>
     $(document).ready(function() {
+        
         $("#spinnerListarTodosClientes").hide();
     var minimoDigitosPesquisar = 3;
     var adicionarSpinner = false;

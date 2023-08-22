@@ -61,6 +61,20 @@
 <div id="jsGridClientes"></div>
 
 <script>
+
+function atualizarQuantidadeClientes() { 
+        $.ajax({
+            type: "GET",
+            url: "/listarClientes",
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                let quantidade = response.length;
+                $("#quantidadeClientes").text(quantidade);
+            }
+        });
+    }
+    atualizarQuantidadeClientes();
     
     
     /* função GET na tabela CLIENTES, carregada de fato em DocReady abaixo e importada em clientes.blade.php */
@@ -71,7 +85,7 @@
             data: "data",
             dataType: "json",
             success: function(response) {
-                console.log(response);
+                atualizarQuantidadeClientes();
 
                 $("#loadingSpinner").hide();
                 $("#jsGridClientes").show();
@@ -417,6 +431,7 @@ $("#visualizarCelularWhatsappCliente").html(linkHtml);
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientes();
+                                                
                                             },
                                             error: function(xhr, status, error) {
                                                 $("#deletarSpinnerModal").remove();
@@ -448,11 +463,8 @@ $("#visualizarCelularWhatsappCliente").html(linkHtml);
     /* ao finalizar o carregamento da página, o spinner é mostrado e o jsGrid ocultado, até que o GET dos 
     Clientes seja finalizado */
     $(document).ready(function() {
-       /*  $("#loadingSpinner").show();
-        $("#jsGridClientes").hide(); */
-
-        /* carrega de fato a função acima de GET */
-        /* listarClientes(); */
+        
+       
     });
     
 
