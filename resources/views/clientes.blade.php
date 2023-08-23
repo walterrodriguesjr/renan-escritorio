@@ -160,32 +160,32 @@
                             name: "nomeCliente",
                             title: "Nome",
                             type: "text",
-                            width: 150,
+                            width: 200,
 
                         },
                         {
                             name: "rgCliente",
                             title: "RG",
                             type: "text",
-                            width: 100,
+                            width: 150,
                         },
                         {
                             name: "cpfCliente",
                             title: "CPF",
                             type: "text",
-                            width: 100,
+                            width: 150,
                         },
                         {
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 150,
+                            width: 200,
                         },
                         {
                             name: "celularCliente",
                             title: "Celular",
                             type: "text",
-                            width: 100,
+                            width: 150,
                         },
                         {
                             title: "Ações",
@@ -244,20 +244,20 @@
                                                 $("#visualizarCpfCliente").val(response.cpfCliente);
                                                 $("#visualizarEmailCliente").val(response.emailCliente);
                                                 var emailCliente = response.emailCliente;
-var linkParaEmail = 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new&to=' + encodeURIComponent(emailCliente);
-
-var linkHtml = '<a href="' + linkParaEmail + '" target="_blank" class="email-link"><span class="email-text purple-text"> - Abrir Gmail <i class="far fa-envelope"></i></span></a>';
-
-if ($("#visualizarEmailCliente .email-link").length === 0) {
-    $("#visualizarEmailCliente").append(linkHtml);
-}
-                                                $("#visualizarCelularCliente").val(response.celularCliente);
-                                                var celularCliente = response.celularCliente;
-var linkParaWhatsapp = 'https://web.whatsapp.com/send?phone=' + celularCliente;
-
-var linkHtml = '<a href="' + linkParaWhatsapp + '" target="_blank">Celular - <span class="whatsapp-text .whatsapp-link">Abrir WhatsApp <i class="fab fa-whatsapp"></i></span></a>';
-
-$("#visualizarCelularWhatsappCliente").html(linkHtml);
+                                                var linkParaEmail = 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new&to=' + encodeURIComponent(emailCliente);
+                                                                                            
+                                                var linkHtml = '<a href="' + linkParaEmail + '" target="_blank" class="email-link"><span class="email-text purple-text"> - Abrir Gmail <i class="far fa-envelope"></i></span></a>';
+                                                                                            
+                                                if ($("#visualizarEmailCliente .email-link").length === 0) {
+                                                    $("#visualizarEmailCliente").append(linkHtml);
+                                                }
+                                                                                                $("#visualizarCelularCliente").val(response.celularCliente);
+                                                                                                var celularCliente = response.celularCliente;
+                                                var linkParaWhatsapp = 'https://web.whatsapp.com/send?phone=' + celularCliente;
+                                                
+                                                var linkHtml = '<a href="' + linkParaWhatsapp + '" target="_blank">Celular - <span class="whatsapp-text .whatsapp-link">Abrir WhatsApp <i class="fab fa-whatsapp"></i></span></a>';
+                                                
+                                                $("#visualizarCelularWhatsappCliente").html(linkHtml);
 
                                                 $("#visualizarTelefoneCliente").val(response.telefoneCliente);
                                                 $("#visualizarEnderecoCliente").val(response.enderecoCliente);
