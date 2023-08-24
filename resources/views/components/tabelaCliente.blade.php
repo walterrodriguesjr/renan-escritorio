@@ -125,7 +125,7 @@ function atualizarQuantidadeClientes() {
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 200,
+                            width: 250,
                         },
                         {
                             name: "celularCliente",

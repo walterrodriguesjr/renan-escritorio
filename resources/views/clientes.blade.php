@@ -17,6 +17,11 @@
     color: #fff !important; /* Defina a cor do texto para garantir a legibilidade */
     border-color: #ffc107 !important; /* Defina a cor da borda para combinar */
 }
+
+/* Centralizar os títulos das colunas no jsGrid */
+.jsgrid-header-cell {
+    text-align: center;
+}
 </style>
 
 <!-- Incluir o custom css -->
@@ -155,6 +160,7 @@
 
                     pageSize: 5,
                     pageButtonCount: 50,
+                    
 
                     fields: [{
                             name: "nomeCliente",
@@ -179,7 +185,7 @@
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 200,
+                            width: 250,
                         },
                         {
                             name: "celularCliente",
