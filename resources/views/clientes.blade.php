@@ -17,11 +17,6 @@
     color: #fff !important; /* Defina a cor do texto para garantir a legibilidade */
     border-color: #ffc107 !important; /* Defina a cor da borda para combinar */
 }
-
-/* Centralizar os títulos das colunas no jsGrid */
-.jsgrid-header-cell {
-    text-align: center;
-}
 </style>
 
 <!-- Incluir o custom css -->
@@ -47,17 +42,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
                     <div class="col-md mb-2">
-                        <button type="button" id="adicionarCliente" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
+                        <button type="button" id="adicionarCliente" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-placement="top" title="Clique para Adicionar um novo Cliente" data-bs-target="#modalAdicionarEditarCliente">
                             <i class="fas fa-plus"></i> Adicionar Cliente
-                        </button>
+                          </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonListarClientes" class="btn btn-success w-100">
+                        <button type="button" id="buttonListarClientes" class="btn btn-success w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Clique para listar os Clientes cadastrados">
                             <i class="fas fa-list-ul"></i> Listar todos os Clientes
                         </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-warning w-100">
+                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-warning w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Clique para limpar o campo de pesquisas e a tabela de Clientes">
                             <i class="fas fa-eraser"></i> Limpar Pesquisa
                         </button>
                     </div>
@@ -65,7 +60,7 @@
                         <x-input-label for="pesquisquantidade" id="psesquisarClienteLabel" :value="__('Pesquisar Cliente')" style="font-weight: bold;" />
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                            <x-text-input id="pesquisarCliente" class="form-control" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." required autofocus />
+                            <x-text-input id="pesquisarCliente" class="form-control" type="text" name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..." data-bs-toggle="tooltip" title="Digite pelo menos 3 caracteres para iniciar a pesquisa. É possível pesquisar por: Nome, RG, CPF, E-mail, Celular." required autofocus />
                         </div>
                         <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
                     </div>
@@ -94,7 +89,7 @@
 
 <script>
     $(document).ready(function() {
-        
+        $('[data-toggle="tooltip"]').tooltip();
         $("#spinnerListarTodosClientes").hide();
     var minimoDigitosPesquisar = 3;
     var adicionarSpinner = false;
@@ -160,7 +155,6 @@
 
                     pageSize: 5,
                     pageButtonCount: 50,
-                    
 
                     fields: [{
                             name: "nomeCliente",
@@ -185,7 +179,7 @@
                             name: "emailCliente",
                             title: "E-mail",
                             type: "text",
-                            width: 250,
+                            width: 200,
                         },
                         {
                             name: "celularCliente",

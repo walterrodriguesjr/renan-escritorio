@@ -12,17 +12,17 @@ class ClienteController extends Controller
     public function listarClientes(Request $request)
 {
     try {
-        $searchTerm = $request->input('search');
+        $pesquisaClientes = $request->input('search');
 
         $query = Cliente::query();
 
-        if ($searchTerm) {
-            $query->where(function ($query) use ($searchTerm) {
-                $query->where('nomeCliente', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('rgCliente', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('cpfCliente', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('emailCliente', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('celularCliente', 'like', '%' . $searchTerm . '%');
+        if ($pesquisaClientes) {
+            $query->where(function ($query) use ($pesquisaClientes) {
+                $query->where('nomeCliente', 'like', '%' . $pesquisaClientes . '%')
+                    ->orWhere('rgCliente', 'like', '%' . $pesquisaClientes . '%')
+                    ->orWhere('cpfCliente', 'like', '%' . $pesquisaClientes . '%')
+                    ->orWhere('emailCliente', 'like', '%' . $pesquisaClientes . '%')
+                    ->orWhere('celularCliente', 'like', '%' . $pesquisaClientes . '%');
             });
         }
 
