@@ -93,11 +93,11 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 22-inserindo tooltips em geral
 
+23-inserir MASC nos inputs que forem possíveis
+
+24-adicionar cores no header dos modais de acordo com a ação (FAZENDO)
+
 A FAZER
-
-23-inserir MASC nos inputs que forem possíveis 
-
-24-adicionar cores no header dos modais de acordo com a ação 
 
 25-adicionar area de processos 
 

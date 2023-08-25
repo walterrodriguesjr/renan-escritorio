@@ -46,7 +46,7 @@
                         <div class="col-md-4">
                             <div class="mt-2">
                                 <x-input-label for="cpfCliente" :value="__('CPF')" />
-                                <x-text-input id="cpfCliente" class="block mt-1 w-full" type="number" name="cpfCliente"
+                                <x-text-input id="cpfCliente" class="block mt-1 w-full" type="text" name="cpfCliente"
                                     :value="old('cpfCliente')" placeholder="Digite" required autofocus />
                                 <x-input-error :messages="$errors->get('cpfCliente')" class="mt-2" />
                             </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-4">
                             <div class="mt-2">
                                 <x-input-label for="celularCliente" :value="__('Celular')" />
-                                <x-text-input id="celularCliente" class="block mt-1 w-full" type="number"
+                                <x-text-input id="celularCliente" class="block mt-1 w-full" type="text"
                                     name="celularCliente" :value="old('celularCliente')" placeholder="Digite" autofocus />
                                 <x-input-error :messages="$errors->get('celularCliente')" class="mt-2" />
                             </div>
@@ -75,7 +75,7 @@
                         <div class="col-md-4">
                             <div class="mt-2">
                                 <x-input-label for="telefoneCliente" :value="__('Telefone')" />
-                                <x-text-input id="telefoneCliente" class="block mt-1 w-full" type="number"
+                                <x-text-input id="telefoneCliente" class="block mt-1 w-full" type="text"
                                     name="telefoneCliente" :value="old('telefoneCliente')" placeholder="Digite" autofocus />
                                 <x-input-error :messages="$errors->get('telefoneCliente')" class="mt-2" />
                             </div>
@@ -103,7 +103,7 @@
 
                         <div class="col-md-2">
                             <div class="mt-2">
-                                <x-input-label for="complementoCliente" :value="__('Complento')" />
+                                <x-input-label for="complementoCliente" :value="__('Complemento')" />
                                 <x-text-input id="complementoCliente" class="block mt-1 w-full" type="text"
                                     name="complementoCliente" :value="old('complementoCliente')" placeholder="Digite" autofocus />
                                 <x-input-error :messages="$errors->get('complementoCliente')" class="mt-2" />
@@ -155,6 +155,9 @@
 {{-- incluindo o jquery nesta view --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+{{-- incluindo o input masc nesta view --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
 {{-- inclui o sweet alert nesta view --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -165,6 +168,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
 <script>
+
+$('#nomeCliente').on('input', function() {
+        var inputVal = $(this).val();
+        var words = inputVal.toLowerCase().split(' ');
+        for (var i = 0; i < words.length; i++) {
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+        }
+        var formattedVal = words.join(' ');
+        $(this).val(formattedVal);
+    });
+
+    $('#enderecoCliente').on('input', function() {
+        var inputVal = $(this).val();
+        var words = inputVal.toLowerCase().split(' ');
+        for (var i = 0; i < words.length; i++) {
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+        }
+        var formattedVal = words.join(' ');
+        $(this).val(formattedVal);
+    });
+
+    /* Inserção de Masc */
+    $('#cpfCliente').inputmask("999.999.999-99");
+    $('#celularCliente').inputmask("(99) 99999-9999");
+    $('#telefoneCliente').inputmask("(99) 9999-9999");
 
 function limparInputsModalAdicionarEditarCliente() {
         $("#nomeCliente").val('');
