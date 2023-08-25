@@ -1,13 +1,18 @@
 <div class="modal fade" id="modalVisualizarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: #6c757d; color: white">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-address-card"></i> Dados Completos do Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="GET" action="" id="formVisualizarCliente">
                     @csrf
+
+                    <!-- tag de dados pessoais -->
+                    <div class="mb-3">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(230, 230, 230)">DADOS PESSOAIS</h1>
+                    </div>
 
                     <div>
                         <x-input-label for="visualizarNomeCliente" :value="__('Nome Completo')" />
@@ -49,6 +54,13 @@
                         </div>
                     </div>
 
+                    <br>
+
+                    <!-- tag de contatos -->
+                    <div class="mb-2">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(230, 230, 230)">CONTATOS</h1>
+                    </div>
+
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
@@ -78,6 +90,13 @@
                                 <x-input-error :messages="$errors->get('visualizarTelefoneCliente')" class="mt-2" />
                             </div>
                         </div>
+                    </div>
+
+                    <br>
+
+                    <!-- tag de endereços -->
+                    <div class="mb-2">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(230, 230, 230)">ENDEREÇOS</h1>
                     </div>
 
                     <div class="row g-3">

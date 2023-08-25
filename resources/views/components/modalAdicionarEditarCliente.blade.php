@@ -2,18 +2,19 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cabecalhoModalAdicionarEditarCliente"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
+            <div class="modal-header corCabecalhoModalAdicionarEditarCliente" id="corCabecalhoModalAdicionarEditarCliente">
+                <h5 style="color: white" class="modal-title" id="cabecalhoModalAdicionarEditarCliente"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="" id="formAdicionarEditarCliente">
                     @csrf
 
-                    <!-- Input Hidden -->
-                    {{-- <input type="text" id="idCliente" name="id" value="id"> --}}
+                    <!-- tag de dados pessoais -->
+                    <div class="mb-3">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(240, 240, 240)">DADOS PESSOAIS</h1>
+                    </div>
 
-                    <!-- Nome -->
                     <div>
                         <x-input-label for="nomeCliente" :value="__('Nome Completo')" />
                         <x-text-input id="nomeCliente" class="block mt-1 w-full" type="text" name="nomeCliente"
@@ -53,6 +54,13 @@
                         </div>
                     </div>
 
+                    <br>
+
+                    <!-- tag de contatos -->
+                    <div class="mb-2">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(240, 240, 240)">CONTATOS</h1>
+                    </div>
+
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
@@ -80,6 +88,13 @@
                                 <x-input-error :messages="$errors->get('telefoneCliente')" class="mt-2" />
                             </div>
                         </div>
+                    </div>
+
+                    <br>
+
+                    <!-- tag de endereços -->
+                    <div class="mb-2">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(240, 240, 240)">ENDEREÇOS</h1>
                     </div>
 
                     <div class="row g-3">
@@ -268,7 +283,7 @@ function limparInputsModalAdicionarEditarCliente() {
     /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
     $("#cadastrarCliente").click(function(e) {
         e.preventDefault();
-        
+        function cadastrarCliente() {
         /* esta variável recebe as propriedades de um spinner de atualizando */
         var spinnerHtml = `
              <div id="adicionarSpinnerModal" class="text-center">
@@ -329,10 +344,12 @@ function limparInputsModalAdicionarEditarCliente() {
         }
     }
         });
-
+        
+    }
     });
 
     $(document).ready(function() {
+        
         // Busque os dados da API do IBGE e preencha o select "estadoCliente"
         $.ajax({
             url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados',

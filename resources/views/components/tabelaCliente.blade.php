@@ -46,9 +46,6 @@
     }
 </style>
 
-
-
-
 <div id="loadingSpinner" class="text-center">
     <button class="btn btn-primary" type="button" disabled>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -246,6 +243,10 @@ function atualizarQuantidadeClientes() {
                                         var icon = '<i class="fas fa-user"></i>';
                                         var texto = "Editar dados do Cliente";
                                         $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
+                                        $("#corCabecalhoModalAdicionarEditarCliente").css({
+                                            "background-color": "#198754",
+                                            "color": "white"
+                                        });
 
                                         // Substituir o botão
                                         var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente" title="Clique para Atualizar os dados do Cliente"><i class="fas fa-sync"></i> Atualizar</button>';
@@ -356,8 +357,6 @@ function atualizarQuantidadeClientes() {
                                                 cidadeCliente: cidadeCliente,
                                             };
 
-                                            
-
                                             // Pegue o token CSRF da meta tag
                                             let csrfToken = $('meta[name="csrf-token"]').attr('content');
 
@@ -372,6 +371,7 @@ function atualizarQuantidadeClientes() {
                                                 dataType: "json",
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarCliente").modal('hide');
+                                                
                                                 $("#loadingSpinnerModal").remove();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */

@@ -95,9 +95,12 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 23-inserir MASC nos inputs que forem possíveis
 
-24-adicionar cores no header dos modais de acordo com a ação (FAZENDO)
+24-adicionar cores no header dos modais de acordo com a ação
+
+25-fazer busca de CEP dinamico em cadastrar ou editar clientes (FAZENDO)
 
 A FAZER
+
 
 25-adicionar area de processos 
 
