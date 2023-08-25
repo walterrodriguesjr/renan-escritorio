@@ -140,18 +140,23 @@ function atualizarQuantidadeClientes() {
                             filtering: false,
                             itemTemplate: function(value, item) {
                                 var $iconVisualizar = $("<i>").attr({
-                                    class: "fas fa-eye"
+                                    class: "fas fa-eye",
+                                    "data-bs-toggle": "tooltip",
+                                     title: "Clique para Visualizar todos os dados do Cliente."
                                 });
                                 var $iconEditar = $("<i>").attr({
-                                    class: "fas fa-edit"
+                                    class: "fas fa-edit",
+                                    "data-bs-toggle": "tooltip",
+                                    title: "Clique para Editar qualquer dado do Cliente."
                                 });
                                 var $iconDeletar = $("<i>").attr({
-                                    class: "fas fa-trash"
+                                    class: "fas fa-trash",
+                                    "data-bs-toggle": "tooltip",
+                                     title: "Clique para Deletar o Cliente."
                                 });
 
                                 var $visualizarButton = $("<button>").attr({
                                         class: "btn btn-sm btn-secondary ml-3",
-                                        
                                     })
                                       
                                     .click(function(e) {
@@ -232,8 +237,7 @@ function atualizarQuantidadeClientes() {
                                     }).append($iconVisualizar);
 
                                 var $editarButton = $("<button>").attr({
-                                        class: "btn btn-sm btn-success ml-2",
-                                        
+                                class: "btn btn-sm btn-success ml-2",
                                     })
                                     .click(function(e) {
                                         e.stopPropagation();
@@ -244,9 +248,8 @@ function atualizarQuantidadeClientes() {
                                         $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
 
                                         // Substituir o botão
-                                        var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente"><i class="fas fa-sync"></i> Atualizar</button>';
+                                        var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente" title="Clique para Atualizar os dados do Cliente"><i class="fas fa-sync"></i> Atualizar</button>';
                                         $("#cadastrarCliente").replaceWith(botaoAtualizar);
-
                                         $("#loadingSpinner").show();
 
                                  
@@ -402,7 +405,7 @@ function atualizarQuantidadeClientes() {
 
                                     $("#buttonDeletarCliente").click(function (e) { 
                                         e.preventDefault();
-
+                                        
                                         /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
                                      <div id="deletarSpinnerModal" class="text-center">

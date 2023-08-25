@@ -42,17 +42,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
                     <div class="col-md mb-2">
-                        <button type="button" id="adicionarCliente" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-placement="top" title="Clique para Adicionar um novo Cliente" data-bs-target="#modalAdicionarEditarCliente">
+                        <button type="button" id="adicionarCliente" class="btn btn-primary w-100" data-bs-toggle="modal" title="Clique para Adicionar um novo Cliente" data-bs-target="#modalAdicionarEditarCliente">
                             <i class="fas fa-plus"></i> Adicionar Cliente
                           </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonListarClientes" class="btn btn-success w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Clique para listar os Clientes cadastrados">
+                        <button type="button" id="buttonListarClientes" class="btn btn-success w-100" data-bs-placement="top" title="Clique para listar os Clientes cadastrados">
                             <i class="fas fa-list-ul"></i> Listar todos os Clientes
                         </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-warning w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Clique para limpar o campo de pesquisas e a tabela de Clientes">
+                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-warning w-100" data-bs-placement="top" title="Clique para limpar o campo de pesquisas e a tabela de Clientes">
                             <i class="fas fa-eraser"></i> Limpar Pesquisa
                         </button>
                     </div>
@@ -194,13 +194,19 @@
                             filtering: false,
                             itemTemplate: function(value, item) {
                                 var $iconVisualizar = $("<i>").attr({
-                                    class: "fas fa-eye"
+                                    class: "fas fa-eye",
+                                    "data-bs-toggle": "tooltip",
+                                     title: "Clique para Visualizar todos os dados do Cliente." 
                                 });
                                 var $iconEditar = $("<i>").attr({
-                                    class: "fas fa-edit"
+                                    class: "fas fa-edit",
+                                    "data-bs-toggle": "tooltip",
+                                    title: "Clique para Editar qualquer dado do Cliente."
                                 });
                                 var $iconDeletar = $("<i>").attr({
-                                    class: "fas fa-trash"
+                                    class: "fas fa-trash",
+                                    "data-bs-toggle": "tooltip",
+                                     title: "Clique para Deletar o Cliente."
                                 });
 
                                 var $visualizarButton = $("<button>").attr({
@@ -297,7 +303,7 @@
                                         $("#cabecalhoModalAdicionarEditarCliente").html(icon + " " + texto);
 
                                         // Substituir o botão
-                                        var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente"><i class="fas fa-sync"></i> Atualizar</button>';
+                                        var botaoAtualizar = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente" title="Clique para Atualizar os dados do Cliente"><i class="fas fa-sync"></i> Atualizar</button>';
                                         $("#cadastrarCliente").replaceWith(botaoAtualizar);
 
                                         $("#loadingSpinner").show();

@@ -91,8 +91,23 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 21-inserido label que exibe quantidade de clientes cadastrados, dinamicamente
 
-22-inserindo tooltips em geral 
+22-inserindo tooltips em geral
 
-23-
+A FAZER
+
+23-inserir MASC nos inputs que forem possíveis 
+
+24-adicionar cores no header dos modais de acordo com a ação 
+
+25-adicionar area de processos 
+
+26-adicionar area de receita / despesas 
+
+27-adicionar gráficos gerais
+
+28-adicionar links uteis 
+
+29-adicionar area de administrador 
+
 
 
