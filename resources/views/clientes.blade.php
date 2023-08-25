@@ -154,6 +154,7 @@
                                          </button>
                                      </div>
                                  `;
+                                 
             $("#jsGridClientes").prepend(spinnerPesquisarCliente);
             $.ajax({
                 type: "GET",
@@ -689,6 +690,64 @@
             "background-color": "#007bff",
             "color": "white"
         });
+
+        var minimoDigitosPesquisar = 8; // Defina o número mínimo de dígitos para a pesquisa
+    var adicionarSpinner = false;
+
+    /* metódo que captura os dados digitados no input de cepCliente */
+    $("#pesquisarCepCliente").on("input", function() {
+        var dadoPesquisado = $(this).val();
+        
+
+        if (dadoPesquisado.length >= minimoDigitosPesquisar) {
+            if (!adicionarSpinner) {
+                listarCepViaCEP(dadoPesquisado);
+                adicionarSpinner = true;
+            }
+        } else {
+            $("#spinnerPesquisarCepCliente").remove();
+            adicionarSpinner = false;
+            // Limpe ou atualize a área de resultados, se necessário
+        }
+    });
+
+    /* método que chama o spinner e em seguida faz a requisição GET no via CEP e traz os dados para os respectivos inputs */
+    function listarCepViaCEP(dadoPesquisado) {
+        /* Código do spinner */
+        var spinnerPesquisarCepCliente = `
+            <div id="spinnerPesquisarCepCliente" class="text-center">
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Pesquisando...
+                </button>
+            </div>
+        `;
+        $("#resultadoPesquisaCep").html(spinnerPesquisarCepCliente);
+        
+
+        // Realize a consulta na API do ViaCEP
+        $.ajax({
+            type: "GET",
+            url: "https://viacep.com.br/ws/" + dadoPesquisado + "/json/",
+            dataType: "json",
+            success: function(response) {
+                $("#spinnerPesquisarCepCliente").remove();
+                console.log(response);
+                $("#enderecoCliente").val(response.logradouro);
+                // Atualize o valor selecionado para o estado
+                var estadoSelectize = $("#estadoCliente")[0].selectize;
+                estadoSelectize.setValue(response.uf, true);
+
+                // Atualize o valor selecionado para a cidade
+                var cidadeSelectize = $("#cidadeCliente")[0].selectize;
+                cidadeSelectize.setValue(response.localidade, true);
+            },
+            error: function(error) {
+                console.error("Erro na pesquisa de CEP:", error);
+            }
+        });
+    }
+
 
         /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
         $("#cadastrarCliente").click(function(e) {

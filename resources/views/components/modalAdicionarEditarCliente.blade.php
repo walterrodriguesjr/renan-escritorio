@@ -98,6 +98,22 @@
                     </div>
 
                     <div class="row g-3">
+                        <div class="col-md-5">
+                            <div class="mt-2">
+                            <x-input-label for="pesquisarCepCliente" id="pesquisarCepClienteLabel" :value="__('Pesquisar CEP')"
+                                style="font-weight: bold;" />
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                                <x-text-input id="pesquisarCepCliente" class="form-control" type="text"
+                                 :value="old('pesquisarCepCliente')" placeholder="Digite para pesquisar o CEP"
+                                     autofocus />
+                            </div>
+                          
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="row g-3">
                         <div class="col-md-8">
                             <div class="mt-2">
                                 <x-input-label for="enderecoCliente" :value="__('Endereço')" />
@@ -209,6 +225,7 @@ $('#nomeCliente').on('input', function() {
     $('#celularCliente').inputmask("(99) 99999-9999");
     $('#telefoneCliente').inputmask("(99) 9999-9999");
 
+
 function limparInputsModalAdicionarEditarCliente() {
         $("#nomeCliente").val('');
         var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
@@ -218,6 +235,7 @@ function limparInputsModalAdicionarEditarCliente() {
         $("#emailCliente").val('');
         $("#celularCliente").val('');
         $("#telefoneCliente").val('');
+        $("#pesquisarCepCliente").val('');
         $("#enderecoCliente").val('');
         $("#numeroCliente").val('');
         $("#complementoCliente").val('');
@@ -283,7 +301,7 @@ function limparInputsModalAdicionarEditarCliente() {
     /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
     $("#cadastrarCliente").click(function(e) {
         e.preventDefault();
-        function cadastrarCliente() {
+        
         /* esta variável recebe as propriedades de um spinner de atualizando */
         var spinnerHtml = `
              <div id="adicionarSpinnerModal" class="text-center">
@@ -344,9 +362,9 @@ function limparInputsModalAdicionarEditarCliente() {
         }
     }
         });
-        
-    }
+
     });
+    
 
     $(document).ready(function() {
         

@@ -97,7 +97,7 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 24-adicionar cores no header dos modais de acordo com a ação
 
-25-fazer busca de CEP dinamico em cadastrar ou editar clientes (FAZENDO)
+25-fazer busca de CEP dinamico em cadastrar ou editar clientes
 
 A FAZER
 
