@@ -99,6 +99,8 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 25-fazer busca de CEP dinamico em cadastrar ou editar clientes
 
+26-inserido toggle na area de clientes para pessoa fisica e pessoa juridica
+
 A FAZER
 
 

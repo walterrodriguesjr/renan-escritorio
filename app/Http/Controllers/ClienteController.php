@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
+    
     public function listarClientes(Request $request)
 {
     try {

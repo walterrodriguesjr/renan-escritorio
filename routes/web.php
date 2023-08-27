@@ -37,4 +37,6 @@ Route::delete('deletarCliente/{id}', [ClienteController::class, 'deletarCliente'
 
 
 
+
+
 require __DIR__.'/auth.php';

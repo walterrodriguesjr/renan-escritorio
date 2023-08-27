@@ -39,6 +39,87 @@
     .jsgrid-header-cell {
         text-align: center;
     }
+
+    .centered-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.form-switch {
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.form-switch i {
+  position: relative;
+  display: inline-block;
+  margin-right: .5rem;
+  width: 46px;
+  height: 26px;
+  background-color: #e6e6e6;
+  border-radius: 23px;
+  vertical-align: text-bottom;
+  transition: all 0.3s linear;
+}
+
+.form-switch i::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 42px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+  transition: all 0.25s linear;
+}
+
+.form-switch i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+  transform: translate3d(2px, 2px, 0);
+  transition: all 0.2s ease-in-out;
+}
+
+.form-switch:active i::after {
+  width: 28px;
+  transform: translate3d(2px, 2px, 0);
+}
+
+.form-switch:active input:checked + i::after {
+  transform: translate3d(16px, 2px, 0);
+}
+
+.form-switch input {
+  display: none;
+}
+
+.form-switch input:checked + i {
+  background-color: #0dcaf0; 
+}
+
+.form-switch input:checked + i::before {
+  transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0);
+}
+
+.form-switch input:checked + i::after {
+  transform: translate3d(22px, 2px, 0);
+}
+
+.form-switch input + i::before {
+  left: 2px;
+  background-color: #007bff; /* Azul */
+}
+
 </style>
 
 <!-- Incluir o custom css -->
@@ -59,12 +140,61 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="centered-switch" style="margin: 5px">
+        <label class="form-switch">
+            <span class="switch-label">Pessoa Física</span>
+            <input type="checkbox" class="apple-switch-checkbox" id="appleSwitch">
+            <i></i>
+            <span class="switch-label">Pessoa Jurídica</span>
+        </label>
+    </div>
+
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="areaClientePessoaFisica">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
+                    <h2>Pessoa Física</h2>
                     <div class="col-md mb-2">
                         <button type="button" id="adicionarCliente" class="btn btn-primary w-100"
+                            data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
+                            <i class="fas fa-plus"></i> Adicionar Cliente
+                        </button>
+                    </div>
+                    <div class="col-md mb-2">
+                        <button type="button" id="buttonListarClientes" class="btn btn-primary w-100">
+                            <i class="fas fa-list-ul"></i> Listar todos os Clientes
+                        </button>
+                    </div>
+                    <div class="col-md mb-2">
+                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-primary w-100">
+                            <i class="fas fa-eraser"></i> Limpar Pesquisa
+                        </button>
+                    </div>
+                    <div class="col-md-4 mb-4" style="margin-bottom: 30px !important">
+                        <x-input-label for="pesquisquantidade" id="psesquisarClienteLabel" :value="__('Pesquisar Cliente')"
+                            style="font-weight: bold;" />
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            <x-text-input id="pesquisarCliente" class="form-control" type="text"
+                                name="pesquisarCliente" :value="old('pesquisarCliente')" placeholder="Digite para pesquisar Cliente..."
+                                required autofocus />
+                        </div>
+                        <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
+                    </div>
+                </div>
+                <div id="loadingSpinner" class="text-center" style="display: none;">
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Carregando...
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="areaClientePessoaJuridica" style="display: none">
+                <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
+                    <h2>Pessoa Jurídica</h2>
+                    <div class="col-md mb-2">
+                        <button type="button" id="adicionarCliente" class="btn btn-info w-100"
                             data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
                             <i class="fas fa-plus"></i> Adicionar Cliente
                         </button>
@@ -116,7 +246,18 @@
 <script>
     $(document).ready(function() {
 
-
+        $('#appleSwitch').change(function () {
+            if ($(this).is(':checked')) {
+                $('#areaClientePessoaFisica').hide();
+                $('#areaClientePessoaJuridica').show();
+                renderJsGrid([]);
+            $("#pesquisarCliente").val('');
+            $("#jsGridClientes").hide();
+            } else {
+                $('#areaClientePessoaFisica').show();
+                $('#areaClientePessoaJuridica').hide();
+            }
+        });
 
         $("#spinnerListarTodosClientes").hide();
         var minimoDigitosPesquisar = 3;
