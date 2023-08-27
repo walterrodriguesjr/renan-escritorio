@@ -195,17 +195,17 @@
                     <h2>Pessoa Jurídica</h2>
                     <div class="col-md mb-2">
                         <button type="button" id="adicionarCliente" class="btn btn-info w-100"
-                            data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
+                            data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarClientePessoaJuridica">
                             <i class="fas fa-plus"></i> Adicionar Cliente
                         </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonListarClientes" class="btn btn-info w-100">
+                        <button type="button" id="buttonListarClientesPessoaJuridica" class="btn btn-info w-100">
                             <i class="fas fa-list-ul"></i> Listar todos os Clientes
                         </button>
                     </div>
                     <div class="col-md mb-2">
-                        <button type="button" id="buttonLimparTabelaClientes" class="btn btn-info w-100">
+                        <button type="button" id="buttonLimparTabelaClientesPessoaJuridica" class="btn btn-info w-100">
                             <i class="fas fa-eraser"></i> Limpar Pesquisa
                         </button>
                     </div>
@@ -242,6 +242,9 @@
 @include('components.modalAdicionarEditarCliente')
 @include('components.modalVisualizarCliente')
 @include('components.modalConfirmacaoDeletarCliente')
+@include('components.modalAdicionarEditarClientePessoaJuridica')
+@include('components.modalVisualizarClientePessoaJuridica')
+@include('components.modalConfirmacaoDeletarClientePessoaJuridica')
 
 <script>
     $(document).ready(function() {
@@ -250,12 +253,16 @@
             if ($(this).is(':checked')) {
                 $('#areaClientePessoaFisica').hide();
                 $('#areaClientePessoaJuridica').show();
-                renderJsGrid([]);
-            $("#pesquisarCliente").val('');
-            $("#jsGridClientes").hide();
+                renderJsGridCliente([]);
+                $("#pesquisarCliente").val('');
+                $("#jsGridClientes").hide();
+                $("#jsGridClientesPessoaJuridica").show();
             } else {
+               
                 $('#areaClientePessoaFisica').show();
                 $('#areaClientePessoaJuridica').hide();
+                $("#jsGridClientesPessoaJuridica").hide();
+                $("#jsGridClientes").show();
             }
         });
 
@@ -266,7 +273,7 @@
         // button que aciona limpeza do grid de clientes
         $("#buttonLimparTabelaClientes").on("click", function() {
             // Limpa o conteúdo do jsGrid chamando a função de renderização com um array vazio
-            renderJsGrid([]);
+            renderJsGridCliente([]);
             $("#pesquisarCliente").val('');
         });
 
@@ -281,7 +288,7 @@
             } else {
                 $("#spinnerPesquisarCliente").remove();
                 adicionarSpinner = false;
-                renderJsGrid([]);
+                renderJsGridCliente([]);
             }
         });
 
@@ -306,7 +313,7 @@
                 dataType: "json",
                 success: function(response) {
                     $("#spinnerPesquisarCliente").remove();
-                    renderJsGrid(response);
+                    renderJsGridCliente(response);
                 },
                 error: function(error) {
                     console.error("Erro na pesquisa de clientes:", error);
@@ -315,7 +322,7 @@
         }
 
         // Função para renderizar o jsGrid
-        function renderJsGrid(data) {
+        function renderJsGridCliente(data) {
             $("#jsGridClientes").jsGrid({
                 width: "100%",
                 height: "350px",
@@ -965,6 +972,11 @@
         e.preventDefault();
         $("#loadingSpinner").show();
         listarClientes();
+    });
+    $("#buttonListarClientesPessoaJuridica").click(function(e) {
+        e.preventDefault();
+        $("#loadingSpinner").show();
+        listarClientesPessoaJuridica();
     });
 </script>
 

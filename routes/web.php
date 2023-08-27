@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Cidades;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ClientePessoaJuridicaController;
 use App\Http\Controllers\Estados;
+use App\Models\ClientePessoaJuridica;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,11 @@ Route::get('visualizarCliente/{id}', [ClienteController::class, 'visualizarClien
 Route::put('editarCliente/{id}', [ClienteController::class, 'editarCliente'])->name('editarCliente');
 Route::delete('deletarCliente/{id}', [ClienteController::class, 'deletarCliente'])->name('deletarCliente');
 
+Route::get('listarClientesPessoaJuridica', [ClientePessoaJuridicaController::class, 'listarClientesPessoaJuridica'])->name('listarClientesPessoaJuridica');
+Route::post('adicionarClientePessoaJuridica', [ClientePessoaJuridicaController::class, 'adicionarClientePessoaJuridica'])->name('adicionarClientePessoaJuridica');
+Route::get('visualizarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'visualizarClientePessoaJuridica'])->name('visualizarClientePessoaJuridica');
+Route::put('editarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'editarClientePessoaJuridica'])->name('editarClientePessoaJuridica');
+Route::delete('deletarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'deletarClientePessoaJuridica'])->name('deletarClientePessoaJuridica');
 
 
 
