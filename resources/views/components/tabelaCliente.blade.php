@@ -474,6 +474,7 @@ function atualizarQuantidadeClientes() {
     //INICIO GRID PESSOA JURIDICA
 
     function atualizarQuantidadeClientesPessoaJuridica() { 
+        
         $.ajax({
             type: "GET",
             url: "/listarClientesPessoaJuridica",
@@ -498,7 +499,7 @@ function atualizarQuantidadeClientes() {
             success: function(response) {
                 atualizarQuantidadeClientesPessoaJuridica();
 
-                $("#loadingSpinner").hide();
+                $("#loadingSpinnerPessoaJuridica").hide();
                 $("#jsGridClientesPessoaJuridica").show();
 
                 $("#jsGridClientesPessoaJuridica").jsGrid({
@@ -564,8 +565,9 @@ function atualizarQuantidadeClientes() {
                                         class: "btn btn-sm btn-secondary ml-3",
                                     })
                                       
-                                    .click(function(e) {                            
-                                       $("#loadingSpinner").show();
+                                    .click(function(e) {     
+                                        $("#loadingSpinnerPessoaJuridica").show();               
+                                       
                                         $.ajax({
                                             type: "GET",
                                             url: "/visualizarClientePessoaJuridica/" + item.id,
@@ -574,7 +576,7 @@ function atualizarQuantidadeClientes() {
                                             success: function(response) {
                                                 /* finalizando o GET o spinner é destruído */
                                                 console.log(response);
-                                                $("#loadingSpinnerModal").remove();
+                                                $("#loadingSpinnerPessoaJuridica").hide();
                                                 function formatarData(dataString) {
                                                     // Converte a string para um objeto Date
                                                     var data = new Date(dataString);
@@ -590,8 +592,7 @@ function atualizarQuantidadeClientes() {
                                                     return (value < 10 ? '0' : '') + value;
                                                 }
                                                 $("#modalVisualizarClientePessoaJuridica").modal("show");
-                                                $("#loadingSpinner").hide();
-
+                                             
                                                 /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
                                                 $("#visualizarNomeFantasia").val(response.nomeFantasia);
                                                 $("#visualizarRazaoSocial").val(response.razaoSocial);
@@ -662,7 +663,7 @@ function atualizarQuantidadeClientes() {
                                         // Substituir o botão
                                         var botaoAtualizarClientePessoaJuridica = '<button type="button" class="btn btn-success btn-atualizar" id="atualizarClientePessoaJuridica" title="Clique para Atualizar os dados do Cliente"><i class="fas fa-sync"></i> Atualizar</button>';
                                         $("#cadastrarClientePessoaJuridica").replaceWith(botaoAtualizarClientePessoaJuridica);
-                                        $("#loadingSpinner").show();
+                                        $("#loadingSpinnerPessoaJuridica").show();
 
                                  
                                         $.ajax({
@@ -705,10 +706,10 @@ function atualizarQuantidadeClientes() {
                                                     municipio.setValue(response.municipio);
 
                                                 $("#modalAdicionarEditarClientePessoaJuridica").modal("show");
-                                            $("#loadingSpinner").hide();
+                                            $("#loadingSpinnerPessoaJuridica").hide();
                                             },
                                             error: function(xhr, status, error) {
-                                            $("#loadingSpinner").remove();
+                                            $("#loadingSpinnerPessoaJuridica").remove();
 
                                             // Se a resposta da API incluir mensagens de erro
                                             if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -727,7 +728,7 @@ function atualizarQuantidadeClientes() {
 
                                             /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
-                                     <div id="loadingSpinnerModal" class="text-center">
+                                     <div id="loadingSpinnerModalPessoaJuridica" class="text-center">
                                          <button class="btn btn-success" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Atualizando...
@@ -786,13 +787,13 @@ function atualizarQuantidadeClientes() {
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarClientePessoaJuridica").modal('hide');
                                                 
-                                                $("#loadingSpinnerModal").remove();
+                                                $("#loadingSpinnerModalPessoaJuridica").remove();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientesPessoaJuridica();
                                                 },
                                                 error: function(xhr, status, error) {
-                                            $("#loadingSpinnerModal").remove();
+                                            $("#loadingSpinnerModalPessoaJuridica").remove();
 
                                             // Se a resposta da API incluir mensagens de erro
                                             if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -822,7 +823,7 @@ function atualizarQuantidadeClientes() {
                                         e.preventDefault();
                                         /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
-                                     <div id="deletarSpinnerModal" class="text-center">
+                                     <div id="deletarSpinnerModalPessoaJuridica" class="text-center">
                                          <button class="btn btn-danger" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Deletando...
@@ -845,14 +846,14 @@ function atualizarQuantidadeClientes() {
                                                 },
                                             dataType: "json",
                                             success: function (response) {
-                                                $("#deletarSpinnerModal").remove();
+                                                $("#deletarSpinnerModalPessoaJuridica").remove();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientesPessoaJuridica();
                                                 
                                             },
                                             error: function(xhr, status, error) {
-                                                $("#deletarSpinnerModal").remove();
+                                                $("#deletarSpinnerModalPessoaJuridica").remove();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
                                             // Exibir o SweetAlert de erro
                                             swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
@@ -871,7 +872,7 @@ function atualizarQuantidadeClientes() {
                 });
             },
             error: function(xhr, status, error) {
-                $("#loadingSpinner").hide();
+                $("#loadingSpinnerPessoaJuridica").hide();
                 // Exibir o SweetAlert de erro
                 swal("Erro ao Carregar Clientes", "Verifique sua conexão com a internet.", "error");
             }
