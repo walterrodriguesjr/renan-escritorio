@@ -127,25 +127,43 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight"><i class="fas fa-users"></i>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3"><i class="fas fa-users"></i>
             {{ __('Clientes') }}
         </h2>
+        <div class="row">
         <div class="col-sm-4">
             <div class="input-group">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-users"></i></span>
-                <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled />
-                <span class="input-group-text" id="quantidadeClientes"></span>
+                <span class="input-group-text" id="basic-addon1" style="background-color: #0049b6"><i class="fas fa-users" style="color: white"></i></span>
+                <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled style="background-color: #0049b6; color: white" />
+                <span class="input-group-text" id="quantidadeClientes" style="background-color: #0049b6; color: white"></span>
             </div>
             <x-input-error :messages="$errors->get('quantidadeClientes')" class="mt-2" />
         </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1" style="background-color: #007bff"><i class="fas fa-user" style="width: 20px; color: white"></i></span>
+                <x-text-input class="form-control" type="text" value="Total de Clientes Pessoa Física: " disabled style="background-color: #007bff; color: white" />
+                <span class="input-group-text" id="quantidadeClientesPessoaFisica" style="background-color: #007bff; color: white"></span>
+            </div>
+            <x-input-error :messages="$errors->get('quantidadeClientesPessoaFisica')" class="mt-2" />
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1" style="background-color: #0dcaf0; color: white"><i class="fas fa-building" style="width: 20px"></i></span>
+                <x-text-input class="form-control" type="text" style="background-color: #0dcaf0; color: white" value="Total de Clientes Pessoa Jurídica: " disabled />
+                <span class="input-group-text" id="quantidadeClientesPessoaJuridica" style="background-color: #0dcaf0; color: white"></span>
+            </div>
+            <x-input-error :messages="$errors->get('quantidadeClientesPessoaJuridica')" class="mt-2" />
+        </div>
+    </div>
     </x-slot>
 
     <div class="centered-switch" style="margin: 5px">
         <label class="form-switch">
-            <span class="switch-label">Pessoa Física</span>
+            <span class="switch-label" style="margin-right: 6px" id="labelPessoaFisica">Pessoa Física</span>
             <input type="checkbox" class="apple-switch-checkbox" id="appleSwitch">
             <i></i>
-            <span class="switch-label">Pessoa Jurídica</span>
+            <span class="switch-label" id="labelPessoaJuridica">Pessoa Jurídica</span>
         </label>
     </div>
 
@@ -248,9 +266,11 @@
 
 <script>
     $(document).ready(function() {
-
+        $("#labelPessoaFisica").css("color", "#007bff");
         $('#appleSwitch').change(function () {
             if ($(this).is(':checked')) {
+                $("#labelPessoaJuridica").css("color", "#0dcaf0");
+                $("#labelPessoaFisica").css("color", "black");
                 $('#areaClientePessoaFisica').hide();
                 $('#areaClientePessoaJuridica').show();
                 renderJsGridCliente([]);
@@ -258,10 +278,12 @@
                 $("#jsGridClientes").hide();
                 $("#jsGridClientesPessoaJuridica").show();
             } else {
-               
+                $("#labelPessoaJuridica").css("color", "black");
+                $("#labelPessoaFisica").css("color", "#007bff");
                 $('#areaClientePessoaFisica').show();
                 $('#areaClientePessoaJuridica').hide();
                 $("#jsGridClientesPessoaJuridica").hide();
+                renderJsGridClientePessoaJuridica([]);
                 $("#jsGridClientes").show();
             }
         });
@@ -1310,9 +1332,9 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         $('#modalAdicionarEditarCliente').on('hidden.bs.modal', function() {
             var botaoCadastrar =
                 '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
-            $("#cadastrarCliente").replaceWith(botaoCadastrar);
+            $("#atualizarCliente").replaceWith(botaoCadastrar);
+            
         });
-
         /* insere dinamicamente icon e text no header do modal AdicionarEditarCliente */
         var icon = '<i class="fas fa-user"></i>';
         var texto = "Cadastrar novo Cliente";
@@ -1323,7 +1345,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         });
 
         var minimoDigitosPesquisar = 8; // Defina o número mínimo de dígitos para a pesquisa
-    var adicionarSpinner = false;
+        var adicionarSpinner = false;
 
     /* metódo que captura os dados digitados no input de cepCliente */
     $("#pesquisarCepCliente").on("input", function() {
@@ -1384,18 +1406,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         $("#cadastrarCliente").click(function(e) {
             e.preventDefault();
 
-            /* esta variável recebe as propriedades de um spinner de atualizando */
-            var spinnerHtml = `
-             <div id="adicionarSpinnerModal" class="text-center">
-                 <button class="btn btn-primary" type="button" disabled>
-                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                     Adicionando...
-                 </button>
-             </div>
-         `;
-
-            // insere o spinner dinamicamente dentro do body do modal visualizar
-            $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+            
 
             /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
             let $dadosCliente = {};
@@ -1463,9 +1474,9 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
     $('#adicionarClientePessoaJuridica').click(function(e) {
         e.preventDefault();
         $('#modalAdicionarEditarClientePessoaJuridica').on('hidden.bs.modal', function() {
-            var botaoCadastrar =
+            var botaoCadastrarPessoaJuridica =
                 '<button type="button" class="btn btn-primary" id="cadastrarClientePessoaJuridica"><i class="fas fa-check"></i> Cadastrar</button>';
-            $("#cadastrarClientePessoaJuridica").replaceWith(botaoCadastrar);
+            $("#cadastrarClientePessoaJuridica").replaceWith(botaoCadastrarPessoaJuridica);
         });
 
         /* insere dinamicamente icon e text no header do modal AdicionarEditarCliente */
@@ -1540,17 +1551,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
             e.preventDefault();
 
             /* esta variável recebe as propriedades de um spinner de atualizando */
-            var spinnerHtml = `
-             <div id="adicionarSpinnerModalPessoaJuridica" class="text-center">
-                 <button class="btn btn-primary" type="button" disabled>
-                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                     Adicionando...
-                 </button>
-             </div>
-         `;
-
-            // insere o spinner dinamicamente dentro do body do modal visualizar
-            $("#modalAdicionarEditarClientePessoaJuridica .modal-body").prepend(spinnerHtml);
+            
 
             /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
             let $dadosClientePessoaJuridica = {};
@@ -1567,7 +1568,6 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
             let $data = JSON.stringify($dadosClientePessoaJuridica);
 
 
-            /* ajax POST adicionar novo cliente */
             $.ajax({
                 type: "POST",
                 url: "/adicionarClientePessoaJuridica",

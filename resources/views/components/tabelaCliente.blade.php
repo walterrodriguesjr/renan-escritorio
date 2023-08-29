@@ -80,6 +80,8 @@ $.ajax({
 
                 let totalClientes = quantidadeClientesPessoaFisica + quantidadeClientesPessoaJuridica;
                 $("#quantidadeClientes").text(totalClientes);
+                $("#quantidadeClientesPessoaFisica").text(quantidadeClientesPessoaFisica);
+                $("#quantidadeClientesPessoaJuridica").text(quantidadeClientesPessoaJuridica);
             }
         });
     }
@@ -423,18 +425,11 @@ atualizarQuantidadeClientes();
                                     $("#buttonDeletarCliente").click(function (e) { 
                                         e.preventDefault();
                                         
-                                        /* esta variável recebe as propriedades de um spinner de atualizando */
-                                        var spinnerHtml = `
-                                     <div id="deletarSpinnerModal" class="text-center">
-                                         <button class="btn btn-danger" type="button" disabled>
-                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                             Deletando...
-                                         </button>
-                                     </div>
-                                 `;
+                                        $("#deletarSpinnerModal").show();
 
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
-                                 $("#modalConfirmacaoDeletarCliente .modal-body").prepend(spinnerHtml);
+                                        setTimeout(() => {
+                                            
+                           
 
                                         // Pegue o token CSRF da meta tag
                                         let csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -448,7 +443,7 @@ atualizarQuantidadeClientes();
                                                 },
                                             dataType: "json",
                                             success: function (response) {
-                                                $("#deletarSpinnerModal").remove();
+                                                $("#deletarSpinnerModal").hide();
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientes();
@@ -461,7 +456,7 @@ atualizarQuantidadeClientes();
                                             swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
                                         }
                                         });
-                                        
+                                    }, 1000);
                                     });
                                         
                                     }).append($iconDeletar);
@@ -836,19 +831,8 @@ atualizarQuantidadeClientes();
             
                                     $("#buttonDeletarClientePessoaJuridica").click(function (e) { 
                                         e.preventDefault();
-                                        /* esta variável recebe as propriedades de um spinner de atualizando */
-                                        var spinnerHtml = `
-                                     <div id="deletarSpinnerModalPessoaJuridica" class="text-center">
-                                         <button class="btn btn-danger" type="button" disabled>
-                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                             Deletando...
-                                         </button>
-                                     </div>
-                                 `;
-
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
-                                 $("#modalConfirmacaoDeletarClientePessoaJuridica .modal-body").prepend(spinnerHtml);
-
+                                        $("#deletarSpinnerModalPessoaJuridica").show();
+                                        setTimeout(() => {
                                         // Pegue o token CSRF da meta tag
                                         let csrfToken = $('meta[name="csrf-token"]').attr('content');
                                         $.ajax({
@@ -861,19 +845,19 @@ atualizarQuantidadeClientes();
                                                 },
                                             dataType: "json",
                                             success: function (response) {
-                                                $("#deletarSpinnerModalPessoaJuridica").remove();
+                                                $("#deletarSpinnerModalPessoaJuridica").hide();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientesPessoaJuridica();
                                             },
                                             error: function(xhr, status, error) {
-                                                $("#deletarSpinnerModalPessoaJuridica").remove();
+                                                $("#deletarSpinnerModalPessoaJuridica").hide();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
                                             // Exibir o SweetAlert de erro
                                             swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
                                         }
                                         });
-                                        
+                                    }, 1000);
                                     });
                                         
                                     }).append($iconDeletar);

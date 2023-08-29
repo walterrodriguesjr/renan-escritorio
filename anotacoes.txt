@@ -101,8 +101,7 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 26-inserido toggle na area de clientes para pessoa fisica e pessoa juridica
 
-27-area de pessoa juridica: views, rotas, controllers, modal e migration (FAZENDO)
-CONTINUAR NO ARQUIVO clientes.blade.php linha 887 (adaptações de pessoa juridica);
+27-area de pessoa juridica: views, rotas, controllers, modal e migration 
 
 A FAZER
 

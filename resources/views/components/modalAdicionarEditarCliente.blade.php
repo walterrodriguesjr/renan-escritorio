@@ -298,72 +298,74 @@ function limparInputsModalAdicionarEditarCliente() {
         });
     }
 
+     /* DESNECESSÁRIO */
+     
     /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
-    $("#cadastrarCliente").click(function(e) {
-        e.preventDefault();
-        
-        /* esta variável recebe as propriedades de um spinner de atualizando */
-        var spinnerHtml = `
-             <div id="adicionarSpinnerModal" class="text-center">
-                 <button class="btn btn-primary" type="button" disabled>
-                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                     Adicionando...
-                 </button>
-             </div>
-         `;
-
-         // insere o spinner dinamicamente dentro do body do modal visualizar
-         $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
-
-        /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
-        let $dadosCliente = {};
-
-        // todos os dados do form são adicionados em um array um a um, em $dadosCliente
-        $("#formAdicionarEditarCliente").serializeArray().forEach(function(field) {
-            $dadosCliente[field.name] = field.value;
-        });
-
-        // Pegue o token CSRF da meta tag
-        let csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-        /* $data recebe o conteudo de $dadosCliente no formato json string */
-        let $data = JSON.stringify($dadosCliente);
-
-        
-        /* ajax POST adicionar novo cliente */
-        $.ajax({
-            type: "POST",
-            url: "/adicionarCliente",
-            data: $data,
-            headers: {
-                // Adicione o token CSRF ao cabeçalho da solicitação
-                'X-CSRF-TOKEN': csrfToken
-            },
-            contentType: "application/json",
-            dataType: "json",
-            success: function(response) {
-                $("#adicionarSpinnerModal").remove();
-                $("#modalAdicionarEditarCliente").modal('hide');
-                 // Exibir o SweetAlert de sucesso
-        swal("Cliente Adicionado com Sucesso!", "", "success");
-                /* método que recarrega o grid de clientes, já atualizado */
-                listarClientes();
-            },
-            error: function(xhr, status, error) {
-        $("#adicionarSpinnerModal").remove();
-        
-        // Se a resposta da API incluir mensagens de erro
-        if (xhr.responseJSON && xhr.responseJSON.errors) {
-            var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
-            swal("Erro ao Adicionar Cliente", errorMessages, "error");
-        } else {
-            // Caso contrário, exiba uma mensagem genérica
-            swal("Erro ao Adicionar Cliente", "Verifique sua conexão com a internet.", "error");
-        }
-    }
-        });
-
-    });
+    //$("#cadastrarCliente").click(function(e) {
+    //    e.preventDefault();
+    //    
+    //    /* esta variável recebe as propriedades de um spinner de atualizando */
+    //    var spinnerHtml = `
+    //         <div id="adicionarSpinnerModal" class="text-center">
+    //             <button class="btn btn-primary" type="button" disabled>
+    //                 <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    //                 Adicionando...
+    //             </button>
+    //         </div>
+    //     `;
+//
+    //     // insere o spinner dinamicamente dentro do body do modal visualizar
+    //     $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+//
+    //    /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
+    //    let $dadosCliente = {};
+//
+    //    // todos os dados do form são adicionados em um array um a um, em $dadosCliente
+    //    $("#formAdicionarEditarCliente").serializeArray().forEach(function(field) {
+    //        $dadosCliente[field.name] = field.value;
+    //    });
+//
+    //    // Pegue o token CSRF da meta tag
+    //    let csrfToken = $('meta[name="csrf-token"]').attr('content');
+//
+    //    /* $data recebe o conteudo de $dadosCliente no formato json string */
+    //    let $data = JSON.stringify($dadosCliente);
+//
+    //    
+    //    /* ajax POST adicionar novo cliente */
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/adicionarCliente",
+    //        data: $data,
+    //        headers: {
+    //            // Adicione o token CSRF ao cabeçalho da solicitação
+    //            'X-CSRF-TOKEN': csrfToken
+    //        },
+    //        contentType: "application/json",
+    //        dataType: "json",
+    //        success: function(response) {
+    //            $("#adicionarSpinnerModal").remove();
+    //            $("#modalAdicionarEditarCliente").modal('hide');
+    //             // Exibir o SweetAlert de sucesso
+    //    swal("Cliente Adicionado com Sucesso!", "", "success");
+    //            /* método que recarrega o grid de clientes, já atualizado */
+    //            listarClientes();
+    //        },
+    //        error: function(xhr, status, error) {
+    //    $("#adicionarSpinnerModal").remove();
+    //    
+    //    // Se a resposta da API incluir mensagens de erro
+    //    if (xhr.responseJSON && xhr.responseJSON.errors) {
+    //        var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+    //        swal("Erro ao Adicionar Cliente", errorMessages, "error");
+    //    } else {
+    //        // Caso contrário, exiba uma mensagem genérica
+    //        swal("Erro ao Adicionar Cliente", "Verifique sua conexão com a internet.", "error");
+    //    }
+    //}
+    //    });
+//
+    //});
     
 
     $(document).ready(function() {
