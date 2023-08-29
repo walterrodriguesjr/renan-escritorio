@@ -18,7 +18,6 @@ class ClientePessoaJuridica extends Model
         'cnaePrincipalCodigo',
         'cep',
         'dataAbertura',
-        'ddd',
         'telefone',
         'email',
         'tipoLogradouro',

@@ -127,43 +127,43 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3"><i class="fas fa-users"></i>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight"><i class="fas fa-users"></i>
             {{ __('Clientes') }}
         </h2>
         <div class="row">
-        <div class="col-sm-4">
-            <div class="input-group">
-                <span class="input-group-text" id="basic-addon1" style="background-color: #0049b6"><i class="fas fa-users" style="color: white"></i></span>
-                <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled style="background-color: #0049b6; color: white" />
-                <span class="input-group-text" id="quantidadeClientes" style="background-color: #0049b6; color: white"></span>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1" style="background-color: #0049b6"><i class="fas fa-users" style="color: white"></i></span>
+                    <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled style="background-color: #0049b6; color: white" />
+                    <span class="input-group-text" id="quantidadeClientes" style="background-color: #0049b6; color: white"></span>
+                </div>
+                <x-input-error :messages="$errors->get('quantidadeClientes')" class="mt-2" />
             </div>
-            <x-input-error :messages="$errors->get('quantidadeClientes')" class="mt-2" />
-        </div>
-        <div class="col-sm-4">
-            <div class="input-group">
-                <span class="input-group-text" id="basic-addon1" style="background-color: #007bff"><i class="fas fa-user" style="width: 20px; color: white"></i></span>
-                <x-text-input class="form-control" type="text" value="Total de Clientes Pessoa Física: " disabled style="background-color: #007bff; color: white" />
-                <span class="input-group-text" id="quantidadeClientesPessoaFisica" style="background-color: #007bff; color: white"></span>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1" style="background-color: #007bff"><i class="fas fa-user" style="width: 20px; color: white"></i></span>
+                    <x-text-input class="form-control" type="text" value="Total de Clientes Pessoa Física: " disabled style="background-color: #007bff; color: white" />
+                    <span class="input-group-text" id="quantidadeClientesPessoaFisica" style="background-color: #007bff; color: white"></span>
+                </div>
+                <x-input-error :messages="$errors->get('quantidadeClientesPessoaFisica')" class="mt-2" />
             </div>
-            <x-input-error :messages="$errors->get('quantidadeClientesPessoaFisica')" class="mt-2" />
-        </div>
-        <div class="col-sm-4">
-            <div class="input-group">
-                <span class="input-group-text" id="basic-addon1" style="background-color: #0dcaf0; color: white"><i class="fas fa-building" style="width: 20px"></i></span>
-                <x-text-input class="form-control" type="text" style="background-color: #0dcaf0; color: white" value="Total de Clientes Pessoa Jurídica: " disabled />
-                <span class="input-group-text" id="quantidadeClientesPessoaJuridica" style="background-color: #0dcaf0; color: white"></span>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1" style="background-color: #0dcaf0; color: white"><i class="fas fa-building" style="width: 20px"></i></span>
+                    <x-text-input class="form-control" type="text" style="background-color: #0dcaf0; color: white" value="Total de Clientes Pessoa Jurídica: " disabled />
+                    <span class="input-group-text" id="quantidadeClientesPessoaJuridica" style="background-color: #0dcaf0; color: white"></span>
+                </div>
+                <x-input-error :messages="$errors->get('quantidadeClientesPessoaJuridica')" class="mt-2" />
             </div>
-            <x-input-error :messages="$errors->get('quantidadeClientesPessoaJuridica')" class="mt-2" />
         </div>
-    </div>
     </x-slot>
 
     <div class="centered-switch" style="margin: 5px">
         <label class="form-switch">
-            <span class="switch-label" style="margin-right: 6px" id="labelPessoaFisica">Pessoa Física</span>
+            <span class="switch-label">Pessoa Física</span>
             <input type="checkbox" class="apple-switch-checkbox" id="appleSwitch">
             <i></i>
-            <span class="switch-label" id="labelPessoaJuridica">Pessoa Jurídica</span>
+            <span class="switch-label">Pessoa Jurídica</span>
         </label>
     </div>
 
@@ -266,11 +266,9 @@
 
 <script>
     $(document).ready(function() {
-        $("#labelPessoaFisica").css("color", "#007bff");
+
         $('#appleSwitch').change(function () {
             if ($(this).is(':checked')) {
-                $("#labelPessoaJuridica").css("color", "#0dcaf0");
-                $("#labelPessoaFisica").css("color", "black");
                 $('#areaClientePessoaFisica').hide();
                 $('#areaClientePessoaJuridica').show();
                 renderJsGridCliente([]);
@@ -278,12 +276,10 @@
                 $("#jsGridClientes").hide();
                 $("#jsGridClientesPessoaJuridica").show();
             } else {
-                $("#labelPessoaJuridica").css("color", "black");
-                $("#labelPessoaFisica").css("color", "#007bff");
+               
                 $('#areaClientePessoaFisica').show();
                 $('#areaClientePessoaJuridica').hide();
                 $("#jsGridClientesPessoaJuridica").hide();
-                renderJsGridClientePessoaJuridica([]);
                 $("#jsGridClientes").show();
             }
         });
@@ -933,7 +929,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                             name: "email",
                             title: "E-mail",
                             type: "text",
-                            width: 150,
+                            width: 200,
                         },
                         {
                             name: "telefone",
@@ -1027,7 +1023,6 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
 
                                                 $("#visualizarCnaePrincipalDescricao").val(response.cnaePrincipalDescricao);
                                                 $("#visualizarCnaePrincipalCodigo").val(response.cnaePrincipalCodigo);
-                                                $("#visualizarDdd").val(response.ddd);
                                                 $("#visualizarTelefone").val(response.telefone);
                                                 $("#visualizarLogradouro").val(response.logradouro);
                                                 $("#visualizarNumero").val(response.numero);
@@ -1119,7 +1114,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                                 $("#cnaePrincipalDescricao").val(response.cnaePrincipalDescricao);
                                                 $("#cnaePrincipalCodigo").val(response.cnaePrincipalCodigo);
                                                 $("#email").val(response.email);
-                                                $("#ddd").val(response.ddd);
+                                                $("#telefone").val(response.telefone);
                                                 $("#logradouro").val(response.logradouro);
                                                 $("#numero").val(response.numero);
                                                 $("#complemento").val(response.complemento);
@@ -1128,7 +1123,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                                 var municipio = $('#municipio')[0].selectize;
                                                     municipio.setValue(response.municipio);
 
-                                                $("#modalAdicionarEditarClientePessoaJuridica").modal("show");
+                                            $("#modalAdicionarEditarClientePessoaJuridica").modal("show");
                                             $("#loadingSpinnerPessoaJuridica").hide();
                                             },
                                         error: function(xhr, status, error) {
@@ -1177,9 +1172,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                             var cnaePrincipalDescricao = $("#cnaePrincipalDescricao").val();
                                             var cnaePrincipalCodigo = $("#cnaePrincipalCodigo").val();
                                             var email = $("#email").val();
-                                            var ddd = $("#ddd").val();
-                                            var logradouro = $("#logradouro").val();
-                                            var numero = $("#numero").val();
+                                            var telefone = $("#telefone").val();
                                             var logradouro = $("#logradouro").val();
                                             var complemento = $("#complemento").val();
                                             var uf = $("#uf").val();
@@ -1194,7 +1187,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                                 cnaePrincipalDescricao: cnaePrincipalDescricao,
                                                 cnaePrincipalCodigo: cnaePrincipalCodigo,
                                                 email: email,
-                                                ddd: ddd,
+                                                telefone: telefone,
                                                 logradouro: logradouro,
                                                 complemento: complemento,
                                                 uf: uf,
@@ -1332,9 +1325,9 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         $('#modalAdicionarEditarCliente').on('hidden.bs.modal', function() {
             var botaoCadastrar =
                 '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
-            $("#atualizarCliente").replaceWith(botaoCadastrar);
-            
+            $("#cadastrarCliente").replaceWith(botaoCadastrar);
         });
+
         /* insere dinamicamente icon e text no header do modal AdicionarEditarCliente */
         var icon = '<i class="fas fa-user"></i>';
         var texto = "Cadastrar novo Cliente";
@@ -1345,7 +1338,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         });
 
         var minimoDigitosPesquisar = 8; // Defina o número mínimo de dígitos para a pesquisa
-        var adicionarSpinner = false;
+    var adicionarSpinner = false;
 
     /* metódo que captura os dados digitados no input de cepCliente */
     $("#pesquisarCepCliente").on("input", function() {
@@ -1406,7 +1399,18 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         $("#cadastrarCliente").click(function(e) {
             e.preventDefault();
 
-            
+            /* esta variável recebe as propriedades de um spinner de atualizando */
+            var spinnerHtml = `
+             <div id="adicionarSpinnerModal" class="text-center">
+                 <button class="btn btn-primary" type="button" disabled>
+                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                     Adicionando...
+                 </button>
+             </div>
+         `;
+
+            // insere o spinner dinamicamente dentro do body do modal visualizar
+            $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
 
             /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
             let $dadosCliente = {};
@@ -1474,9 +1478,9 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
     $('#adicionarClientePessoaJuridica').click(function(e) {
         e.preventDefault();
         $('#modalAdicionarEditarClientePessoaJuridica').on('hidden.bs.modal', function() {
-            var botaoCadastrarPessoaJuridica =
+            var botaoCadastrar =
                 '<button type="button" class="btn btn-primary" id="cadastrarClientePessoaJuridica"><i class="fas fa-check"></i> Cadastrar</button>';
-            $("#cadastrarClientePessoaJuridica").replaceWith(botaoCadastrarPessoaJuridica);
+            $("#cadastrarClientePessoaJuridica").replaceWith(botaoCadastrar);
         });
 
         /* insere dinamicamente icon e text no header do modal AdicionarEditarCliente */
@@ -1545,13 +1549,97 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         });
     }
 
+    /* metódo que captura os dados digitados no input de cepCliente */
+    $("#pesquisarCnpjClientePessoaJuridica").on("input", function() {
+        var dadoPesquisado = $(this).val();
+        console.log(dadoPesquisado);
+
+       // if (dadoPesquisado.length >= minimoDigitosPesquisar) {
+       //     if (!adicionarSpinner) {
+              listarCnpjPessoaJuridica(dadoPesquisado);
+       //         adicionarSpinner = true;
+       //     }
+       // } else {
+       //     $("#spinnerPesquisarCepCliente").remove();
+       //     adicionarSpinner = false;
+       //     // Limpe ou atualize a área de resultados, se necessário
+       // }
+    });
+    /* método que chama o spinner e em seguida faz a requisição GET no via CEP e traz os dados para os respectivos inputs */
+    function listarCnpjPessoaJuridica(dadoPesquisado) {
+        /* Código do spinner */
+        /* var spinnerPesquisarCepClientePessoaJuridica = `
+            <div id="spinnerPesquisarCepClientePessoaJuridica" class="text-center">
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Pesquisando...
+                </button>
+            </div>
+        `;
+        $("#resultadoPesquisaCepPessoaJuridica").html(spinnerPesquisarCepClientePessoaJuridica); */
+
+        //função que formata e trata o response.endereco.municipio antes de inserir no sellect
+        function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+        // Realize a consulta na API do ViaCEP
+        $.ajax({
+            type: "GET",
+            url: "https://api.cnpjs.dev/v1/" + dadoPesquisado,
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                $("#spinnerPesquisarCepClientePessoaJuridica").remove();
+                console.log(response);
+                $("#nomeFantasia").val(response.nome_fantasia);
+                $("#razaoSocial").val(response.razao_social);
+                $("#cnpj").val(response.cnpj);
+                $("#status").val(response.situacao_cadastral);
+                $("#dataAbertura").val(response.data_inicio_atividade);
+                $("#cnaePrincipalDescricao").val(response.cnae_fiscal_principal.nome);
+                $("#cnaePrincipalCodigo").val(response.cnae_fiscal_principal.codigo);
+                $("#email").val(response.email);
+                $("#telefone").val(response.telefone1);
+                $("#pesquisarCepClientePessoaJuridica").val(response.endereco.cep);
+                $("#logradouro").val(response.endereco.logradouro);
+                $("#numero").val(response.endereco.numero);
+                $("#complemento").val(response.endereco.complemento);
+
+                // Atualize o valor selecionado para o estado
+                var estadoSelectize = $("#uf")[0].selectize;
+                estadoSelectize.setValue(response.endereco.uf, true);
+
+                 // Formate o nome da cidade antes de inseri-lo no campo select
+                 var formattedCidade = capitalizeFirstLetter(response.endereco.municipio);
+
+// Atualize o valor selecionado para a cidade
+var cidadeSelectize = $("#municipio")[0].selectize;
+cidadeSelectize.setValue(formattedCidade, true);
+            },
+            error: function(error) {
+                console.error("Erro na pesquisa de CEP:", error);
+            }
+        });
+    }
+
 
         /* POST função click que envia os dados do form #formAdicionarEditarCliente por ajax*/
         $("#cadastrarClientePessoaJuridica").click(function(e) {
             e.preventDefault();
 
             /* esta variável recebe as propriedades de um spinner de atualizando */
-            
+            var spinnerHtml = `
+             <div id="adicionarSpinnerModalPessoaJuridica" class="text-center">
+                 <button class="btn btn-primary" type="button" disabled>
+                     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                     Adicionando...
+                 </button>
+             </div>
+         `;
+
+            // insere o spinner dinamicamente dentro do body do modal visualizar
+            $("#modalAdicionarEditarClientePessoaJuridica .modal-body").prepend(spinnerHtml);
 
             /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
             let $dadosClientePessoaJuridica = {};
@@ -1568,6 +1656,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
             let $data = JSON.stringify($dadosClientePessoaJuridica);
 
 
+            /* ajax POST adicionar novo cliente */
             $.ajax({
                 type: "POST",
                 url: "/adicionarClientePessoaJuridica",

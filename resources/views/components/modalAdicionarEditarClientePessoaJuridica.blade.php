@@ -15,6 +15,24 @@
                         <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(240, 240, 240)">DADOS DA EMPRESA</h1>
                     </div>
 
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="mt-2">
+                            <x-input-label for="pesquisarCnpjClientePessoaJuridica" id="pesquisarCepLabel" :value="__('CNPJ (Preencha todos os campos usando o CNPJ)')" 
+                                style="font-weight: bold;" />
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                                <x-text-input id="pesquisarCnpjClientePessoaJuridica" class="form-control" type="text"
+                                 :value="old('pesquisarCnpjClientePessoaJuridica')" placeholder="Digite para pesquisar o CNPJ"
+                                     autofocus />
+                            </div>
+                          
+                        </div>
+                    </div>
+                    </div>
+
+                    <br>
+
                     <div>
                         <x-input-label for="nomeFantasia" :value="__('Nome Fantasia')" />
                         <x-text-input id="nomeFantasia" class="block mt-1 w-full" type="text" name="nomeFantasia"
@@ -33,7 +51,7 @@
                         <div class="col-md-4">
                             <div class="mt-2">
                                 <x-input-label for="cnpj" :value="__('CNPJ')" />
-                                <x-text-input id="cnpj" class="block mt-1 w-full" type="number" name="cnpj"
+                                <x-text-input id="cnpj" class="block mt-1 w-full" type="text" name="cnpj"
                                     :value="old('cnpj')" placeholder="Digite" required autofocus />
                                 <x-input-error :messages="$errors->get('cnpj')" class="mt-2" />
                             </div>
@@ -86,21 +104,12 @@
                     </div>
 
                     <div class="row g-3">
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="mt-2">
                                 <x-input-label for="email" :value="__('E-mail')" />
                                 <x-text-input id="email" class="block mt-1 w-full" type="email"
                                     name="email" :value="old('email')" placeholder="Digite" required autofocus />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="mt-2">
-                                <x-input-label for="ddd" :value="__('DDD')" />
-                                <x-text-input id="ddd" class="block mt-1 w-full" type="text"
-                                    name="ddd" :value="old('ddd')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('ddd')" class="mt-2" />
                             </div>
                         </div>
 
@@ -266,7 +275,7 @@ $('#cnaePrincipalDescricao').on('input', function() {
 
     /* Inserção de Masc */
     $('#cnpj').inputmask("99.999.999/9999-99");
-    $('#telefoneCliente').inputmask("(99) 9999-9999");
+    $('#telefone').inputmask("(99) 9999-9999");
 
 
 function limparInputsModalAdicionarEditarClientePessoaJuridica() {
@@ -274,13 +283,13 @@ function limparInputsModalAdicionarEditarClientePessoaJuridica() {
         /* var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
             estadoRgClienteSelectize.clear(); */
         $("#razaoSocial").val('');
+        $("#pesquisarCnpjClientePessoaJuridica").val('');
         $("#cnpj").val('');
         $("#status").val('');
         $("#cnaePrincipalDescricao").val('');
         $("#cnaePrincipalCodigo").val('');
         $("#pesquisarCepClientePessoaJuridica").val('');
         $("#dataAbertura").val('');
-        $("#ddd").val('');
         $("#telefone").val('');
         $("#email").val('');
         $("#logradouro").val('');

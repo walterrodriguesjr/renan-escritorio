@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('cnaePrincipalCodigo')->nullable();
             $table->string('cep')->nullable();
             $table->string('dataAbertura')->nullable();
-            $table->string('ddd')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();
             $table->string('tipoLogradouro')->nullable();

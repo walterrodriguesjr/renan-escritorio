@@ -103,6 +103,11 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 27-area de pessoa juridica: views, rotas, controllers, modal e migration 
 
+28 - fazer busca dinamica de cnpj (FAZENDO)
+usado API https://cnpjs.dev/docs/api-http/#acesso-%C3%A0-api 
+
+
+
 A FAZER
 
 

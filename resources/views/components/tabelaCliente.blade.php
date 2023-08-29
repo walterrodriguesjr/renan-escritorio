@@ -529,26 +529,26 @@ atualizarQuantidadeClientes();
                             name: "razaoSocial",
                             title: "Razão Social",
                             type: "text",
-                            width: 200,
+                            width: 250,
 
                         },
                         {
                             name: "cnpj",
                             title: "CNPJ",
                             type: "text",
-                            width: 150,
+                            width: 200,
                         },
                         {
                             name: "email",
                             title: "E-mail",
                             type: "text",
-                            width: 150,
+                            width: 300,
                         },
                         {
                             name: "telefone",
                             title: "Telefone",
                             type: "text",
-                            width: 250,
+                            width: 200,
                         },
                         {
                             title: "Ações",
@@ -707,7 +707,7 @@ atualizarQuantidadeClientes();
                                                 $("#cnaePrincipalDescricao").val(response.cnaePrincipalDescricao);
                                                 $("#cnaePrincipalCodigo").val(response.cnaePrincipalCodigo);
                                                 $("#email").val(response.email);
-                                                $("#ddd").val(response.ddd);
+                                                $("#telefone").val(response.telefone);
                                                 $("#logradouro").val(response.logradouro);
                                                 $("#numero").val(response.numero);
                                                 $("#complemento").val(response.complemento);
@@ -759,8 +759,7 @@ atualizarQuantidadeClientes();
                                             var cnaePrincipalDescricao = $("#cnaePrincipalDescricao").val();
                                             var cnaePrincipalCodigo = $("#cnaePrincipalCodigo").val();
                                             var email = $("#email").val();
-                                            var ddd = $("#ddd").val();
-                                            var logradouro = $("#logradouro").val();
+                                            var telefone = $("#telefone").val();
                                             var numero = $("#numero").val();
                                             var logradouro = $("#logradouro").val();
                                             var complemento = $("#complemento").val();
@@ -776,7 +775,7 @@ atualizarQuantidadeClientes();
                                                 cnaePrincipalDescricao: cnaePrincipalDescricao,
                                                 cnaePrincipalCodigo: cnaePrincipalCodigo,
                                                 email: email,
-                                                ddd: ddd,
+                                                telefone: telefone,
                                                 logradouro: logradouro,
                                                 complemento: complemento,
                                                 uf: uf,

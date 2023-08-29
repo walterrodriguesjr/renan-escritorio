@@ -33,7 +33,7 @@
                         <div class="col-md-4">
                             <div class="mt-2">
                                 <x-input-label for="visualizarCnpj" :value="__('CNPJ')" />
-                                <x-text-input id="visualizarCnpj" class="block mt-1 w-full" type="number" name="visualizarCnpj"
+                                <x-text-input id="visualizarCnpj" class="block mt-1 w-full" type="text" name="visualizarCnpj"
                                     :value="old('visualizarCnpj')" placeholder="Digite" disabled autofocus />
                                 <x-input-error :messages="$errors->get('visualizarCnpj')" class="mt-2" />
                             </div>
@@ -86,21 +86,12 @@
                     </div>
 
                     <div class="row g-3">
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="mt-2">
                                 <x-input-label for="visualizarEmail" :value="__('E-mail')" />
                                 <x-text-input id="visualizarEmail" class="block mt-1 w-full" type="email"
                                     name="visualizarEmail" :value="old('visualizarEmail')" placeholder="Digite" disabled autofocus />
                                 <x-input-error :messages="$errors->get('visualizarEmail')" class="mt-2" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="mt-2">
-                                <x-input-label for="visualizarDdd" :value="__('DDD')" />
-                                <x-text-input id="visualizarDdd" class="block mt-1 w-full" type="text"
-                                    name="visualizarDdd" :value="old('visualizarDdd')" placeholder="Digite" disabled autofocus />
-                                <x-input-error :messages="$errors->get('visualizarDdd')" class="mt-2" />
                             </div>
                         </div>
 
@@ -206,8 +197,14 @@
     </div>
 </div>
 
+{{-- incluindo o input masc nesta view --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
 
 <script>
+     /* Inserção de Masc */
+     $('#visualizarCnpj').inputmask("99.999.999/9999-99");
+    $('#visualizarTelefone').inputmask("(99) 9999-9999");
     /* função que limpa os inputs do modal visualizar */
     function limparInputsModalVisualizarClientePessoaJuridica() {
         $("#visualizarNomeFantasia").val('');
@@ -218,7 +215,7 @@
         $("#visualizarCnaePrincipalDescricao").val('');
         $("#visualizarCnaePrincipalCodigo").val('');
         $("#visualizarEmail").val('');
-        $("#visualizarDdd").val('');
+        $("#visualizarTelefone").val('');
         $("#visualizarLogradouro").val('');
         $("#visualizarNumero").val('');
         $("#visualizarComplemento").val('');
