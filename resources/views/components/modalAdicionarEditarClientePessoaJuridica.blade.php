@@ -124,12 +124,12 @@
                     <div class="row g-3">
                         <div class="col-md-5">
                             <div class="mt-2">
-                            <x-input-label for="cep" id="pesquisarCepLabel" :value="__('Pesquisar CEP')"
+                            <x-input-label for="pesquisarCepClientePessoaJuridica" id="pesquisarCepLabel" :value="__('Pesquisar CEP')"
                                 style="font-weight: bold;" />
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                                <x-text-input id="cep" class="form-control" type="text"
-                                 :value="old('cep')" placeholder="Digite para pesquisar o CEP"
+                                <x-text-input id="pesquisarCepClientePessoaJuridica" class="form-control" type="text"
+                                 :value="old('pesquisarCepClientePessoaJuridica')" placeholder="Digite para pesquisar o CEP"
                                      autofocus />
                             </div>
                           
@@ -278,7 +278,7 @@ function limparInputsModalAdicionarEditarClientePessoaJuridica() {
         $("#status").val('');
         $("#cnaePrincipalDescricao").val('');
         $("#cnaePrincipalCodigo").val('');
-        $("#cep").val('');
+        $("#pesquisarCepClientePessoaJuridica").val('');
         $("#dataAbertura").val('');
         $("#ddd").val('');
         $("#telefone").val('');
@@ -297,8 +297,8 @@ function limparInputsModalAdicionarEditarClientePessoaJuridica() {
         };
 
     $("#modalAdicionarEditarClientePessoaJuridica").on("hidden.bs.modal", function () {
-        limparInputsModalAdicionarEditarClientePessoaJuridica(); 
-            });
+        limparInputsModalAdicionarEditarClientePessoaJuridica();
+    });
 
     // Função para preencher o select "cidadeCliente" com os municípios
     function popularCidadesClientePessoaJuridica(data) {

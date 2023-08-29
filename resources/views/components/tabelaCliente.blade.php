@@ -60,19 +60,35 @@
 
 <script>
 
-function atualizarQuantidadeClientes() { 
+function atualizarQuantidadeClientes() {
+
+$.ajax({
+    type: "GET",
+    url: "/listarClientes",
+    data: "data",
+    dataType: "json",
+    success: function (responsePessoaFisica) {
+        let quantidadeClientesPessoaFisica = responsePessoaFisica.length;
+
         $.ajax({
             type: "GET",
-            url: "/listarClientes",
+            url: "/listarClientesPessoaJuridica",
             data: "data",
             dataType: "json",
-            success: function (response) {
-                let quantidade = response.length;
-                $("#quantidadeClientesPessoaJuridica").text(quantidade);
+            success: function (responsePessoaJuridica) {
+                let quantidadeClientesPessoaJuridica = responsePessoaJuridica.length;
+
+                let totalClientes = quantidadeClientesPessoaFisica + quantidadeClientesPessoaJuridica;
+                $("#quantidadeClientes").text(totalClientes);
             }
         });
     }
-    atualizarQuantidadeClientes();
+});
+
+}
+
+atualizarQuantidadeClientes();
+
     
     
     /* função GET na tabela CLIENTES, carregada de fato em DocReady abaixo e importada em clientes.blade.php */
@@ -473,7 +489,7 @@ function atualizarQuantidadeClientes() {
 
     //INICIO GRID PESSOA JURIDICA
 
-    function atualizarQuantidadeClientesPessoaJuridica() { 
+    /* function atualizarQuantidadeClientesPessoaJuridica() { 
         
         $.ajax({
             type: "GET",
@@ -486,7 +502,7 @@ function atualizarQuantidadeClientes() {
             }
         });
     }
-    atualizarQuantidadeClientesPessoaJuridica();
+    atualizarQuantidadeClientesPessoaJuridica(); */
     
     
     /* função GET na tabela CLIENTES, carregada de fato em DocReady abaixo e importada em clientes.blade.php */
@@ -497,7 +513,7 @@ function atualizarQuantidadeClientes() {
             data: "data",
             dataType: "json",
             success: function(response) {
-                atualizarQuantidadeClientesPessoaJuridica();
+                atualizarQuantidadeClientes();
 
                 $("#loadingSpinnerPessoaJuridica").hide();
                 $("#jsGridClientesPessoaJuridica").show();
@@ -630,7 +646,7 @@ function atualizarQuantidadeClientes() {
                                                 $("#visualizarDataCadastroClientePessoaJuridica").val(formatarData(response.created_at));
                                             },
                                             error: function(xhr, status, error) {
-                                            $("#loadingSpinner").hide();
+                                            $("#loadingSpinnerPessoaJuridica").hide();
 
                                             // Se a resposta da API incluir mensagens de erro
                                             if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -771,7 +787,7 @@ function atualizarQuantidadeClientes() {
                                                 uf: uf,
                                                 municipio: municipio,
                                             };
-                                            console.log(data);
+                                          
                                             // Pegue o token CSRF da meta tag
                                             let csrfToken = $('meta[name="csrf-token"]').attr('content');
 
@@ -786,7 +802,6 @@ function atualizarQuantidadeClientes() {
                                                 dataType: "json",
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarClientePessoaJuridica").modal('hide');
-                                                
                                                 $("#loadingSpinnerModalPessoaJuridica").remove();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */
@@ -850,7 +865,6 @@ function atualizarQuantidadeClientes() {
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientesPessoaJuridica();
-                                                
                                             },
                                             error: function(xhr, status, error) {
                                                 $("#deletarSpinnerModalPessoaJuridica").remove();

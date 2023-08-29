@@ -201,7 +201,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Clique para fechar este formulário"><i class="fas fa-times"></i> Fechar</button>
-                <button type="button" class="btn btn-primary" id="cadastrarClientePessoaJuridica" title="Clique para salvar"><i class="fas fa-check"></i> Cadastrar</button>
             </div>
         </div>
     </div>
