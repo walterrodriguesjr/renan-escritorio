@@ -127,7 +127,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight"><i class="fas fa-users"></i>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="margin-bottom: 6px"><i class="fas fa-users"></i>
             {{ __('Clientes') }}
         </h2>
         <div class="row">
@@ -168,7 +168,7 @@
     </div>
 
     <div class="py-1">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-1">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="areaClientePessoaFisica">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
                     <h2>Pessoa Física</h2>
@@ -276,9 +276,10 @@
                 $("#jsGridClientes").hide();
                 $("#jsGridClientesPessoaJuridica").show();
             } else {
-               
                 $('#areaClientePessoaFisica').show();
                 $('#areaClientePessoaJuridica').hide();
+                renderJsGridClientePessoaJuridica([]);
+                $("#pesquisarClientePessoaJuridica").val('');
                 $("#jsGridClientesPessoaJuridica").hide();
                 $("#jsGridClientes").show();
             }
@@ -873,7 +874,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
             /* esta variável recebe as propriedades de um spinner de atualizando */
             var spinnerPesquisarClientePessoaJuridica = `
                                      <div id="spinnerPesquisarCliente" class="text-center">
-                                         <button class="btn btn-primary" type="button" disabled>
+                                         <button class="btn btn-info" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Pesquisando...
                                          </button>
@@ -916,26 +917,25 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                             name: "razaoSocial",
                             title: "Razão Social",
                             type: "text",
-                            width: 200,
-
+                            width: 250,
                         },
                         {
                             name: "cnpj",
                             title: "CNPJ",
                             type: "text",
-                            width: 150,
+                            width: 200,
                         },
                         {
                             name: "email",
                             title: "E-mail",
                             type: "text",
-                            width: 200,
+                            width: 300,
                         },
                         {
                             name: "telefone",
                             title: "Telefone",
                             type: "text",
-                            width: 250,
+                            width: 200,
                         },
                         {
                         title: "Ações",
@@ -1552,11 +1552,12 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
     /* metódo que captura os dados digitados no input de cepCliente */
     $("#pesquisarCnpjClientePessoaJuridica").on("input", function() {
         var dadoPesquisado = $(this).val();
-        console.log(dadoPesquisado);
+        var numeroSomente = dadoPesquisado.replace(/\D/g, '');
+        console.log(numeroSomente);
 
-       // if (dadoPesquisado.length >= minimoDigitosPesquisar) {
+       // if (numeroSomente.length >= minimoDigitosPesquisar) {
        //     if (!adicionarSpinner) {
-              listarCnpjPessoaJuridica(dadoPesquisado);
+              listarCnpjPessoaJuridica(numeroSomente);
        //         adicionarSpinner = true;
        //     }
        // } else {
@@ -1566,7 +1567,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
        // }
     });
     /* método que chama o spinner e em seguida faz a requisição GET no via CEP e traz os dados para os respectivos inputs */
-    function listarCnpjPessoaJuridica(dadoPesquisado) {
+    function listarCnpjPessoaJuridica(numeroSomente) {
         /* Código do spinner */
         /* var spinnerPesquisarCepClientePessoaJuridica = `
             <div id="spinnerPesquisarCepClientePessoaJuridica" class="text-center">
@@ -1586,7 +1587,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
         // Realize a consulta na API do ViaCEP
         $.ajax({
             type: "GET",
-            url: "https://api.cnpjs.dev/v1/" + dadoPesquisado,
+            url: "https://api.cnpjs.dev/v1/" + numeroSomente,
             dataType: "json",
             success: function(response) {
                 console.log(response);
@@ -1638,8 +1639,19 @@ cidadeSelectize.setValue(formattedCidade, true);
              </div>
          `;
 
-            // insere o spinner dinamicamente dentro do body do modal visualizar
-            $("#modalAdicionarEditarClientePessoaJuridica .modal-body").prepend(spinnerHtml);
+         // Função para mostrar o spinner no lugar do botão "Cadastrar"
+function mostrarSpinner() {
+    var spinnerButton = $(spinnerHtml);
+    $("#cadastrarClientePessoaJuridica").replaceWith(spinnerButton);
+}
+mostrarSpinner();
+
+// Função para restaurar o botão "Cadastrar" no lugar do spinner
+function restaurarBotaoCadastrar() {
+    var cadastrarButton = $("<button type='button' class='btn btn-primary' id='cadastrarClientePessoaJuridica' title='Clique para salvar'><i class='fas fa-check'></i> Cadastrar</button>");
+    $("#adicionarSpinnerModalPessoaJuridica").replaceWith(cadastrarButton);
+}
+
 
             /* objeto vazio para receber os dados dos inputs do form #formAdicionarEditarCliente*/
             let $dadosClientePessoaJuridica = {};
@@ -1668,15 +1680,15 @@ cidadeSelectize.setValue(formattedCidade, true);
                 contentType: "application/json",
                 dataType: "json",
                 success: function(response) {
-                    $("#adicionarSpinnerModalPessoaJuridica").remove();
                     $("#modalAdicionarEditarClientePessoaJuridica").modal('hide');
+                    restaurarBotaoCadastrar();
                     // Exibir o SweetAlert de sucesso
                     swal("Cliente Adicionado com Sucesso!", "", "success");
                     /* método que recarrega o grid de clientes, já atualizado */
                     listarClientesPessoaJuridica();
                 },
                 error: function(xhr, status, error) {
-                    $("#adicionarSpinnerModalPessoaJuridica").remove();
+                    restaurarBotaoCadastrar();
 
                     // Se a resposta da API incluir mensagens de erro
                     if (xhr.responseJSON && xhr.responseJSON.errors) {

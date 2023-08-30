@@ -18,7 +18,7 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="mt-2">
-                            <x-input-label for="pesquisarCnpjClientePessoaJuridica" id="pesquisarCepLabel" :value="__('CNPJ (Preencha todos os campos usando o CNPJ)')" 
+                            <x-input-label for="pesquisarCnpjClientePessoaJuridica" id="pesquisarCepLabel" :value="__('CNPJ (Preencha todos os campos usando o CNPJ, digite apenas números)')" 
                                 style="font-weight: bold;" />
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
@@ -202,7 +202,7 @@
                 </form>
             </div>
             <div class="modal-footer" id="modalFooter">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Clique para fechar este formulário"><i class="fas fa-times"></i> Fechar</button>
+                <button type="button" class="btn btn-secondary" id="fecharModalAdicionarEditarClientePessoaJuridica" data-bs-dismiss="modal" title="Clique para fechar este formulário"><i class="fas fa-times"></i> Fechar</button>
                 <button type="button" class="btn btn-primary" id="cadastrarClientePessoaJuridica" title="Clique para salvar"><i class="fas fa-check"></i> Cadastrar</button>
             </div>
         </div>
@@ -275,6 +275,7 @@ $('#cnaePrincipalDescricao').on('input', function() {
 
     /* Inserção de Masc */
     $('#cnpj').inputmask("99.999.999/9999-99");
+    $('#pesquisarCnpjClientePessoaJuridica').inputmask("99.999.999/9999-99");
     $('#telefone').inputmask("(99) 9999-9999");
 
 
