@@ -243,15 +243,18 @@ function limparInputsModalAdicionarEditarCliente() {
             estadoClienteSelectize.clear();
         var cidadeClienteSelectize = $('#cidadeCliente')[0].selectize;
             cidadeClienteSelectize.clear();
-
-        // Restaurar o botão Cadastrar
-        var botaoCadastrar = '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
-        $("#atualizarCliente").replaceWith(botaoCadastrar);
         };
 
+        // Restaurar o botão Cadastrar (DESNECESSARIO)
+       /*  var botaoCadastrarClientePessoaFisica =
+    '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
+    $("#atualizarCliente").replaceWith(botaoCadastrarClientePessoaFisica);
+
     $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
+      
         limparInputsModalAdicionarEditarCliente(); 
-            });
+            }); */ 
+            //(DESNECESSARIO)
 
     // Função para preencher o select "cidadeCliente" com os municípios
     function popularCidades(data) {

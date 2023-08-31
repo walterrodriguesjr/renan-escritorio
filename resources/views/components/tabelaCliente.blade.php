@@ -336,7 +336,7 @@ atualizarQuantidadeClientes();
 
                                             /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
-                                     <div id="loadingSpinnerModal" class="text-center">
+                                     <div id="adicionarSpinnerModalAtualizarCliente" class="text-center">
                                          <button class="btn btn-success" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Atualizando...
@@ -344,8 +344,18 @@ atualizarQuantidadeClientes();
                                      </div>
                                  `;
 
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
-                                 $("#modalAdicionarEditarCliente .modal-body").prepend(spinnerHtml);
+                                 // Função para mostrar o spinner no lugar do botão "Cadastrar"
+                                 function mostrarSpinnerAtualizarCliente() {
+                                            var spinnerButton = $(spinnerHtml);
+                                            $("#atualizarCliente").replaceWith(spinnerButton);
+                                        }
+                                        mostrarSpinnerAtualizarCliente();
+
+                                        // Função para restaurar o botão "Cadastrar" no lugar do spinner
+                                        function restaurarBotaoAtualizarCliente() {
+                                            var atualizarButton = $("<button type='button' class='btn btn-primary' id='cadastrarClientePessoaJuridica' title='Clique para salvar'><i class='fas fa-check'></i> Cadastrar</button>");
+                                            $("#adicionarSpinnerModalAtualizarCliente").replaceWith(atualizarButton);
+                                        }
 
                                             // Coleta dos valores dos campos e selects usando serializeArray
                                             var nomeCliente = $("#nomeCliente").val();
@@ -390,8 +400,7 @@ atualizarQuantidadeClientes();
                                                 dataType: "json",
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarCliente").modal('hide');
-                                                
-                                                $("#loadingSpinnerModal").remove();
+                                                restaurarBotaoAtualizarCliente();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientes();
@@ -425,11 +434,29 @@ atualizarQuantidadeClientes();
                                     $("#buttonDeletarCliente").click(function (e) { 
                                         e.preventDefault();
                                         
-                                        $("#deletarSpinnerModal").show();
+                                        /* esta variável recebe as propriedades de um spinner de atualizando */
+                                        var spinnerHtml = `
+                                     <div id="deletarSpinnerModalCliente" class="text-center">
+                                         <button class="btn btn-danger" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Deletando...
+                                         </button>
+                                     </div>
+                                 `;
 
-                                        setTimeout(() => {
-                                            
-                           
+                                 // Função para mostrar o spinner no lugar do botão "Cadastrar"
+                                 function mostrarSpinnerDeletarCliente() {
+                                            var spinnerButton = $(spinnerHtml);
+                                            $("#buttonDeletarCliente").replaceWith(spinnerButton);
+                                        }
+                                        mostrarSpinnerDeletarCliente();
+
+                                        // Função para restaurar o botão "Cadastrar" no lugar do spinner
+                                        function restaurarBotaoDeletarCliente() {
+                                            var deletarButton = $("<button type='button' class='btn btn-danger' id='buttonDeletarCliente' title='Clique para deletar'><i class='fas fa-trash'></i> Deletar</button>");
+                                            $("#deletarSpinnerModalCliente").replaceWith(deletarButton);
+                                        }
+
 
                                         // Pegue o token CSRF da meta tag
                                         let csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -443,20 +470,19 @@ atualizarQuantidadeClientes();
                                                 },
                                             dataType: "json",
                                             success: function (response) {
-                                                $("#deletarSpinnerModal").hide();
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
+                                                restaurarBotaoDeletarCliente();
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientes();
                                                 
                                             },
                                             error: function(xhr, status, error) {
-                                                $("#deletarSpinnerModal").remove();
                                                 $("#modalConfirmacaoDeletarCliente").modal("hide");
+                                                restaurarBotaoDeletarCliente();
                                             // Exibir o SweetAlert de erro
                                             swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
                                         }
                                         });
-                                    }, 1000);
                                     });
                                         
                                     }).append($iconDeletar);
@@ -739,7 +765,7 @@ atualizarQuantidadeClientes();
 
                                             /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
-                                     <div id="loadingSpinnerModalPessoaJuridica" class="text-center">
+                                     <div id="adicionarSpinnerModalAtualizarClientePessoaJuridica" class="text-center">
                                          <button class="btn btn-success" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Atualizando...
@@ -747,8 +773,18 @@ atualizarQuantidadeClientes();
                                      </div>
                                  `;
 
-                                 // insere o spinner dinamicamente dentro do body do modal visualizar
-                                 $("#modalAdicionarEditarClientePessoaJuridica .modal-body").prepend(spinnerHtml);
+                                 // Função para mostrar o spinner no lugar do botão "Cadastrar"
+                                 function mostrarSpinnerAtualizarClientePessoaJuridica() {
+                                            var spinnerButton = $(spinnerHtml);
+                                            $("#atualizarClientePessoaJuridica").replaceWith(spinnerButton);
+                                        }
+                                        mostrarSpinnerAtualizarClientePessoaJuridica();
+
+                                        // Função para restaurar o botão "Cadastrar" no lugar do spinner
+                                        function restaurarBotaoAtualizarClientePessoaJuridica() {
+                                            var atualizarButton = $("<button type='button' class='btn btn-success' id='atualizarClientePessoaJuridica' title='Clique para atualizar'><i class='fas fa-sync'></i> Atualizar</button>");
+                                            $("#adicionarSpinnerModalAtualizarClientePessoaJuridica").replaceWith(atualizarButton);
+                                        }
 
                                             // Coleta dos valores dos campos e selects usando serializeArray
                                             var nomeFantasia = $("#nomeFantasia").val();
@@ -796,13 +832,13 @@ atualizarQuantidadeClientes();
                                                 dataType: "json",
                                                 success: function (response) {
                                                 $("#modalAdicionarEditarClientePessoaJuridica").modal('hide');
-                                                $("#loadingSpinnerModalPessoaJuridica").remove();
+                                                restaurarBotaoAtualizarClientePessoaJuridica();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                     /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientesPessoaJuridica();
                                                 },
                                                 error: function(xhr, status, error) {
-                                            $("#loadingSpinnerModalPessoaJuridica").remove();
+                                                    restaurarBotaoAtualizarClientePessoaJuridica();
 
                                             // Se a resposta da API incluir mensagens de erro
                                             if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -826,12 +862,33 @@ atualizarQuantidadeClientes();
                                     })
                                     .click(function(e) {
                                         e.stopPropagation();
-
-            
+                                        
                                     $("#buttonDeletarClientePessoaJuridica").click(function (e) { 
                                         e.preventDefault();
-                                        $("#deletarSpinnerModalPessoaJuridica").show();
-                                        setTimeout(() => {
+                                        
+                                        /* esta variável recebe as propriedades de um spinner de atualizando */
+                                        var spinnerHtml = `
+                                     <div id="deletarSpinnerModalClientePessoaJuridica" class="text-center">
+                                         <button class="btn btn-danger" type="button" disabled>
+                                             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                             Deletando...
+                                         </button>
+                                     </div>
+                                 `;
+
+                                 // Função para mostrar o spinner no lugar do botão "Cadastrar"
+                                 function mostrarSpinnerDeletarClientePessoaJuridica() {
+                                            var spinnerButton = $(spinnerHtml);
+                                            $("#buttonDeletarClientePessoaJuridica").replaceWith(spinnerButton);
+                                        }
+                                        mostrarSpinnerDeletarClientePessoaJuridica();
+
+                                        // Função para restaurar o botão "Cadastrar" no lugar do spinner
+                                        function restaurarBotaoDeletarClientePessoaJuridica() {
+                                            var deletarButton = $("<button type='button' class='btn btn-danger' id='buttonDeletarClientePessoaJuridica' title='Clique para deletar'><i class='fas fa-trash'></i> Deletar</button>");
+                                            $("#deletarSpinnerModalClientePessoaJuridica").replaceWith(deletarButton);
+                                        }
+                                      
                                         // Pegue o token CSRF da meta tag
                                         let csrfToken = $('meta[name="csrf-token"]').attr('content');
                                         $.ajax({
@@ -844,19 +901,18 @@ atualizarQuantidadeClientes();
                                                 },
                                             dataType: "json",
                                             success: function (response) {
-                                                $("#deletarSpinnerModalPessoaJuridica").hide();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
+                                                restaurarBotaoDeletarClientePessoaJuridica();
                                                 swal("Cliente Deletado com Sucesso!", "", "success");
                                                 listarClientesPessoaJuridica();
                                             },
                                             error: function(xhr, status, error) {
-                                                $("#deletarSpinnerModalPessoaJuridica").hide();
                                                 $("#modalConfirmacaoDeletarClientePessoaJuridica").modal("hide");
+                                                restaurarBotaoDeletarClientePessoaJuridica();
                                             // Exibir o SweetAlert de erro
                                             swal("Erro ao Deletar Cliente", "Verifique sua conexão com a internet.", "error");
                                         }
                                         });
-                                    }, 1000);
                                     });
                                         
                                     }).append($iconDeletar);
