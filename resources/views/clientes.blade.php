@@ -258,9 +258,11 @@
 
 <!-- Incluir o modal -->
 @include('components.modalAdicionarEditarCliente')
+@include('components.modalEditarCliente')
 @include('components.modalVisualizarCliente')
 @include('components.modalConfirmacaoDeletarCliente')
 @include('components.modalAdicionarEditarClientePessoaJuridica')
+@include('components.modalEditarClientePessoaJuridica')
 @include('components.modalVisualizarClientePessoaJuridica')
 @include('components.modalConfirmacaoDeletarClientePessoaJuridica')
 
@@ -540,28 +542,25 @@
 
                             var $editarButton = $("<button>").attr({
                                     class: "btn btn-sm btn-success ml-2",
-
                                 })
                                 .click(function(e) {
                                     e.stopPropagation();
                                     console.log("Edit clicked for item:", item);
-
-                                    var icon = '<i class="fas fa-user"></i>';
+                                    
+                                    /* var icon = '<i class="fas fa-user"></i>';
                                     var texto = "Editar dados do Cliente";
                                     $("#cabecalhoModalAdicionarEditarCliente").html(icon +
                                         " " + texto);
                                     $("#corCabecalhoModalAdicionarEditarCliente").css({
                                         "background-color": "#198754",
                                         "color": "white"
-                                    });
+                                    }); */
 
                                     // Substituir o botão
-                                    var botaoAtualizar =
+                                    /* var botaoAtualizar =
                                     '<button type="button" class="btn btn-success btn-atualizar" id="atualizarCliente"><i class="fas fa-sync"></i> Atualizar</button>';
-                                    $("#cadastrarCliente").replaceWith(botaoAtualizar);
-
+                                    $("#cadastrarCliente").replaceWith(botaoAtualizar); */
                                     $("#loadingSpinner").show();
-
 
                                     $.ajax({
                                         type: "GET",
@@ -592,49 +591,26 @@
                                                     value;
                                             }
 
-                                            /* os dados trazidos na requisição GET colocandos nos inputs do modal Adicionar / Editar */
-                                            $("#nomeCliente").val(response
-                                                .nomeCliente);
-                                            var estadoRgCliente = $(
-                                                    '#estadoRgCliente')[0]
-                                                .selectize;
-                                            estadoRgCliente.setValue(response
-                                                .estadoRgCliente);
-                                            $("#rgCliente").val(response
-                                                .rgCliente);
-                                            $("#cpfCliente").val(response
-                                                .cpfCliente);
-                                            $("#emailCliente").val(response
-                                                .emailCliente);
-                                            $("#celularCliente").val(response
-                                                .celularCliente);
-                                            $("#telefoneCliente").val(response
-                                                .telefoneCliente);
-                                            $("#enderecoCliente").val(response
-                                                .enderecoCliente);
-                                            $("#numeroCliente").val(response
-                                                .numeroCliente);
-                                            $("#complementoCliente").val(
-                                                response.complementoCliente);
-                                            var estadoCliente = $(
-                                                    '#estadoCliente')[0]
-                                                .selectize;
-                                            estadoCliente.setValue(response
-                                                .estadoCliente);
-                                            var cidadeCliente = $(
-                                                    '#cidadeCliente')[0]
-                                                .selectize;
-                                            cidadeCliente.setValue(response
-                                                .cidadeCliente);
-                                            $("#ultimaAtualizacaoCliente").val(
-                                                formatarData(response
-                                                    .updated_at));
-                                            $("#dataCadastroCliente").val(
-                                                formatarData(response
-                                                    .created_at));
+                                            /* os dados trazidos na requisição GET colocandos nos inputs do modal Editar */
+                                            $("#nomeEditarCliente").val(response.nomeCliente);
+                                            var estadoRgEditarCliente = $('#estadoRgEditarCliente')[0].selectize;
+                                                estadoRgEditarCliente.setValue(response.estadoRgCliente);
+                                            $("#rgEditarCliente").val(response.rgCliente);
+                                            $("#cpfEditarCliente").val(response.cpfCliente);
+                                            $("#emailEditarCliente").val(response.emailCliente);
+                                            $("#celularEditarCliente").val(response.celularCliente);
+                                            $("#telefoneEditarCliente").val(response.telefoneCliente);
+                                            $("#enderecoEditarCliente").val(response.enderecoCliente);
+                                            $("#numeroEditarCliente").val(response.numeroCliente);
+                                            $("#complementoEditarCliente").val(response.complementoCliente);
+                                            var estadoEditarCliente = $('#estadoEditarCliente')[0].selectize;
+                                                estadoEditarCliente.setValue(response.estadoCliente);
+                                            var cidadeEditarCliente = $('#cidadeEditarCliente')[0].selectize;
+                                                cidadeEditarCliente.setValue(response.cidadeCliente);
+                                            $("#ultimaAtualizacaoCliente").val(formatarData(response.updated_at));
+                                            $("#dataCadastroCliente").val(formatarData(response.created_at));
 
-                                            $("#modalAdicionarEditarCliente")
-                                                .modal("show");
+                                            $("#modalEditarCliente").modal('show');
                                             $("#loadingSpinner").hide();
                                         },
                                         error: function(xhr, status, error) {
@@ -658,12 +634,12 @@
 
                                     });
 
-                                    $('#atualizarCliente').click(function(e) {
+                                    $('#editarCliente').click(function(e) {
                                         e.preventDefault();
-
+                                        
                                         /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
-                                     <div id="adicionarSpinnerModalAtualizarCliente" class="text-center">
+                                     <div id="SpinnerModalEditarCliente" class="text-center">
                                          <button class="btn btn-success" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                              Atualizando...
@@ -671,53 +647,45 @@
                                      </div>
                                  `;
                                         // Função para mostrar o spinner no lugar do botão "Cadastrar"
-                                        function mostrarSpinnerAtualizarCliente() {
+                                        function mostrarSpinnerEditarCliente() {
                                             var spinnerButton = $(spinnerHtml);
-                                            $("#atualizarCliente").replaceWith(spinnerButton);
+                                            $("#editarCliente").replaceWith(spinnerButton);
                                         }
-                                        mostrarSpinnerAtualizarCliente();
+                                        mostrarSpinnerEditarCliente();
 
                                         // Função para restaurar o botão "Cadastrar" no lugar do spinner
-                                        function restaurarBotaoAtualizarCliente() {
-                                            var atualizarButton = $("<button type='button' class='btn btn-success' id='adicionarSpinnerModalAtualizarCliente' title='Clique para atualizar'><i class='fas fa-sync'></i> Atualizar</button>");
-                                            $("#adicionarSpinnerModalAtualizarCliente").replaceWith(atualizarButton);
+                                        function restaurarBotaoEditarCliente() {
+                                            var editarButton = $("<button type='button' class='btn btn-success' id='editarCliente' title='Clique para atualizar'><i class='fas fa-sync'></i> Atualizar</button>");
+                                            $("#SpinnerModalEditarCliente").replaceWith(editarButton);
                                         }
 
                                         // Coleta dos valores dos campos e selects usando serializeArray
-                                        var nomeCliente = $("#nomeCliente").val();
-                                        var estadoRgCliente = $("#estadoRgCliente")
-                                            .val();
-                                        var rgCliente = $("#rgCliente").val();
-                                        var cpfCliente = $("#cpfCliente").val();
-                                        var emailCliente = $("#emailCliente").val();
-                                        var celularCliente = $("#celularCliente")
-                                            .val();
-                                        var telefoneCliente = $("#telefoneCliente")
-                                            .val();
-                                        var enderecoCliente = $("#enderecoCliente")
-                                            .val();
-                                        var numeroCliente = $("#numeroCliente")
-                                        .val();
-                                        var complementoCliente = $(
-                                            "#complementoCliente").val();
-                                        var estadoCliente = $("#estadoCliente")
-                                        .val();
-                                        var cidadeCliente = $("#cidadeCliente")
-                                        .val();
+                                        var nomeEditarCliente = $("#nomeEditarCliente").val();
+                                        var estadoRgEditarCliente = $("#estadoRgEditarCliente").val();
+                                        var rgEditarCliente = $("#rgEditarCliente").val();
+                                        var cpfEditarCliente = $("#cpfEditarCliente").val();
+                                        var emailEditarCliente = $("#emailEditarCliente").val();
+                                        var celularEditarCliente = $("#celularEditarCliente").val();
+                                        var telefoneEditarCliente = $("#telefoneEditarCliente").val();
+                                        var enderecoEditarCliente = $("#enderecoEditarCliente").val();
+                                        var numeroEditarCliente = $("#numeroEditarCliente").val();
+                                        var complementoEditarCliente = $("#complementoEditarCliente").val();
+                                        var estadoEditarCliente = $("#estadoEditarCliente").val();
+                                        var cidadeEditarCliente = $("#cidadeEditarCliente").val();
 
                                         var data = {
-                                            nomeCliente: nomeCliente,
-                                            estadoRgCliente: estadoRgCliente,
-                                            rgCliente: rgCliente,
-                                            cpfCliente: cpfCliente,
-                                            emailCliente: emailCliente,
-                                            celularCliente: celularCliente,
-                                            telefoneCliente: telefoneCliente,
-                                            enderecoCliente: enderecoCliente,
-                                            numeroCliente: numeroCliente,
-                                            complementoCliente: complementoCliente,
-                                            estadoCliente: estadoCliente,
-                                            cidadeCliente: cidadeCliente,
+                                            nomeCliente: nomeEditarCliente,
+                                            estadoRgCliente: estadoRgEditarCliente,
+                                            rgCliente: rgEditarCliente,
+                                            cpfCliente: cpfEditarCliente,
+                                            emailCliente: emailEditarCliente,
+                                            celularCliente: celularEditarCliente,
+                                            telefoneCliente: telefoneEditarCliente,
+                                            enderecoCliente: enderecoEditarCliente,
+                                            numeroCliente: numeroEditarCliente,
+                                            complementoCliente: complementoEditarCliente,
+                                            estadoCliente: estadoEditarCliente,
+                                            cidadeCliente: cidadeEditarCliente,
                                         };
 
 
@@ -728,8 +696,7 @@
 
                                         $.ajax({
                                             type: "PUT",
-                                            url: "/editarCliente/" + item
-                                                .id,
+                                            url: "/editarCliente/" + item.id,
                                             data: data,
                                             headers: {
                                                 // Adicione o token CSRF ao cabeçalho da solicitação
@@ -737,36 +704,22 @@
                                             },
                                             dataType: "json",
                                             success: function(response) {
-                                                $("#modalAdicionarEditarCliente").modal('hide');
-                                                restaurarBotaoAtualizarCliente();
-                                                swal("Cliente Atualizado com Sucesso!",
-                                                    "", "success");
+                                                $("#modalEditarCliente").modal('hide');
+                                                restaurarBotaoEditarCliente();
+                                                swal("Cliente Atualizado com Sucesso!", "", "success");
                                                 /* método que recarrega o grid de clientes, já atualizado */
                                                 listarClientes();
                                             },
-                                            error: function(xhr, status,
-                                                error) {
-                                                $("#loadingSpinnerModal")
-                                                    .remove();
+                                            error: function(xhr, status, error) {
+                                                $("#loadingSpinnerModal").remove();
 
                                                 // Se a resposta da API incluir mensagens de erro
-                                                if (xhr.responseJSON &&
-                                                    xhr.responseJSON
-                                                    .errors) {
-                                                    var errorMessages =
-                                                        Object.values(
-                                                            xhr
-                                                            .responseJSON
-                                                            .errors)
-                                                        .join("\n");
-                                                    swal("Erro ao Editar Cliente",
-                                                        errorMessages,
-                                                        "error");
+                                                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                                    var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+                                                    swal("Erro ao Editar Cliente", errorMessages, "error");
                                                 } else {
                                                     // Caso contrário, exiba uma mensagem genérica
-                                                    swal("Erro ao Editar Cliente",
-                                                        "Verifique sua conexão com a internet.",
-                                                        "error");
+                                                    swal("Erro ao Editar Cliente", "Verifique sua conexão com a internet.", "error");
                                                 }
                                             }
                                         });
@@ -1077,18 +1030,18 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                     e.stopPropagation();
                                     console.log("Edit clicked for item:", item);
 
-                                    var icon = '<i class="fas fa-user"></i>';
+                                    /* var icon = '<i class="fas fa-user"></i>';
                                     var texto = "Editar dados do Cliente";
                                     $("#cabecalhoModalAdicionarEditarClientePessoaJuridica").html(icon + " " + texto);
                                     $("#corCabecalhoModalAdicionarEditarClientePessoaJuridica").css({
                                         "background-color": "#198754",
                                         "color": "white"
-                                    });
+                                    }); */
 
                                     // Substituir o botão
-                                    var botaoAtualizar =
+                                    /* var botaoAtualizar =
                                         '<button type="button" class="btn btn-success btn-atualizar" id="atualizarClientePessoaJuridica"><i class="fas fa-sync"></i> Atualizar</button>';
-                                    $("#cadastrarClientePessoaJuridica").replaceWith(botaoAtualizar);
+                                    $("#cadastrarClientePessoaJuridica").replaceWith(botaoAtualizar); */
                                     $("#loadingSpinnerPessoaJuridica").show();
 
                                     $.ajax({
@@ -1121,24 +1074,24 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                             }
 
                                             /* os dados trazidos na requisição GET colocandos nos inputs do modal Adicionar / Editar */
-                                            $("#nomeFantasia").val(response.nomeFantasia);
-                                                $("#razaoSocial").val(response.razaoSocial);
-                                                $("#cnpj").val(response.cnpj);
-                                                $("#status").val(response.status);
-                                                $("#dataAbertura").val(formatarData(response.dataAbertura));
-                                                $("#cnaePrincipalDescricao").val(response.cnaePrincipalDescricao);
-                                                $("#cnaePrincipalCodigo").val(response.cnaePrincipalCodigo);
-                                                $("#email").val(response.email);
-                                                $("#telefone").val(response.telefone);
-                                                $("#logradouro").val(response.logradouro);
-                                                $("#numero").val(response.numero);
-                                                $("#complemento").val(response.complemento);
-                                                var uf = $('#uf')[0].selectize;
-                                                    uf.setValue(response.uf);
-                                                var municipio = $('#municipio')[0].selectize;
-                                                    municipio.setValue(response.municipio);
+                                            $("#nomeFantasiaEditar").val(response.nomeFantasia);
+                                            $("#razaoSocialEditar").val(response.razaoSocial);
+                                            $("#cnpjEditar").val(response.cnpj);
+                                            $("#statusEditar").val(response.status);
+                                            $("#dataAberturaEditar").val(formatarData(response.dataAbertura));
+                                            $("#cnaePrincipalDescricaoEditar").val(response.cnaePrincipalDescricao);
+                                            $("#cnaePrincipalCodigoEditar").val(response.cnaePrincipalCodigo);
+                                            $("#emailEditar").val(response.email);
+                                            $("#telefoneEditar").val(response.telefone);
+                                            $("#logradouroEditar").val(response.logradouro);
+                                            $("#numeroEditar").val(response.numero);
+                                            $("#complementoEditar").val(response.complemento);
+                                            var ufEditar = $('#ufEditar')[0].selectize;
+                                                ufEditar.setValue(response.uf);
+                                            var municipioEditar = $('#municipioEditar')[0].selectize;
+                                                municipioEditar.setValue(response.municipio);
 
-                                            $("#modalAdicionarEditarClientePessoaJuridica").modal("show");
+                                            $("#modalEditarClientePessoaJuridica").modal("show");
                                             $("#loadingSpinnerPessoaJuridica").hide();
                                             },
                                         error: function(xhr, status, error) {
@@ -1162,9 +1115,9 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
 
                                     });
 
-                                    $('#atualizarClientePessoaJuridica').click(function(e) {
+                                    $('#editarClientePessoaJuridica').click(function(e) {
                                         e.preventDefault();
-
+                                      
                                         /* esta variável recebe as propriedades de um spinner de atualizando */
                                         var spinnerHtml = `
                                      <div id="adicionarSpinnerModalAtualizarClientePessoaJuridica" class="text-center">
@@ -1178,44 +1131,44 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                     // Função para mostrar o spinner no lugar do botão "Cadastrar"
                                  function mostrarSpinnerAtualizarClientePessoaJuridica() {
                                             var spinnerButton = $(spinnerHtml);
-                                            $("#atualizarClientePessoaJuridica").replaceWith(spinnerButton);
+                                            $("#editarClientePessoaJuridica").replaceWith(spinnerButton);
                                         }
                                         mostrarSpinnerAtualizarClientePessoaJuridica();
 
                                         // Função para restaurar o botão "Cadastrar" no lugar do spinner
                                         function restaurarBotaoAtualizarClientePessoaJuridica() {
-                                            var atualizarButton = $("<button type='button' class='btn btn-success' id='atualizarClientePessoaJuridica' title='Clique para atualizar'><i class='fas fa-sync'></i> Atualizar</button>");
+                                            var atualizarButton = $("<button type='button' class='btn btn-success' id='editarClientePessoaJuridica' title='Clique para atualizar'><i class='fas fa-sync'></i> Atualizar</button>");
                                             $("#adicionarSpinnerModalAtualizarClientePessoaJuridica").replaceWith(atualizarButton);
                                         }
-                                        // Coleta dos valores dos campos e selects usando serializeArray
-                                        var nomeFantasia = $("#nomeFantasia").val();
-                                            var razaoSocial = $("#razaoSocial").val();
-                                            var cnpj = $("#cnpj").val();
-                                            var status = $("#status").val();
-                                            var dataAbertura = $("#dataAbertura").val();
-                                            var cnaePrincipalDescricao = $("#cnaePrincipalDescricao").val();
-                                            var cnaePrincipalCodigo = $("#cnaePrincipalCodigo").val();
-                                            var email = $("#email").val();
-                                            var telefone = $("#telefone").val();
-                                            var logradouro = $("#logradouro").val();
-                                            var complemento = $("#complemento").val();
-                                            var uf = $("#uf").val();
-                                            var municipio = $("#municipio").val();
+                                            // Coleta dos valores dos campos e selects usando serializeArray
+                                            var nomeFantasiaEditar = $("#nomeFantasiaEditar").val();
+                                            var razaoSocialEditar = $("#razaoSocialEditar").val();
+                                            var cnpjEditar = $("#cnpjEditar").val();
+                                            var statusEditar = $("#statusEditar").val();
+                                            var dataAberturaEditar = $("#dataAberturaEditar").val();
+                                            var cnaePrincipalDescricaoEditar = $("#cnaePrincipalDescricaoEditar").val();
+                                            var cnaePrincipalCodigoEditar = $("#cnaePrincipalCodigoEditar").val();
+                                            var emailEditar = $("#emailEditar").val();
+                                            var telefoneEditar = $("#telefoneEditar").val();
+                                            var logradouroEditar = $("#logradouroEditar").val();
+                                            var complementoEditar = $("#complementoEditar").val();
+                                            var ufEditar = $("#ufEditar").val();
+                                            var municipioEditar = $("#municipioEditar").val();
 
                                             var data = {
-                                                nomeFantasia: nomeFantasia,
-                                                razaoSocial: razaoSocial,
-                                                cnpj: cnpj,
-                                                status: status,
-                                                dataAbertura: dataAbertura,
-                                                cnaePrincipalDescricao: cnaePrincipalDescricao,
-                                                cnaePrincipalCodigo: cnaePrincipalCodigo,
-                                                email: email,
-                                                telefone: telefone,
-                                                logradouro: logradouro,
-                                                complemento: complemento,
-                                                uf: uf,
-                                                municipio: municipio,
+                                                nomeFantasia: nomeFantasiaEditar,
+                                                razaoSocial: razaoSocialEditar,
+                                                cnpj: cnpjEditar,
+                                                status: statusEditar,
+                                                dataAbertura: dataAberturaEditar,
+                                                cnaePrincipalDescricao: cnaePrincipalDescricaoEditar,
+                                                cnaePrincipalCodigo: cnaePrincipalCodigoEditar,
+                                                email: emailEditar,
+                                                telefone: telefoneEditar,
+                                                logradouro: logradouroEditar,
+                                                complemento: complementoEditar,
+                                                uf: ufEditar,
+                                                municipio: municipioEditar,
                                             };
 
                                         // Pegue o token CSRF da meta tag
@@ -1232,7 +1185,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                             },
                                             dataType: "json",
                                             success: function(response) {
-                                                $("#modalAdicionarEditarClientePessoaJuridica").modal('hide');
+                                                $("#modalEditarClientePessoaJuridica").modal('hide');
                                                 restaurarBotaoAtualizarClientePessoaJuridica();
                                                 swal("Cliente Atualizado com Sucesso!", "", "success");
                                                 /* método que recarrega o grid de clientes, já atualizado */
