@@ -279,36 +279,7 @@ $('#cnaePrincipalDescricao').on('input', function() {
     $('#telefone').inputmask("(99) 9999-9999");
 
 
-function limparInputsModalAdicionarEditarClientePessoaJuridica() {
-        $("#nomeFantasia").val('');
-        /* var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
-            estadoRgClienteSelectize.clear(); */
-        $("#razaoSocial").val('');
-        $("#pesquisarCnpjClientePessoaJuridica").val('');
-        $("#cnpj").val('');
-        $("#status").val('');
-        $("#cnaePrincipalDescricao").val('');
-        $("#cnaePrincipalCodigo").val('');
-        $("#pesquisarCepClientePessoaJuridica").val('');
-        $("#dataAbertura").val('');
-        $("#telefone").val('');
-        $("#email").val('');
-        $("#logradouro").val('');
-        $("#numero").val('');
-        $("#complemento").val('');
-        var estadoClientePessoaJuridicaSelectize = $('#uf')[0].selectize;
-            estadoClientePessoaJuridicaSelectize.clear();
-        var cidadeClientePessoaJuridicaSelectize = $('#municipio')[0].selectize;
-            cidadeClientePessoaJuridicaSelectize.clear();
 
-        // Restaurar o botão Cadastrar
-        var botaoCadastrarClientePessoaJuridica = '<button type="button" class="btn btn-primary" id="cadastrarClientePessoaJuridica"><i class="fas fa-check"></i> Cadastrar</button>';
-        $("#atualizarClientePessoaJuridica").replaceWith(botaoCadastrarClientePessoaJuridica);
-        };
-
-    $("#modalAdicionarEditarClientePessoaJuridica").on("hidden.bs.modal", function () {
-        limparInputsModalAdicionarEditarClientePessoaJuridica();
-    });
 
     
 

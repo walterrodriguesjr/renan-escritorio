@@ -46,12 +46,21 @@
     }
 </style>
 
-<div id="loadingSpinner" class="text-center">
+{{-- <div id="loadingSpinner" class="text-center">
     <button class="btn btn-primary" type="button" disabled>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Carregando...
     </button>
-</div>
+</div> --}}
+
+{{-- <div id="loadingSpinner" class="text-center spinner-container" style="display: none;">
+    <div class="spinner-backdrop"></div>
+    <button class="btn btn-info spinner-button" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Carregando...
+    </button>
+</div> --}}
+
 
 {{-- onde todo o grid de Clientes é montado --}}
 
@@ -59,6 +68,7 @@
 <div id="jsGridClientesPessoaJuridica"></div>
 
 <script>
+    
 
 function atualizarQuantidadeClientes() {
 
@@ -76,13 +86,21 @@ $.ajax({
             data: "data",
             dataType: "json",
             success: function (responsePessoaJuridica) {
-                let quantidadeClientesPessoaJuridica = responsePessoaJuridica.length;
+    let quantidadeClientesPessoaJuridica = responsePessoaJuridica.length;
 
-                let totalClientes = quantidadeClientesPessoaFisica + quantidadeClientesPessoaJuridica;
-                $("#quantidadeClientes").text(totalClientes);
-                $("#quantidadeClientesPessoaFisica").text(quantidadeClientesPessoaFisica);
-                $("#quantidadeClientesPessoaJuridica").text(quantidadeClientesPessoaJuridica);
-            }
+    let totalClientes = quantidadeClientesPessoaFisica + quantidadeClientesPessoaJuridica;
+
+    // Substituir o spinner pelo número real de clientes
+    $("#spinnerTotalCliente").hide();
+    $("#spinnerTotalClientePessoaFisica").hide();
+    $("#spinnerTotalClientePessoaJuridica").hide();
+    $("#quantidadeClientes").text(totalClientes).show();
+    $("#quantidadeClientesPessoaFisica").text(quantidadeClientesPessoaFisica).show();
+    $("#quantidadeClientesPessoaJuridica").text(quantidadeClientesPessoaJuridica).show();
+
+    $("#quantidadeClientesPessoaFisica").text(quantidadeClientesPessoaFisica);
+    $("#quantidadeClientesPessoaJuridica").text(quantidadeClientesPessoaJuridica);
+}
         });
     }
 });

@@ -1,3 +1,6 @@
+<!-- Estilos do AdminLTE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css">
+
 <style>
     .btn-success {
         background-color: #28a745;
@@ -120,41 +123,113 @@
   background-color: #007bff; /* Azul */
 }
 
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Backdrop color with transparency */
+}
+
+.spinner-content {
+    z-index: 1;
+    text-align: center;
+}
+
+
 </style>
 
 <!-- Incluir o custom css -->
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
 <x-app-layout>
+    
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="margin-bottom: 6px"><i class="fas fa-users"></i>
             {{ __('Clientes') }}
         </h2>
+        
+        
         <div class="row">
             <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1" style="background-color: #0049b6"><i class="fas fa-users" style="color: white"></i></span>
-                    <x-text-input class="form-control" type="text" value="Total de Clientes Cadastrados: " disabled style="background-color: #0049b6; color: white" />
-                    <span class="input-group-text" id="quantidadeClientes" style="background-color: #0049b6; color: white"></span>
+                <div class="small-box bg-gradient" style="background-color: #0049b6">
+                    <div class="inner" style="color: white">
+                        <p>Total de Clientes Cadastrados:</p>
+                        <div class="spinner-border text-light" id="spinnerTotalCliente" role="status" style="margin-bottom: 20px">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h3 id="quantidadeClientes" style="display: none;"></h3>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-                <x-input-error :messages="$errors->get('quantidadeClientes')" class="mt-2" />
             </div>
+            
+
             <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1" style="background-color: #007bff"><i class="fas fa-user" style="width: 20px; color: white"></i></span>
-                    <x-text-input class="form-control" type="text" value="Total de Clientes Pessoa Física: " disabled style="background-color: #007bff; color: white" />
-                    <span class="input-group-text" id="quantidadeClientesPessoaFisica" style="background-color: #007bff; color: white"></span>
-                </div>
-                <x-input-error :messages="$errors->get('quantidadeClientesPessoaFisica')" class="mt-2" />
+                  <div class="small-box bg-gradient" style="background-color: #007bff">
+                    <div class="inner" style="color: white">
+                        <p>Total de Clientes Pessoa Física:</p>
+                        <div class="spinner-border text-light" id="spinnerTotalClientePessoaFisica" role="status" style="margin-bottom: 20px">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                      <h3 id="quantidadeClientesPessoaFisica" style="display: none"></h3>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                      More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </div>
             </div>
-            <div class="col-sm-4">
+
+                  <div class="col-sm-4">
+                  <div class="small-box bg-gradient" style="background-color: #0dcaf0">
+                    <div class="inner" style="color: white">
+                        <p>Total de Clientes Pessoa Jurídica:</p>
+                        <div class="spinner-border text-light" id="spinnerTotalClientePessoaJuridica" role="status" style="margin-bottom: 20px">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                      <h3 id="quantidadeClientesPessoaJuridica" style="display: none"></h3>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-building"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                      More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </div>
+                  </div>
+                  
+                  
+           
+           
+           {{--  <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1" style="background-color: #0dcaf0; color: white"><i class="fas fa-building" style="width: 20px"></i></span>
                     <x-text-input class="form-control" type="text" style="background-color: #0dcaf0; color: white" value="Total de Clientes Pessoa Jurídica: " disabled />
                     <span class="input-group-text" id="quantidadeClientesPessoaJuridica" style="background-color: #0dcaf0; color: white"></span>
                 </div>
                 <x-input-error :messages="$errors->get('quantidadeClientesPessoaJuridica')" class="mt-2" />
-            </div>
+            </div> --}}
         </div>
     </x-slot>
 
@@ -200,8 +275,9 @@
                         <x-input-error :messages="$errors->get('pesquisarCliente')" class="mt-2" />
                     </div>
                 </div>
-                <div id="loadingSpinner" class="text-center" style="display: none;">
-                    <button class="btn btn-primary" type="button" disabled>
+                <div id="loadingSpinner" class="text-center spinner-container" style="display: none;">
+                    <div class="spinner-backdrop"></div>
+                    <button class="btn btn-primary spinner-button" type="button" disabled style="margin-top: 288px">
                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         Carregando...
                     </button>
@@ -238,13 +314,16 @@
                         </div>
                         <x-input-error :messages="$errors->get('pesquisarClientePessoaJuridica')" class="mt-2" />
                     </div>
+
                 </div>
-                <div id="loadingSpinnerPessoaJuridica" class="text-center" style="display: none;">
-                    <button class="btn btn-info" type="button" disabled>
+                <div id="loadingSpinnerPessoaJuridica" class="text-center spinner-container" style="display: none;">
+                    <div class="spinner-backdrop"></div>
+                    <button class="btn btn-info spinner-button" type="button" disabled>
                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         Carregando...
                     </button>
                 </div>
+                    
             </div>
 
 
@@ -268,6 +347,58 @@
 
 <script>
     $(document).ready(function() {
+
+        function limparInputsModalAdicionarEditarCliente() {
+        $("#nomeCliente").val('');
+        var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
+            estadoRgClienteSelectize.clear();
+        $("#rgCliente").val('');
+        $("#cpfCliente").val('');
+        $("#emailCliente").val('');
+        $("#celularCliente").val('');
+        $("#telefoneCliente").val('');
+        $("#pesquisarCepCliente").val('');
+        $("#enderecoCliente").val('');
+        $("#numeroCliente").val('');
+        $("#complementoCliente").val('');
+        var estadoClienteSelectize = $('#estadoCliente')[0].selectize;
+            estadoClienteSelectize.clear();
+        var cidadeClienteSelectize = $('#cidadeCliente')[0].selectize;
+            cidadeClienteSelectize.clear();
+        };
+
+    $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
+        limparInputsModalAdicionarEditarCliente(); 
+            }); 
+
+            function limparInputsModalAdicionarEditarClientePessoaJuridica() {
+        $("#nomeFantasia").val('');
+        /* var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
+            estadoRgClienteSelectize.clear(); */
+        $("#razaoSocial").val('');
+        $("#pesquisarCnpjClientePessoaJuridica").val('');
+        $("#cnpj").val('');
+        $("#status").val('');
+        $("#cnaePrincipalDescricao").val('');
+        $("#cnaePrincipalCodigo").val('');
+        $("#pesquisarCepClientePessoaJuridica").val('');
+        $("#dataAbertura").val('');
+        $("#telefone").val('');
+        $("#email").val('');
+        $("#logradouro").val('');
+        $("#numero").val('');
+        $("#complemento").val('');
+        var estadoClientePessoaJuridicaSelectize = $('#uf')[0].selectize;
+            estadoClientePessoaJuridicaSelectize.clear();
+        var cidadeClientePessoaJuridicaSelectize = $('#municipio')[0].selectize;
+            cidadeClientePessoaJuridicaSelectize.clear();
+        };
+
+    $("#modalAdicionarEditarClientePessoaJuridica").on("hidden.bs.modal", function () {
+        limparInputsModalAdicionarEditarClientePessoaJuridica();
+    });
+
+    
 
         $('#appleSwitch').change(function () {
             if ($(this).is(':checked')) {
@@ -1307,12 +1438,6 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
 /* ------------------------------------------------------------------------------------------------------- */ 
 
 /* ao fechar este modal, o button que estava com verde editar, volta ao azul de cadastrar */
-$('#modalAdicionarEditarCliente').on('hidden.bs.modal', function() {
-    limparInputsModalAdicionarEditarCliente(); 
-    var botaoCadastrarClientePessoaFisica =
-    '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
-    $("#atualizarCliente").replaceWith(botaoCadastrarClientePessoaFisica);
-});
 
 /* ação click do button Adicionar Cliente */
     $('#adicionarCliente').click(function(e) {
@@ -1735,3 +1860,4 @@ function restaurarBotaoCadastrar() {
 
 {{-- incluindo a biblioteca jsGrid após toda página ser carregada, evita o erro --}}
 <script src="{{ asset('js/jsgrid.min.js') }}"></script>
+

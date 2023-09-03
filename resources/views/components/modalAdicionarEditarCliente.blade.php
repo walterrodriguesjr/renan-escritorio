@@ -2,8 +2,8 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 style="color: white" class="modal-title" id="cabecalhoModalAdicionarEditarCliente"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
+            <div class="modal-header" style="background-color: #007bff">
+                <h5 style="color: white" class="modal-title"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -225,35 +225,6 @@ $('#nomeCliente').on('input', function() {
     $('#celularCliente').inputmask("(99) 99999-9999");
     $('#telefoneCliente').inputmask("(99) 9999-9999");
 
-
-function limparInputsModalAdicionarEditarCliente() {
-        $("#nomeCliente").val('');
-        var estadoRgClienteSelectize = $('#estadoRgCliente')[0].selectize;
-            estadoRgClienteSelectize.clear();
-        $("#rgCliente").val('');
-        $("#cpfCliente").val('');
-        $("#emailCliente").val('');
-        $("#celularCliente").val('');
-        $("#telefoneCliente").val('');
-        $("#pesquisarCepCliente").val('');
-        $("#enderecoCliente").val('');
-        $("#numeroCliente").val('');
-        $("#complementoCliente").val('');
-        var estadoClienteSelectize = $('#estadoCliente')[0].selectize;
-            estadoClienteSelectize.clear();
-        var cidadeClienteSelectize = $('#cidadeCliente')[0].selectize;
-            cidadeClienteSelectize.clear();
-        };
-
-        // Restaurar o botão Cadastrar (DESNECESSARIO)
-       /*  var botaoCadastrarClientePessoaFisica =
-    '<button type="button" class="btn btn-primary" id="cadastrarCliente"><i class="fas fa-check"></i> Cadastrar</button>';
-    $("#atualizarCliente").replaceWith(botaoCadastrarClientePessoaFisica);
-
-    $("#modalAdicionarEditarCliente").on("hidden.bs.modal", function () {
-      
-        limparInputsModalAdicionarEditarCliente(); 
-            }); */ 
             //(DESNECESSARIO)
 
     // Função para preencher o select "cidadeCliente" com os municípios
