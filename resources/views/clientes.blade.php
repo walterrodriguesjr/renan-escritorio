@@ -177,7 +177,7 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
+                        {{-- More info <i class="fas fa-arrow-circle-right"></i> --}}
                     </a>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                       <i class="fas fa-user"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                      More info <i class="fas fa-arrow-circle-right"></i>
+                      {{-- More info <i class="fas fa-arrow-circle-right"></i> --}}
                     </a>
                   </div>
             </div>
@@ -214,7 +214,7 @@
                       <i class="fas fa-building"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                      More info <i class="fas fa-arrow-circle-right"></i>
+                      {{-- More info <i class="fas fa-arrow-circle-right"></i> --}}
                     </a>
                   </div>
                   </div>
@@ -450,7 +450,7 @@
 
         function listarClientesAjax(dadoPesquisado) {
             /* esta variável recebe as propriedades de um spinner de atualizando */
-            var spinnerPesquisarCliente = `
+            /* var spinnerPesquisarCliente = `
                                      <div id="spinnerPesquisarCliente" class="text-center">
                                          <button class="btn btn-primary" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -459,7 +459,8 @@
                                      </div>
                                  `;
                                  
-            $("#jsGridClientes").prepend(spinnerPesquisarCliente);
+            $("#jsGridClientes").prepend(spinnerPesquisarCliente); */
+            $("#loadingSpinner").show();
             $.ajax({
                 type: "GET",
                 url: "/listarClientes",
@@ -468,10 +469,12 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    $("#spinnerPesquisarCliente").remove();
+                    /* $("#spinnerPesquisarCliente").remove(); */
+                    $("#loadingSpinner").hide();
                     renderJsGridCliente(response);
                 },
                 error: function(error) {
+                    $("#loadingSpinner").hide();
                     console.error("Erro na pesquisa de clientes:", error);
                 }
             });
@@ -971,7 +974,7 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
 
         function listarClientesPessoaJuridicaAjax(dadoPesquisado) {
             /* esta variável recebe as propriedades de um spinner de atualizando */
-            var spinnerPesquisarClientePessoaJuridica = `
+            /* var spinnerPesquisarClientePessoaJuridica = `
                                      <div id="spinnerPesquisarCliente" class="text-center">
                                          <button class="btn btn-info" type="button" disabled>
                                              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -980,7 +983,8 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                                      </div>
                                  `;
                                  
-            $("#jsGridClientesPessoaJuridica").prepend(spinnerPesquisarClientePessoaJuridica);
+            $("#jsGridClientesPessoaJuridica").prepend(spinnerPesquisarClientePessoaJuridica); */
+            $("#loadingSpinnerPessoaJuridica").show();
             $.ajax({
                 type: "GET",
                 url: "/listarClientesPessoaJuridica",
@@ -989,10 +993,12 @@ $("#spinnerListarTodosClientesPessoaJuridica").hide();
                 },
                 dataType: "json",
                 success: function(response) {
-                    $("#spinnerPesquisarClientePessoaJuridica").remove();
+                    /* $("#spinnerPesquisarClientePessoaJuridica").remove(); */
+                    $("#loadingSpinnerPessoaJuridica").hide();
                     renderJsGridClientePessoaJuridica(response);
                 },
                 error: function(error) {
+                    $("#loadingSpinnerPessoaJuridica").hide();
                     console.error("Erro na pesquisa de clientes:", error);
                 }
             });
