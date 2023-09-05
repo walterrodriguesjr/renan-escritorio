@@ -19,6 +19,7 @@
         <!-- Incluir o custom css -->
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         
+        
         <!-- Incluir o jsgrid css -->
         <link rel="stylesheet" href="{{ asset('css/jsgrid.min.css') }}">
         
@@ -27,6 +28,9 @@
 
         <!-- Incluir o selectize css -->
         <link rel="stylesheet" href="{{ asset('css/selectize.bootstrap5.css') }}">
+
+        <!-- Estilos do AdminLTE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css">
 
          <!-- Incluir o jQuery -->
          <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -44,12 +48,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        @include('layouts.sidebar')
+        <div class="min-h-screen bg-gray-100" style="margin-left: 80px">
             @include('layouts.navigation')
+            
+            
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-white shadow mt-5">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

@@ -1,18 +1,22 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 fixed top-0 w-full z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                {{-- <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                        <img src="./img/Renan_Rodrigues_Marca_principal_azul_Impressão_3.png" alt=""
                             style="width: 100px; height: 25px;">
                     </a>
-                </div>
+                </div> --}}
+
+                    <a class="nav-link" data-widget="pushmenu" id="qqq" href="#"><i class="fa fa-bars" style="margin-top: 18px; color: grey"></i></a>
+
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
@@ -21,11 +25,11 @@
                     <x-nav-link :href="route('clientes')" :active="request()->routeIs('clientes')">
                         {{ __('Clientes') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            {{-- <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -52,7 +56,7 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
+            </div> --}}
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -94,10 +98,58 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Sair') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
         </div>
     </div>
 </nav>
+
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        var $spanTeste = $('#span-teste'); // Seleciona o elemento com o ID #span-teste
+
+      var $sidebar = $('.main-sidebar');
+      var $navLinks = $sidebar.find('.nav-link'); // Seleciona todos os links do menu
+      var $menuToggle = $('#qqq'); // Elemento de âncora do botão de menu
+      var $contentDiv = $('.min-h-screen.bg-gray-100'); // Seleciona a div que você quer alterar a margem
+      var sidebarExpanded = false; // Variável para controlar o estado do sidebar
+  
+      // Adiciona um manipulador para o evento de passar o mouse
+      $sidebar.on('mouseenter', function() {
+        if (!sidebarExpanded) {
+          $sidebar.addClass('expanded'); // Adiciona a classe 'expanded' para expandir o sidebar
+          $navLinks.find('p').show(); // Mostra os textos dos links
+        }
+      });
+  
+      // Adiciona um manipulador para o evento de sair com o mouse
+      $sidebar.on('mouseleave', function() {
+        if (!sidebarExpanded) {
+          $sidebar.removeClass('expanded'); // Remove a classe 'expanded' para recuar o sidebar
+          $navLinks.find('p').hide(); // Oculta os textos dos links
+        }
+      });
+  
+      // Adiciona um manipulador para o evento de clicar no botão de menu
+      $menuToggle.on('click', function() {
+        sidebarExpanded = !sidebarExpanded; // Alterna o estado do sidebar
+        
+        if (sidebarExpanded) {
+          $sidebar.addClass('expanded');
+          $contentDiv.css('margin-left', '250px');
+          $spanTeste.css('display', 'block'); // Mostra o span quando o sidebar expande
+          $navLinks.find('p').show(); // Mostra os textos dos links
+        } else {
+          $sidebar.removeClass('expanded');
+          $contentDiv.css('margin-left', '80px');
+          $spanTeste.css('display', 'none'); // Oculta o span quando o sidebar recua
+          $navLinks.find('p').hide(); // Oculta os textos dos links
+        }
+      });
+    });
+  </script>
+  

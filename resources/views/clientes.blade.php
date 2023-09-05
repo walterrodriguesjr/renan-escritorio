@@ -246,7 +246,7 @@
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-1">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="areaClientePessoaFisica">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
-                    <h2>Pessoa Física</h2>
+                    {{-- <h2>Pessoa Física</h2> --}}
                     <div class="col-md mb-2">
                         <button type="button" id="adicionarCliente" class="btn btn-primary w-100"
                             data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarCliente">
@@ -255,7 +255,7 @@
                     </div>
                     <div class="col-md mb-2">
                         <button type="button" id="buttonListarClientes" class="btn btn-primary w-100">
-                            <i class="fas fa-list-ul"></i> Listar todos os Clientes
+                            <i class="fas fa-list-ul"></i> Listar Clientes
                         </button>
                     </div>
                     <div class="col-md mb-2">
@@ -286,7 +286,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" id="areaClientePessoaJuridica" style="display: none">
                 <div class="p-6 bg-white border-b border-gray-200 button-container row align-items-center">
-                    <h2>Pessoa Jurídica</h2>
+                    {{-- <h2>Pessoa Jurídica</h2> --}}
                     <div class="col-md mb-2">
                         <button type="button" id="adicionarClientePessoaJuridica" class="btn btn-info w-100"
                             data-bs-toggle="modal" data-bs-target="#modalAdicionarEditarClientePessoaJuridica">
@@ -295,7 +295,7 @@
                     </div>
                     <div class="col-md mb-2">
                         <button type="button" id="buttonListarClientesPessoaJuridica" class="btn btn-info w-100">
-                            <i class="fas fa-list-ul"></i> Listar todos os Clientes
+                            <i class="fas fa-list-ul"></i> Listar Clientes
                         </button>
                     </div>
                     <div class="col-md mb-2">
@@ -1586,15 +1586,15 @@ function restaurarBotaoCadastrarCliente() {
                     listarClientes();
                 },
                 error: function(xhr, status, error) {
-                    $("#adicionarSpinnerModal").remove();
-
+                    restaurarBotaoCadastrarCliente();
                     // Se a resposta da API incluir mensagens de erro
                     if (xhr.responseJSON && xhr.responseJSON.errors) {
-                        var errorMessages = Object.values(xhr.responseJSON.errors).join(
-                            "\n");
+                        var errorMessages = Object.values(xhr.responseJSON.errors).join("\n");
+                        restaurarBotaoCadastrarCliente();
                         swal("Erro ao Adicionar Cliente", errorMessages, "error");
                     } else {
                         // Caso contrário, exiba uma mensagem genérica
+                        restaurarBotaoCadastrarCliente();
                         swal("Erro ao Adicionar Cliente",
                             "Verifique sua conexão com a internet.", "error");
                     }
