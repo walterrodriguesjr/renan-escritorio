@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
     public function userDados()
     {
-        return $this->hasOne(UserDados::class, 'userId'); // ou 'user_id' se preferir manter o nome da coluna
+        return $this->hasOne(UserDados::class, 'user_id'); // ou 'user_id' se preferir manter o nome da coluna
     }
 
     /**

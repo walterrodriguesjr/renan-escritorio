@@ -25,6 +25,6 @@ class UserDados extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'userId'); // ou 'user_id' se preferir manter o nome da coluna
+        return $this->belongsTo(User::class, 'user_id'); // ou 'user_id' se preferir manter o nome da coluna
     }
 }

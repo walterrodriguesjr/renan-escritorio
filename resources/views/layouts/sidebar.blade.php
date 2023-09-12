@@ -98,14 +98,14 @@
             </p>
         </a>
         </li>
-        <li class="nav-item menu-close">
-          <a href="{{ route('administrador') }}" class="nav-link active">
-            <i class="nav-icon fas fa-lock"></i>
-            <p style="display: none">
-                Administrador
-            </p>
+        @if (auth()->user()->userDados && auth()->user()->userDados->tipoAcessoUsuario !== 'Usuário')
+       <li class="nav-item menu-close">
+            <a href="{{ route('administrador') }}" class="nav-link active">
+                <i class="nav-icon fas fa-lock"></i>
+            <p>Administrador</p>
         </a>
-        </li>
+    </li>
+@endif
 
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">

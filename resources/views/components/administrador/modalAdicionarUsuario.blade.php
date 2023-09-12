@@ -180,7 +180,7 @@
                             <!-- Select de Cidade -->
                             <div class="mt-2">
                                 <x-input-label for="tipoAcessoUsuario" :value="__('Nível de Acesso')" />
-                                <select id="tipoAcessoUsuario" class="form-select" name="tipAcessoUsuario" autofocus>
+                                <select id="tipoAcessoUsuario" class="form-select" name="tipoAcessoUsuario" autofocus>
                                     <option value="">Selecione</option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Usuário">Usuário</option>

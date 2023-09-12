@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('rgUsuario')->nullable();
             $table->string('cpfUsuario')->required()->unique();
             $table->string('emailUsuario')->required()->unique();
-            $table->string('celularUsuario')->required();
+            $table->string('celularUsuario');
             $table->string('telefoneUsuario')->nullable();
             $table->string('enderecoUsuario')->nullable();
             $table->string('numeroUsuario')->nullable();
             $table->string('complementoUsuario')->nullable();
             $table->string('estadoUsuario')->nullable();
             $table->string('cidadeUsuario')->nullable();
+            $table->string('tipoAcessoUsuario');
             $table->string('token');
             $table->timestamps();
         });
