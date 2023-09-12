@@ -1,13 +1,15 @@
-<div class="modal fade" id="modalAdicionarEditarCliente" tabindex="-1" aria-labelledby="exampleModalLabel"
+
+
+<div class="modal fade" id="modalAdicionarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #007bff">
-                <h5 style="color: white" class="modal-title"><i class="fas fa-user"></i> Cadastrar dados do Cliente</h5>
+                <h5 style="color: white" class="modal-title"><i class="fas fa-user"></i> Cadastrar dados do Usuário</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="" id="formAdicionarEditarCliente">
+                <form method="POST" action="" id="formAdicionarUsuario">
                     @csrf
 
                     <!-- tag de dados pessoais -->
@@ -16,40 +18,40 @@
                     </div>
 
                     <div>
-                        <x-input-label for="nomeCliente" :value="__('Nome Completo')" />
-                        <x-text-input id="nomeCliente" class="block mt-1 w-full" type="text" name="nomeCliente"
-                            :value="old('nomeCliente')" placeholder="Digite" required autofocus />
-                        <x-input-error :messages="$errors->get('nomeCliente')" class="mt-2" />
+                        <x-input-label for="nomeUsuario" :value="__('Nome Completo')" />
+                        <x-text-input id="nomeUsuario" class="block mt-1 w-full" type="text" name="nomeUsuario"
+                            :value="old('nomeUsuario')" placeholder="Digite" required autofocus />
+                        <x-input-error :messages="$errors->get('nomeUsuario')" class="mt-2" />
                     </div>
 
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="estadoRgCliente" :value="__('Estado do RG')" />
-                                <select id="estadoRgCliente" name="estadoRgCliente"
+                                <x-input-label for="estadoRgUsuario" :value="__('Estado do RG')" />
+                                <select id="estadoRgUsuario" name="estadoRgUsuario"
                                     class="block mt-1 w-full shadow-sm border-gray-300 rounded-md" required autofocus>
 
                                 </select>
-                                <x-input-error :messages="$errors->get('estadoRgCliente')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('estadoRgUsuario')" class="mt-2" />
                             </div>
                         </div>
 
 
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="rgCliente" :value="__('RG')" />
-                                <x-text-input id="rgCliente" class="block mt-1 w-full" type="number" name="rgCliente"
-                                    :value="old('rgCliente')" placeholder="Digite" required autofocus />
-                                <x-input-error :messages="$errors->get('rgCliente')" class="mt-2" />
+                                <x-input-label for="rgUsuario" :value="__('RG')" />
+                                <x-text-input id="rgUsuario" class="block mt-1 w-full" type="number" name="rgUsuario"
+                                    :value="old('rgUsuario')" placeholder="Digite" required autofocus />
+                                <x-input-error :messages="$errors->get('rgUsuario')" class="mt-2" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="cpfCliente" :value="__('CPF')" />
-                                <x-text-input id="cpfCliente" class="block mt-1 w-full" type="text" name="cpfCliente"
-                                    :value="old('cpfCliente')" placeholder="Digite" required autofocus />
-                                <x-input-error :messages="$errors->get('cpfCliente')" class="mt-2" />
+                                <x-input-label for="cpfUsuario" :value="__('CPF')" />
+                                <x-text-input id="cpfUsuario" class="block mt-1 w-full" type="text" name="cpfUsuario"
+                                    :value="old('cpfUsuario')" placeholder="Digite" required autofocus />
+                                <x-input-error :messages="$errors->get('cpfUsuario')" class="mt-2" />
                             </div>
                         </div>
                     </div>
@@ -64,28 +66,28 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="emailCliente" :value="__('E-mail')" />
-                                <x-text-input id="emailCliente" class="block mt-1 w-full" type="email"
-                                    name="emailCliente" :value="old('emailCliente')" placeholder="Digite" required autofocus />
-                                <x-input-error :messages="$errors->get('emailCliente')" class="mt-2" />
+                                <x-input-label for="emailUsuario" :value="__('E-mail')" />
+                                <x-text-input id="emailUsuario" class="block mt-1 w-full" type="email"
+                                    name="emailUsuario" :value="old('emailUsuario')" placeholder="Digite" required autofocus />
+                                <x-input-error :messages="$errors->get('emailUsuario')" class="mt-2" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="celularCliente" :value="__('Celular')" />
-                                <x-text-input id="celularCliente" class="block mt-1 w-full" type="text"
-                                    name="celularCliente" :value="old('celularCliente')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('celularCliente')" class="mt-2" />
+                                <x-input-label for="celularUsuario" :value="__('Celular')" />
+                                <x-text-input id="celularUsuario" class="block mt-1 w-full" type="text"
+                                    name="celularUsuario" :value="old('celularUsuario')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('celularUsuario')" class="mt-2" />
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="mt-2">
-                                <x-input-label for="telefoneCliente" :value="__('Telefone')" />
-                                <x-text-input id="telefoneCliente" class="block mt-1 w-full" type="text"
-                                    name="telefoneCliente" :value="old('telefoneCliente')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('telefoneCliente')" class="mt-2" />
+                                <x-input-label for="telefoneUsuario" :value="__('Telefone')" />
+                                <x-text-input id="telefoneUsuario" class="block mt-1 w-full" type="text"
+                                    name="telefoneUsuario" :value="old('telefoneUsuario')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('telefoneUsuario')" class="mt-2" />
                             </div>
                         </div>
                     </div>
@@ -100,12 +102,12 @@
                     <div class="row g-3">
                         <div class="col-md-5">
                             <div class="mt-2">
-                            <x-input-label for="pesquisarCepCliente" id="pesquisarCepClienteLabel" :value="__('Pesquisar CEP')"
+                            <x-input-label for="pesquisarCepUsuario" id="pesquisarCepUsuarioLabel" :value="__('Pesquisar CEP')"
                                 style="font-weight: bold;" />
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                                <x-text-input id="pesquisarCepCliente" class="form-control" type="text"
-                                 :value="old('pesquisarCepCliente')" placeholder="Digite para pesquisar o CEP"
+                                <x-text-input id="pesquisarCepUsuario" class="form-control" type="text"
+                                 :value="old('pesquisarCepUsuario')" placeholder="Digite para pesquisar o CEP"
                                      autofocus />
                             </div>
                           
@@ -116,28 +118,28 @@
                     <div class="row g-3">
                         <div class="col-md-8">
                             <div class="mt-2">
-                                <x-input-label for="enderecoCliente" :value="__('Endereço')" />
-                                <x-text-input id="enderecoCliente" class="block mt-1 w-full" type="text"
-                                    name="enderecoCliente" :value="old('enderecoCliente')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('enderecoCliente')" class="mt-2" />
+                                <x-input-label for="enderecoUsuario" :value="__('Endereço')" />
+                                <x-text-input id="enderecoUsuario" class="block mt-1 w-full" type="text"
+                                    name="enderecoUsuario" :value="old('enderecoUsuario')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('enderecoUsuario')" class="mt-2" />
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="mt-2">
-                                <x-input-label for="numeroCliente" :value="__('Número')" />
-                                <x-text-input id="numeroCliente" class="block mt-1 w-full" type="number"
-                                    name="numeroCliente" :value="old('numeroCliente')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('numeroCliente')" class="mt-2" />
+                                <x-input-label for="numeroUsuario" :value="__('Número')" />
+                                <x-text-input id="numeroUsuario" class="block mt-1 w-full" type="number"
+                                    name="numeroUsuario" :value="old('numeroUsuario')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('numeroUsuario')" class="mt-2" />
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="mt-2">
-                                <x-input-label for="complementoCliente" :value="__('Complemento')" />
-                                <x-text-input id="complementoCliente" class="block mt-1 w-full" type="text"
-                                    name="complementoCliente" :value="old('complementoCliente')" placeholder="Digite" autofocus />
-                                <x-input-error :messages="$errors->get('complementoCliente')" class="mt-2" />
+                                <x-input-label for="complementoUsuario" :value="__('Complemento')" />
+                                <x-text-input id="complementoUsuario" class="block mt-1 w-full" type="text"
+                                    name="complementoUsuario" :value="old('complementoUsuario')" placeholder="Digite" autofocus />
+                                <x-input-error :messages="$errors->get('complementoUsuario')" class="mt-2" />
                             </div>
                         </div>
                     </div>
@@ -146,22 +148,44 @@
                         <div class="col-md-4">
                             <!-- Select de Estado -->
                             <div class="mt-2">
-                                <x-input-label for="estadoCliente" :value="__('Estado')" />
-                                <select id="estadoCliente" class="form-select" name="estadoCliente" autofocus>
+                                <x-input-label for="estadoUsuario" :value="__('Estado')" />
+                                <select id="estadoUsuario" class="form-select" name="estadoUsuario" autofocus>
                                     
                                 </select>
-                                {{-- <x-input-error :messages="$errors->get('estadoCliente')" class="mt-2" /> --}}
+                                {{-- <x-input-error :messages="$errors->get('estadoUsuario')" class="mt-2" /> --}}
                             </div>
                         </div>
 
                         <div class="col-md-8">
                             <!-- Select de Cidade -->
                             <div class="mt-2">
-                                <x-input-label for="cidadeCliente" :value="__('Cidade')" />
-                                <select id="cidadeCliente" class="form-select" name="cidadeCliente" autofocus>
+                                <x-input-label for="cidadeUsuario" :value="__('Cidade')" />
+                                <select id="cidadeUsuario" class="form-select" name="cidadeUsuario" autofocus>
 
                                 </select>
-                                <x-input-error :messages="$errors->get('cidadeCliente')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('cidadeUsuario')" class="mt-2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- tag de endereços -->
+                    <div class="mb-2">
+                        <h1 class="d-flex align-items-center justify-content-center" style="background-color: rgb(240, 240, 240)">TIPO DE ACESSO</h1>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <!-- Select de Cidade -->
+                            <div class="mt-2">
+                                <x-input-label for="tipoAcessoUsuario" :value="__('Nível de Acesso')" />
+                                <select id="tipoAcessoUsuario" class="form-select" name="tipAcessoUsuario" autofocus>
+                                    <option value="">Selecione</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Usuário">Usuário</option>
+                                </select>
+                                <x-input-error :messages="$errors->get('tipoAcessoUsuario')" class="mt-2" />
                             </div>
                         </div>
                     </div>
@@ -170,7 +194,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Clique para fechar este formulário"><i class="fas fa-times"></i> Fechar</button>
-                <button type="button" class="btn btn-primary" id="cadastrarCliente" title="Clique para salvar"><i class="fas fa-check"></i> Cadastrar</button>
+                <button type="button" class="btn btn-primary" id="cadastrarUsuario" title="Clique para salvar"><i class="fas fa-check"></i> Cadastrar</button>
             </div>
         </div>
     </div>
@@ -200,7 +224,7 @@
 
 <script>
 
-$('#nomeCliente').on('input', function() {
+$('#nomeUsuario').on('input', function() {
         var inputVal = $(this).val();
         var words = inputVal.toLowerCase().split(' ');
         for (var i = 0; i < words.length; i++) {
@@ -210,7 +234,7 @@ $('#nomeCliente').on('input', function() {
         $(this).val(formattedVal);
     });
 
-    $('#enderecoCliente').on('input', function() {
+    $('#enderecoUsuario').on('input', function() {
         var inputVal = $(this).val();
         var words = inputVal.toLowerCase().split(' ');
         for (var i = 0; i < words.length; i++) {
@@ -221,14 +245,13 @@ $('#nomeCliente').on('input', function() {
     });
 
     /* Inserção de Masc */
-    $('#cpfCliente').inputmask("999.999.999-99");
-    $('#celularCliente').inputmask("(99) 99999-9999");
-    $('#telefoneCliente').inputmask("(99) 9999-9999");
-
+    $('#cpfUsuario').inputmask("999.999.999-99");
+    $('#celularUsuario').inputmask("(99) 99999-9999");
+    $('#telefoneUsuario').inputmask("(99) 9999-9999");
 
     $(document).ready(function() {
         function popularCidades(data) {
-        var select = $('#cidadeCliente');
+        var select = $('#cidadeUsuario');
 
         // Limpar o select antes de preencher novamente
         select.empty();
@@ -247,7 +270,7 @@ $('#nomeCliente').on('input', function() {
             select.append(option);
         });
 
-        // Inicialize o Selectize para o elemento select "cidadeCliente"
+        // Inicialize o Selectize para o elemento select "cidadeUsuario"
         select.selectize({
             create: false,
             sortField: 'text',
@@ -271,14 +294,14 @@ $('#nomeCliente').on('input', function() {
         });
     }
         
-        // Busque os dados da API do IBGE e preencha o select "estadoCliente"
+        // Busque os dados da API do IBGE e preencha o select "estadoUsuario"
         $.ajax({
             url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados',
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var rgEstadoSelect = $('#estadoRgCliente');
-                var estadoSelect = $('#estadoCliente');
+                var rgEstadoSelect = $('#estadoRgUsuario');
+                var estadoSelect = $('#estadoUsuario');
 
                 // Ordenar os estados em ordem alfabética
                 data.sort(function(a, b) {
@@ -300,7 +323,7 @@ $('#nomeCliente').on('input', function() {
                         .nome + '</option>');
                 });
 
-                // Inicialize o Selectize para os selects "rgEstado" e "estadoCliente"
+                // Inicialize o Selectize para os selects "rgEstado" e "estadoUsuario"
                 rgEstadoSelect.selectize({
                     create: false,
                     sortField: 'text',
@@ -314,14 +337,26 @@ $('#nomeCliente').on('input', function() {
                     allowEmptyOption: true,
                     placeholder: 'Selecione o estado'
                 });
+
+
             },
             error: function(xhr, status, error) {
                 console.error('Erro ao obter os estados:', error);
             }
         });
 
-        // Chamar a função para buscar e preencher o select "cidadeCliente"
+        // Chamar a função para buscar e preencher o select "cidadeUsuario"
         obterMunicipios();
 
+        var tipoAcessoUsuario = $("#tipoAcessoUsuario");
+        // Inicialize o Selectize para o elemento select "cidadeUsuario"
+        tipoAcessoUsuario.selectize({
+            create: false,
+            sortField: 'text',
+            allowEmptyOption: true,
+            placeholder: 'Selecione o tipo de Usuario'
+        });
+
     });
+
 </script>

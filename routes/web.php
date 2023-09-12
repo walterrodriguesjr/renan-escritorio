@@ -4,7 +4,7 @@ use App\Http\Controllers\Cidades;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ClientePessoaJuridicaController;
 use App\Http\Controllers\Estados;
-use App\Models\ClientePessoaJuridica;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,18 +30,26 @@ Route::get('/clientes', function () {
     return view('clientes');
 })->middleware(['auth', 'verified'])->name('clientes');
 
+Route::get('/administrador', function () {
+    return view('administrador');
+})->middleware(['auth', 'verified'])->name('administrador');
+
+//CLIENTE PESSOA FÍSICA
 Route::get('/listarClientes', [ClienteController::class, 'listarClientes'])->name('listarClientes');
 Route::post('adicionarCliente', [ClienteController::class, 'adicionarCliente'])->name('adicionarCliente');
 Route::get('visualizarCliente/{id}', [ClienteController::class, 'visualizarCliente'])->name('visualizarCliente');
 Route::put('editarCliente/{id}', [ClienteController::class, 'editarCliente'])->name('editarCliente');
 Route::delete('deletarCliente/{id}', [ClienteController::class, 'deletarCliente'])->name('deletarCliente');
 
+//CLIENTE PESSOA JURÍDICA
 Route::get('listarClientesPessoaJuridica', [ClientePessoaJuridicaController::class, 'listarClientesPessoaJuridica'])->name('listarClientesPessoaJuridica');
 Route::post('adicionarClientePessoaJuridica', [ClientePessoaJuridicaController::class, 'adicionarClientePessoaJuridica'])->name('adicionarClientePessoaJuridica');
 Route::get('visualizarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'visualizarClientePessoaJuridica'])->name('visualizarClientePessoaJuridica');
 Route::put('editarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'editarClientePessoaJuridica'])->name('editarClientePessoaJuridica');
 Route::delete('deletarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'deletarClientePessoaJuridica'])->name('deletarClientePessoaJuridica');
 
+//USUÁRIO (ADMINISTRADOR)
+Route::post('/adicionarUsuario', [UsuarioController::class, 'adicionarUsuario'])->name('adicionarUsuario');
 
 
 

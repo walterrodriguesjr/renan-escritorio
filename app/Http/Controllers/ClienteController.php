@@ -28,6 +28,7 @@ class ClienteController extends Controller
         }
 
         $clientes = $query->get();
+    
 
         return response()->json($clientes, 200); // 200 OK
     } catch (\Exception $e) {

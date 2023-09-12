@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function userDados()
+    {
+        return $this->hasOne(UserDados::class, 'userId'); // ou 'user_id' se preferir manter o nome da coluna
+    }
 
     /**
      * The attributes that should be hidden for serialization.
