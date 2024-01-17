@@ -326,12 +326,10 @@
                     
             </div>
 
-
             {{-- trazendo o conteúdo da referida view --}}
             @include('components.tabelaCliente')
         </div>
     </div>
-
 
 </x-app-layout>
 
@@ -397,8 +395,6 @@
     $("#modalAdicionarEditarClientePessoaJuridica").on("hidden.bs.modal", function () {
         limparInputsModalAdicionarEditarClientePessoaJuridica();
     });
-
-    
 
         $('#appleSwitch').change(function () {
             if ($(this).is(':checked')) {
@@ -590,37 +586,27 @@
                                             $("#loadingSpinner").hide();
 
                                             /* os dados trazidos na requisição GET colocandos nos inputs do modal visualizar */
-                                            $("#visualizarNomeCliente").val(
-                                                response.nomeCliente);
-                                            $("#visualizarEstadoRgCliente").val(
-                                                response.estadoRgCliente);
-                                            $("#visualizarRgCliente").val(
-                                                response.rgCliente);
-                                            $("#visualizarCpfCliente").val(
-                                                response.cpfCliente);
-                                            $("#visualizarEmailCliente").val(
-                                                response.emailCliente);
-                                            var emailCliente = response
-                                                .emailCliente;
+                                            $("#visualizarNomeCliente").val(response.nomeCliente);
+                                            $("#visualizarEstadoRgCliente").val(response.estadoRgCliente);
+                                            $("#visualizarRgCliente").val(response.rgCliente);
+                                            $("#visualizarCpfCliente").val(response.cpfCliente);
+                                            $("#visualizarEmailCliente").val(response.emailCliente);
+                                            var emailCliente = response.emailCliente;
                                             var linkParaEmail =
                                                 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new&to=' +
-                                                encodeURIComponent(
-                                                emailCliente);
+                                                encodeURIComponent(emailCliente);
 
                                             var linkHtml = '<a href="' +
                                                 linkParaEmail +
                                                 '" target="_blank" class="email-link"><span class="email-text purple-text"> - Abrir Gmail <i class="far fa-envelope"></i></span></a>';
 
-                                            if ($(
-                                                    "#visualizarEmailCliente .email-link")
+                                            if ($("#visualizarEmailCliente .email-link")
                                                 .length === 0) {
-                                                $("#visualizarEmailCliente")
-                                                    .append(linkHtml);
+                                                $("#visualizarEmailCliente").append(linkHtml);
                                             }
                                             $("#visualizarCelularCliente").val(
                                                 response.celularCliente);
-                                            var celularCliente = response
-                                                .celularCliente;
+                                            var celularCliente = response.celularCliente;
                                             var linkParaWhatsapp =
                                                 'https://web.whatsapp.com/send?phone=' +
                                                 celularCliente;
@@ -632,25 +618,14 @@
                                             $("#visualizarCelularWhatsappCliente")
                                                 .html(linkHtml);
 
-                                            $("#visualizarTelefoneCliente").val(
-                                                response.telefoneCliente);
-                                            $("#visualizarEnderecoCliente").val(
-                                                response.enderecoCliente);
-                                            $("#visualizarNumeroCliente").val(
-                                                response.numeroCliente);
-                                            $("#visualizarComplementoCliente")
-                                                .val(response
-                                                    .complementoCliente);
-                                            $("#visualizarEstadoCliente").val(
-                                                response.estadoCliente);
-                                            $("#visualizarCidadeCliente").val(
-                                                response.cidadeCliente);
-                                            $("#visualizarUltimaAtualizacaoCliente")
-                                                .val(formatarData(response
-                                                    .updated_at));
-                                            $("#visualizarDataCadastroCliente")
-                                                .val(formatarData(response
-                                                    .created_at));
+                                            $("#visualizarTelefoneCliente").val(response.telefoneCliente);
+                                            $("#visualizarEnderecoCliente").val(response.enderecoCliente);
+                                            $("#visualizarNumeroCliente").val(response.numeroCliente);
+                                            $("#visualizarComplementoCliente").val(response.complementoCliente);
+                                            $("#visualizarEstadoCliente").val(response.estadoCliente);
+                                            $("#visualizarCidadeCliente").val(response.cidadeCliente);
+                                            $("#visualizarUltimaAtualizacaoCliente").val(formatarData(response.updated_at));
+                                            $("#visualizarDataCadastroCliente").val(formatarData(response.created_at));
                                         },
                                         error: function(xhr, status, error) {
                                             $("#loadingSpinner").hide();
@@ -659,10 +634,8 @@
                                             if (xhr.responseJSON && xhr
                                                 .responseJSON.errors) {
                                                 var errorMessages = Object
-                                                    .values(xhr.responseJSON
-                                                        .errors).join("\n");
-                                                swal("Erro ao Exibir Cliente",
-                                                    errorMessages, "error");
+                                                    .values(xhr.responseJSON.errors).join("\n");
+                                                swal("Erro ao Exibir Cliente", errorMessages, "error");
                                             } else {
                                                 // Caso contrário, exiba uma mensagem genérica
                                                 swal("Erro ao Exibir Cliente",

@@ -103,10 +103,16 @@ COMITADO E PRONTO O TEMPLATE, USANDO A MASTER
 
 27-area de pessoa juridica: views, rotas, controllers, modal e migration 
 
-28 - fazer busca dinamica de cnpj (FAZENDO)
+28 - fazer busca dinamica de cnpj
 usado API https://cnpjs.dev/docs/api-http/#acesso-%C3%A0-api 
 
+29-adicionado sidebar padrão admin lte
 
+30-adicionar area de administrador (FAZENDO)
+    -cadastro de usuário    
+    -envio de email ao usuario para criar senha 
+    -niveis de acesso
+    -criado middleware nivelAdministrador - php artisan make:middleware NivelAcessoAdministrador
 
 A FAZER
 
@@ -119,7 +125,6 @@ A FAZER
 
 28-adicionar links uteis 
 
-29-adicionar area de administrador 
 
 
 

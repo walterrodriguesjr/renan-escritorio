@@ -1,4 +1,26 @@
+<style>
+    .spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
+.spinner-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Backdrop color with transparency */
+}
+
+</style>
 
 <x-app-layout>
     
@@ -25,55 +47,9 @@
                         {{-- More info <i class="fas fa-arrow-circle-right"></i> --}}
                     </a>
                 </div>
-            </div>
-            
-            {{-- <div class="col-sm-4">
-                  <div class="small-box bg-gradient" style="background-color: #007bff">
-                    <div class="inner" style="color: white">
-                        <p>Total de Clientes Pessoa Física:</p>
-                        <div class="spinner-border text-light" id="spinnerTotalClientePessoaFisica" role="status" style="margin-bottom: 20px">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                      <h3 id="quantidadeClientesPessoaFisica" style="display: none"></h3>
-                    </div>
-                    <div class="icon">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                      More info <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                  </div>
-            </div> --}}
-
-                  {{-- <div class="col-sm-4">
-                  <div class="small-box bg-gradient" style="background-color: #0dcaf0">
-                    <div class="inner" style="color: white">
-                        <p>Total de Clientes Pessoa Jurídica:</p>
-                        <div class="spinner-border text-light" id="spinnerTotalClientePessoaJuridica" role="status" style="margin-bottom: 20px">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                      <h3 id="quantidadeClientesPessoaJuridica" style="display: none"></h3>
-                    </div>
-                    <div class="icon">
-                      <i class="fas fa-building"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                      More info <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                  </div>
-                  </div> --}}
-                  
+            </div>                  
         </div>
     </x-slot>
-
-    {{-- <div class="centered-switch" style="margin: 5px">
-        <label class="form-switch">
-            <span class="switch-label">Pessoa Física</span>
-            <input type="checkbox" class="apple-switch-checkbox" id="appleSwitch">
-            <i></i>
-            <span class="switch-label">Pessoa Jurídica</span>
-        </label>
-    </div> --}}
 
     <div class="py-1">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-1">
@@ -110,7 +86,7 @@
                 </div>
                 <div id="loadingSpinner" class="text-center spinner-container" style="display: none;">
                     <div class="spinner-backdrop"></div>
-                    <button class="btn btn-primary spinner-button" type="button" disabled style="margin-top: 288px">
+                    <button class="btn btn-primary spinner-button" type="button" disabled>
                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         Carregando...
                     </button>

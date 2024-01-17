@@ -104,8 +104,8 @@
                 <i class="nav-icon fas fa-lock"></i>
             <p>Administrador</p>
         </a>
-    </li>
-@endif
+     </li>
+      @endif
 
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">

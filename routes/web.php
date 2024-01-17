@@ -22,6 +22,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//VIEWS
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,7 +33,8 @@ Route::get('/clientes', function () {
 
 Route::get('/administrador', function () {
     return view('administrador');
-})->middleware(['auth', 'verified'])->name('administrador');
+})->middleware(['auth', 'verified', 'nivelAcessoAdministrador'])->name('administrador');
+//VIEWS
 
 //CLIENTE PESSOA FÍSICA
 Route::get('/listarClientes', [ClienteController::class, 'listarClientes'])->name('listarClientes');
@@ -49,7 +51,10 @@ Route::put('editarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController:
 Route::delete('deletarClientePessoaJuridica/{id}', [ClientePessoaJuridicaController::class, 'deletarClientePessoaJuridica'])->name('deletarClientePessoaJuridica');
 
 //USUÁRIO (ADMINISTRADOR)
-Route::post('/adicionarUsuario', [UsuarioController::class, 'adicionarUsuario'])->name('adicionarUsuario');
+Route::post('/adicionarUsuario', [UsuarioController::class, 'adicionarUsuario'])->middleware('nivelAcessoAdministrador')->name('adicionarUsuario');
+Route::get('/listarUsuarios', [UsuarioController::class, 'listarUsuarios'])->middleware('nivelAcessoAdministrador')->name('listarUsuarios');
+Route::get('/visualizarUsuario/{id}', [UsuarioController::class, 'visualizarUsuario'])->middleware('nivelAcessoAdministrador')->name('visualizarUsuario');
+Route::put('/editarUsuario/{id}', [UsuarioController::class, 'editarUsuario'])->middleware('nivelAcessoAdministrador')->name('editarUsuario');
 
 
 
