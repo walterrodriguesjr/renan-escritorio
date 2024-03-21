@@ -9,6 +9,7 @@ class Cliente extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'nomeCliente',
         'estadoRgCliente',
         'rgCliente',
@@ -22,4 +23,8 @@ class Cliente extends Model
         'estadoCliente',
         'cidadeCliente'
     ];
+
+    public function usuario(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

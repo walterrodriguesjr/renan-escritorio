@@ -10,6 +10,7 @@ class ClientePessoaJuridica extends Model
     use HasFactory;
     protected $table = 'clientes_pessoa_juridica';
     protected $fillable = [
+        'user_id',
         'nomeFantasia',
         'razaoSocial',
         'cnpj',
@@ -28,4 +29,9 @@ class ClientePessoaJuridica extends Model
         'municipio',
         'uf'
     ];
+
+    public function usuario(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

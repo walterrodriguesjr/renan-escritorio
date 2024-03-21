@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('clientes_pessoa_juridica', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nomeFantasia')->nullable();
             $table->string('razaoSocial')->nullable();
             $table->string('cnpj')->nullable();

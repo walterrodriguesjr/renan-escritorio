@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -15,7 +16,8 @@ class ClienteController extends Controller
     try {
         $pesquisaClientes = $request->input('search');
 
-        $query = Cliente::query();
+        // Inicia a consulta filtrando pela coluna user_id com o ID do usuário logado
+        $query = Cliente::where('user_id', Auth::id());
 
         if ($pesquisaClientes) {
             $query->where(function ($query) use ($pesquisaClientes) {
@@ -28,7 +30,6 @@ class ClienteController extends Controller
         }
 
         $clientes = $query->get();
-    
 
         return response()->json($clientes, 200); // 200 OK
     } catch (\Exception $e) {
@@ -74,6 +75,9 @@ class ClienteController extends Controller
         foreach ($dados as $key => $value) {
             $cliente->$key = $value;
         }
+
+        // Aqui você atribui o user_id do usuário logado
+        $cliente->user_id = Auth::user()->id;
 
         $cliente->save();
 

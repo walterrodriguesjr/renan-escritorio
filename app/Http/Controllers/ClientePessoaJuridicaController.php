@@ -6,6 +6,7 @@ use App\Models\ClientePessoaJuridica;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ClientePessoaJuridicaController extends Controller
 {
@@ -15,7 +16,8 @@ class ClientePessoaJuridicaController extends Controller
         try {
             $pesquisaClientesPessoaJuridica = $request->input('search');
 
-            $query = ClientePessoaJuridica::query();
+        // Inicia a consulta filtrando pela coluna user_id com o ID do usuário logado
+        $query = ClientePessoaJuridica::where('user_id', Auth::id());
 
             if ($pesquisaClientesPessoaJuridica) {
                 $query->where(function ($query) use ($pesquisaClientesPessoaJuridica) {
@@ -64,6 +66,8 @@ class ClientePessoaJuridicaController extends Controller
         foreach ($dados as $key => $value) {
             $cliente->$key = $value;
         }
+
+        $cliente->user_id = Auth::user()->id;
 
         $cliente->save();
 
